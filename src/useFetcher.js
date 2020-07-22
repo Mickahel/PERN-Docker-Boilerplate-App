@@ -1,153 +1,198 @@
-import { useState, useContext } from 'react';
-import _ from 'lodash'
-import axios from 'axios'
-import qs from 'qs'
-import UrlPattern from 'url-pattern'
-import { useHistory }  from 'react-router-dom'
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useContext,
+} from "react";
+import _ from "lodash";
+import axios from "axios";
+import qs from "qs";
+import UrlPattern from "url-pattern";
+import { useHistory } from "react-router-dom";
+//import { Trans } from 'react-i18next'
 
 // ? https://www.npmjs.com/package/qs
 // ? https://www.npmjs.com/package/url-pattern
 
+function useFetcher(props) {
+  const history = useHistory();
+  const [error, setError] = useState();
+  //const [success, setSuccess] = useState();
+  const [loading, setLoading] = useState(_.get(props, "initialLoading", true));
+  const [data, setData] = useState();
 
+  useEffect(() => {
+    if (Array.isArray(props)) fetchAll(props);
+    else if (typeof props == "object") fetch(props);
+  }, []);
 
-function useFetcher(props){
-    const history      = useHistory();
+  useEffect(() => {
+    if (data != undefined || error !=undefined) setLoading(false);
+  }, [data,error]);
 
-
-    const [error, setError] = useState()
-    const [success, setSuccess] = useState()
-    const [loading, setLoading] = useState(_.get(props, 'initialLoading', true))
-    const [firstLoading, setFirstLoading] = useState(true)
-    const [data, setData] = useState()
-
-
-    const headers = {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers' : 'X-Requested-With, Content-Type, Accept',
-        'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+  // ? if there is a UrlParams
+  const createUrl = useCallback((axiosOptions) => {
+    let uri = axiosOptions.url;
+    if (axiosOptions.urlParams) {
+      uri = new UrlPattern(axiosOptions.url).stringify(axiosOptions.urlParams);
     }
 
-    const fetch = async options =>{
-        
-        if(!options) options = props
-        
-        // ? Get UserToken if there is one and attach to Header
-        if(_.get(options, 'useToken', true) && localStorage.userToken){ 
-            headers['Authorization'] = `Bearer ${localStorage.userToken}`
-        }
-        
-
-        // ? Create custom axios instance
-        const axiosGateway = axios.create({
-            baseURL: process.env.REACT_APP_API_URL,
-            timeout: 30000,
-            json: true,
-            headers,
-        })
-
-        // ? attach global headers
-        axiosGateway.defaults.headers.common = headers
-        axiosGateway.defaults.headers.patch = headers
-        axiosGateway.defaults.headers.post = headers
-        axiosGateway.defaults.headers.put = headers
-
-        let url = createUrl(options)
-
-        const isSilent = _.get(options, 'silent')
-
-        axiosGateway.interceptors.response.use(response => {
-            // ? Do something with response data
-            return response;
-          }, (error) =>{
-              if(error.response){
-                    if(error.response.status === 401 && options.redirectToLogin){
-                        console.log("Unauthorized", this.props)
-                        // ? Gestiamolo al login
-                        history.push("auth?returnUrl="+this.props.location.pathname)            
-                    } else {
-                        console.error("Client response", error.response, error.request.url)
-
-                        try {
-                            if(_.isEmpty(error.response.data)){
-                            error.response.data = JSON.parse(error.response.request.response) 
-                        }
-                        } catch (e){}
-
-                        if(!isSilent) console.log({err: error.response})
-
-                    }
-                } 
-                else if (error.request) console.error("Client request", error.request,error.request.url)
-                if(!isSilent) console.log({err: error.request})
-                else {
-                    console.error("Client", error)
-                    if(!isSilent) console.log({err: error})
-                  }
-                  return Promise.reject(error);
-
-            });
-    
-            setLoading(true)
-
-
-            return axiosGateway({
-                ...options,
-                url,
-            }).then(result =>{
-                if(_.get(props, 'autoSetData', true)){
-                    setSuccess(true)
-                    setData(result.data)
-
-                    if(!options.doNotInterruptLoadingOnSuccess){
-                        setLoading(false)
-                        setFirstLoading(false)
-                      }
-                      setError(undefined)
-
-                }
-
-                return result
-            }).catch(err=>{
-                setSuccess(false)
-                setLoading(false)
-                setError(err)
-                throw err;
-              });
+    let queryString = "";
+    if (axiosOptions.query) {
+      Object.keys(axiosOptions.query).forEach(
+        (key) =>
+          (axiosOptions.query[key] === null ||
+            axiosOptions.query[key] === undefined) &&
+          delete axiosOptions.query[key]
+      );
+      queryString = axiosOptions.query
+        ? qs.stringify(axiosOptions.query, {
+            addQueryPrefix: true,
+            arrayFormat: "repeat",
+          })
+        : "";
     }
 
+    return uri + queryString;
+  }, []);
 
-    const createUrl = axiosOptions =>{
-        let uri = axiosOptions.url
-        if(axiosOptions.urlParams){ 
-          uri = new UrlPattern(axiosOptions.url).stringify(axiosOptions.urlParams)
-        }
-  
-        let queryString = ""
-        if(axiosOptions.query){
-          Object.keys(axiosOptions.query).forEach(key => (axiosOptions.query[key] === null || axiosOptions.query[key] === undefined) && delete axiosOptions.query[key]);
-          queryString = axiosOptions.query ? qs.stringify(axiosOptions.query, { addQueryPrefix: true, arrayFormat: 'repeat' }) : ""
-        }
-  
-        return uri+queryString
+  const headers = {
+    accept: "application/json",
+    "Content-Type": "application/json", //"application/x-www-form-urlencoded" "multipart/form-data or" "text/plain" "application/json"
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept",
+    "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, OPTIONS",
+  };
+
+  const createAxiosGateway = useCallback((options, fetchType) => {
+    if (!options) options = props;
+    const isSilent = _.get(options, "silent");
+    const redirectToPage500 = _.get(options, "redirectToPage500", false);
+    const showErrorSnackBar = _.get(options, "showErrorSnackBar", false);
+
+    // ? Get UserToken if there is one and attach to Header
+    if (_.get(options, "useToken", true) && localStorage.userToken) {
+      headers["Authorization"] = `Bearer ${localStorage.userToken}`;
+    }
+
+    // ? Create custom axios instance
+    const axiosGateway = axios.create({
+      baseURL: process.env.REACT_APP_API_URL,
+      timeout: 30000,
+      json: true,
+      headers,
+    });
+    // ? attach global headers
+    axiosGateway.defaults.headers.common = headers;
+    axiosGateway.defaults.headers.patch = headers;
+    axiosGateway.defaults.headers.post = headers;
+    axiosGateway.defaults.headers.put = headers;
+
+    axiosGateway.interceptors.request.use((response) => {
+      if (process.env.REACT_APP_API_LOGGING === true) {
+        response.meta = response.meta || {};
+        response.meta.requestStartedAt = new Date().getTime();
       }
-    
-    return {
-        loading,
-        data,
-        error,
-        fetch,
-        setLoading,
-        setData,
-        setError,
-        setFirstLoading,
-        firstLoading,
-        success,
-        setSuccess
-    }
+      return response;
+    });
 
+    axiosGateway.interceptors.response.use(
+      (response) => {
+        // ? Do something with response data
+        if (process.env.REACT_APP_API_LOGGING === true)
+          console.log(
+            `[${fetchType}] Execution time for: ${response.config.url} - ${
+              new Date().getTime() - response.config.meta.requestStartedAt
+            } ms`
+          );
+        return response;
+      },
+      (err) => {
+        if (err.response?.status == 500 && redirectToPage500)
+          history.push("/error/500");
+        //if (err.response?.status == 500 && showErrorSnackBar) themeContext.showErrorNotification({ message: <Trans>somethingWentWrong</Trans> })
+        if (process.env.REACT_APP_API_LOGGING === true)
+          console.log(
+            `[${fetchType}] Execution time for: ${err.config.url} - ${
+              new Date().getTime() - error.config.meta.requestStartedAt
+            } ms`
+          );
+        if (err.response) {
+        }
+        //setError(err.response);
+        throw err;
+      }
+    );
+
+    return axiosGateway;
+  }, []);
+
+  const fetchAll = useCallback((options) => {
+    const axiosGateway = createAxiosGateway(options, "Fetch All");
+    setLoading(true);
+    const requests = options.map((singleRequest) => {
+      let url = createUrl(singleRequest);
+      return axiosGateway({
+        ...singleRequest,
+        url,
+      }).then(
+        (response) => ({ response: response.data }),
+        (err) => ({ err })
+      );
+    });
+
+    return axios
+      .all(requests)
+      .then(
+        axios.spread((...responses) => {
+          let apiData = {};
+          let apiErrors = {};
+          responses.map((element, elementIndex) => {
+            if (element.response)
+              apiData[options[elementIndex].name] = element.response;
+            else if (element.err)
+              apiErrors[options[elementIndex].name] = element.err;
+            return element;
+          });
+          setData(apiData);
+          setError(apiErrors);
+          return responses;
+        })
+      )
+      .catch((err) => {
+        //setSuccess(false);
+        setError(err);
+        return err;
+      });
+  }, []);
+
+  const fetch = useCallback(async (options) => {
+    const axiosGateway = createAxiosGateway(options, "Fetch");
+    let url = createUrl(options);
+
+    setLoading(true);
+    return axiosGateway({
+      ...options,
+      url,
+    })
+      .then((result) => {
+          //setSuccess(true);
+          setData(result.data);
+        return result;
+      })
+      .catch((err) => {
+        //setSuccess(false);
+        setError(err);
+        return err
+      });
+  }, []);
+
+  return {
+    loading,
+    data,
+    error,
+  };
 }
 
-
-export default useFetcher
+export default useFetcher;
