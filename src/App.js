@@ -39,35 +39,5 @@ function App(props) {
     </LocalizationProvider >
   );
 }
-
-/*  const currencyAPIOptions = {
-    url: "/ticker",
-    method: "GET",
-    addHeaders: false,
-  };
-
-  
-  const { data,fetch, loading, error } = useFetcher(currencyAPIOptions);
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {!loading && (
-          <ul>
-            {Object.keys(data).map((key) => {
-              return (
-                <li className="bulletPoint" key={key}>
-                  <p>{key}:</p>
-                  <p> {data[key].last}</p>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </header>
-    </div>
-  );*/
-
-  
 App = withTranslation()(App)
 export default App;

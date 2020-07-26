@@ -14,23 +14,30 @@ if (typeof importScripts === "function") {
 
     /* injection point for manifest files.  */
     workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
-
-    
-    /*self.addEventListener('install', function(event) {
-      self.skipWaiting();
-   });*/
+   
     workbox.routing.registerRoute(
-      /https:\/\/blockchain\.info\/ticker/, //https://blockchain.info/ticker
+      /https?:\/\/localhost/, //https://blockchain.info/ticker
       new workbox.strategies.NetworkFirst({
-        cacheName: "currencies",
+        cacheName: "data",
         plugins: [
           new workbox.expiration.ExpirationPlugin({
-            maxEntries: 10,
             maxAgeSeconds: 10 * 60, // 10 minutes
           }),
         ],
       })
     );
+
+    const queue = new workbox.backgroundSync.Queue("myQueueName");
+    self.addEventListener("fetch", (event) => {
+      // Clone the request to ensure it's safe to read when
+      // adding to the Queue.
+      const promiseChain = fetch(event.request.clone()).catch((err) => {
+        return queue.pushRequest({ request: event.request });
+      });
+
+      event.waitUntil(promiseChain);
+    });
+
   } else {
     console.log("Workbox could not be loaded. No Offline support");
   }
