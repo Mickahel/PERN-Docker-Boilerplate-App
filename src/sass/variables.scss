@@ -1,0 +1,48 @@
+$mobileWidth: 800px;
+
+$textColor: green;
+
+$primaryColor: #f2fe;
+$secondaryColor: white;
+$tertiaryColor: orange;
+
+$standardMargin:20px;
+
+$sidebarWidth: 225px; 
+$sidebarWidthCollapsed: 60px;
+
+$errorColor: red;
+$infoColor: #00b1ec;
+$confirmColor: rgb(86, 211, 253);
+$successColor: rgb(76, 175, 80);
+$warningColor: rgb(231, 197, 1);
+
+
+$robotoFont: robotofont ;
+@font-face {
+    font-family: $robotoFont;
+    src: url("/webfonts/Roboto-Medium.ttf");
+  }
+
+
+@mixin greyBorder{
+    border: 1px solid #d3d4d5 !important;
+}
+/*@mixin buttonShadow {
+    -webkit-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.75);
+}
+
+@mixin buttonShadowMaterial {
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+}*/
+
+@mixin buttonSize($side) {
+    max-width: $side;
+    min-width: $side;
+    width: $side;
+    max-height: $side;
+    min-height: $side;
+    height: $side;
+}

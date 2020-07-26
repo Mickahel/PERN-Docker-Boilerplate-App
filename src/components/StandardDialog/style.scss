@@ -1,0 +1,105 @@
+@import "../../sass/variables.scss";
+
+
+
+.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthMd.MuiPaper-elevation24.MuiPaper-rounded {
+  border-radius: 10px !important;
+}
+.standard-dialog {
+
+  .iconTitleColor{
+    color:white;
+  }
+
+  &.error {
+    .title {
+      background: $errorColor;
+
+      span {
+        color: white;
+      }
+    }
+  }
+
+  &.info {
+    .title {
+      background: $infoColor;
+
+      span {
+        color: white;
+      }
+    }
+  }
+
+  &.success {
+    .title {
+      background: $successColor;
+
+      span {
+        color: white;
+      }
+    }
+  }
+
+  &.warning {
+    .title {
+      background: $warningColor;
+
+      span {
+        color: white;
+      }
+    }
+  }
+
+  &.confirm {
+    .title {
+      background: $confirmColor;
+
+      span {
+        color: white;
+      }
+    }
+  }
+
+  .content-text {
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-bottom: 0px;
+  }
+
+  .title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    h2 {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+
+      .text {
+        padding-left: 5px;
+      }
+    }
+  }
+
+  .content {
+    padding-top: 15px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+
+
+
+    .more-info{
+      padding-left: 24px;
+      padding-right: 24px;
+      border-top: 1px solid #ccc;
+      font-size: 0.75em;
+      color: #777;
+      margin-top: 1em;
+      text-align: right;
+    }
+  }
+
+}
