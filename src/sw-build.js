@@ -9,6 +9,7 @@ const buildSW = () => {
       swDest: "build/service-worker.js", // this will be created in the build step
       globDirectory: "build",
       globPatterns: ['**/*.{html,js,css,svg,ico,png}'],
+      globIgnores:["service-worker.js"]
     })
     .then(({ count, size, warnings }) => {
       // Optionally, log any warnings and details.

@@ -15,13 +15,17 @@ if (typeof importScripts === "function") {
     /* injection point for manifest files.  */
     workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
 
+    
+    /*self.addEventListener('install', function(event) {
+      self.skipWaiting();
+   });*/
     workbox.routing.registerRoute(
       /https:\/\/blockchain\.info\/ticker/, //https://blockchain.info/ticker
       new workbox.strategies.NetworkFirst({
         cacheName: "currencies",
         plugins: [
           new workbox.expiration.ExpirationPlugin({
-            //maxEntries: 60,
+            maxEntries: 10,
             maxAgeSeconds: 10 * 60, // 10 minutes
           }),
         ],
