@@ -9,7 +9,10 @@
 
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
-
+//import {precaching} from 'workbox-precaching';
+//import {registerRoute} from 'workbox-routing';
+//import {NetworkFirst} from 'workbox-strategies';
+//import {BackgroundSyncPlugin} from 'workbox-background-sync';
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.

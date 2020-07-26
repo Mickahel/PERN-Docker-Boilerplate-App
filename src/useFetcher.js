@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useContext,
-} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import _ from "lodash";
 import axios from "axios";
 import qs from "qs";
@@ -28,8 +22,13 @@ function useFetcher(props) {
   }, []);
 
   useEffect(() => {
-    if (data != undefined || error !=undefined) setLoading(false);
-  }, [data,error]);
+    if (
+      data !== undefined &&
+      !_.isEmpty(data)
+      //|| (error !=undefined && !_.isEmpty(error))
+    )
+      setLoading(false);
+  }, [data, error]);
 
   // ? if there is a UrlParams
   const createUrl = useCallback((axiosOptions) => {
@@ -57,37 +56,55 @@ function useFetcher(props) {
     return uri + queryString;
   }, []);
 
-  const headers = {
-    accept: "application/json",
-    "Content-Type": "application/json", //"application/x-www-form-urlencoded" "multipart/form-data or" "text/plain" "application/json"
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept",
-    "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, OPTIONS",
-  };
 
   const createAxiosGateway = useCallback((options, fetchType) => {
-    if (!options) options = props;
+    const addHeaders = _.get(options, "addHeaders", true);
     const isSilent = _.get(options, "silent");
     const redirectToPage500 = _.get(options, "redirectToPage500", false);
     const showErrorSnackBar = _.get(options, "showErrorSnackBar", false);
+    const addBaseUrl = _.get(options, "addBaseUrl", true);
 
+    const CORSHeaders= addHeaders==true ? {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept",
+        "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, PATCH, OPTIONS",
+        "Access-Control-Allow-Credentials": "true",
+        crossorigin: "true",
+      } : {}
+    
+    const headers = {
+      accept: "application/json",
+      "Content-Type": "application/json", //"application/x-www-form-urlencoded" "multipart/form-data or" "text/plain" "application/json"
+      ...CORSHeaders
+    };
+
+    
     // ? Get UserToken if there is one and attach to Header
-    if (_.get(options, "useToken", true) && localStorage.userToken) {
+    if (
+      _.get(options, "useToken", true) &&
+      localStorage.userToken &&
+      addHeaders == true
+    ) {
       headers["Authorization"] = `Bearer ${localStorage.userToken}`;
     }
 
     // ? Create custom axios instance
     const axiosGateway = axios.create({
-      baseURL: process.env.REACT_APP_API_URL,
+      baseURL: addBaseUrl==true ? process.env.REACT_APP_API_URL : null ,
       timeout: 30000,
       json: true,
       headers,
     });
     // ? attach global headers
-    axiosGateway.defaults.headers.common = headers;
-    axiosGateway.defaults.headers.patch = headers;
-    axiosGateway.defaults.headers.post = headers;
-    axiosGateway.defaults.headers.put = headers;
+    if (addHeaders==false) {
+      
+      axiosGateway.defaults.headers.common = headers;
+      axiosGateway.defaults.headers.patch = headers;
+      axiosGateway.defaults.headers.post = headers;
+      axiosGateway.defaults.headers.put = headers;
+      axiosGateway.defaults.headers.get = headers;
+      axiosGateway.defaults.headers.delete = headers;
+    }
 
     axiosGateway.interceptors.request.use((response) => {
       if (process.env.REACT_APP_API_LOGGING === true) {
@@ -177,14 +194,14 @@ function useFetcher(props) {
       url,
     })
       .then((result) => {
-          //setSuccess(true);
-          setData(result.data);
+        //setSuccess(true);
+        setData(result.data);
         return result;
       })
       .catch((err) => {
         //setSuccess(false);
         setError(err);
-        return err
+        return err;
       });
   }, []);
 
@@ -192,6 +209,8 @@ function useFetcher(props) {
     loading,
     data,
     error,
+    fetch,
+    fetchAll
   };
 }
 
