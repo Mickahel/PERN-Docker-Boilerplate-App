@@ -8,8 +8,8 @@ const buildSW = () => {
       swSrc: "src/sw-template.js", // this is your sw template file
       swDest: "build/service-worker.js", // this will be created in the build step
       globDirectory: "build",
-      globPatterns: ['**/*.{html,js,css,svg,ico,png,json}'],
-      globIgnores:["service-worker.js"]
+      globPatterns: ['**/*.{html,js,json}'],
+      globIgnores:["**/service-worker.js"]
     })
     .then(({ count, size, warnings }) => {
       // Optionally, log any warnings and details.

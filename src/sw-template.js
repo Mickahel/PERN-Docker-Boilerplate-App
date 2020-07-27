@@ -10,14 +10,55 @@ if (typeof importScripts === "function") {
     // This will trigger the importScripts() for workbox.strategies and its dependencies:
     workbox.loadModule("workbox-strategies");
     workbox.core.skipWaiting();
-    workbox.core.clientsClaim();
+    //workbox.core.clientsClaim();
 
     /* injection point for manifest files.  */
     workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
    
+
+
     workbox.routing.registerRoute(
-      /https?:\/\/localhost/, //https://blockchain.info/ticker
-      new workbox.strategies.NetworkFirst({
+      /\.(?:js|css)$/, // ? JS and CSS
+      new workbox.strategies.StaleWhileRevalidate({
+        cacheName: "assets",
+        plugins: [
+          new workbox.expiration.ExpirationPlugin({
+            maxAgeSeconds: 10 * 60, // 10 minutes
+            maxEntries: 1000
+          }),
+        ],
+      })
+    );
+
+    workbox.routing.registerRoute(
+      /\.(?:png|jpg|svg|ico|gif)$/,// ? Images
+      new workbox.strategies.CacheFirst({
+        cacheName: "images",
+        plugins: [
+          new workbox.expiration.ExpirationPlugin({
+            maxAgeSeconds: 10 * 60, // 10 minutes
+            maxEntries: 1000
+          }),
+        ],
+      })
+    );
+
+
+    workbox.routing.registerRoute(
+      /https?:\/\/localhost/, // ? Routes
+      new workbox.strategies.StaleWhileRevalidate({
+        cacheName: "routes",
+        plugins: [
+          new workbox.expiration.ExpirationPlugin({
+            maxAgeSeconds: 10 * 60, // 10 minutes
+          }),
+        ],
+      })
+    );
+
+        workbox.routing.registerRoute(
+      /https?:\/\/pernBoilerplate\.com/, //? the backend APIs and data
+      new workbox.strategies.StaleWhileRevalidate({
         cacheName: "data",
         plugins: [
           new workbox.expiration.ExpirationPlugin({
@@ -27,7 +68,8 @@ if (typeof importScripts === "function") {
       })
     );
 
-    const queue = new workbox.backgroundSync.Queue("myQueueName");
+
+    const queue = new workbox.backgroundSync.Queue("backgroundSyncQueue");
     self.addEventListener("fetch", (event) => {
       // Clone the request to ensure it's safe to read when
       // adding to the Queue.
