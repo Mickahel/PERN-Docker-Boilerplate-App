@@ -1,4 +1,4 @@
-import React, {Suspense} from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -11,14 +11,13 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-serviceWorker.register(
-  {
-    onUpdate: function(){
-      if (alert(`New content is available!. Click OK to refresh`)) {
-        window.location.reload();
-      }
-      let event = new Event('app-update');
-      window.dispatchEvent(event);
-  }
-  }
-);
+/*serviceWorker.register({
+  onUpdate: function () {
+    if (alert(`New content is available!. Click OK to refresh`)) {
+      window.location.reload();
+    }
+    let event = new Event("app-update");
+    window.dispatchEvent(event);
+  },
+});
+*/

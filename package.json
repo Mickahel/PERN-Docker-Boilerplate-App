@@ -40,7 +40,7 @@
     "start": "react-scripts start",
     "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
     "build-sw": "node ./src/sw-build.js",
-    "build": "react-scripts build && npm run build-sw",
+    "build": "react-scripts build && workbox copyLibraries build/ && npm run build-sw",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-tailwind": "yarn tailwind build ./src/css/tailwind-input.css -o ./src/css/tailwind.css",
@@ -60,5 +60,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
   }
 }

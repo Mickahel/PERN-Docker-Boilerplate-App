@@ -25,20 +25,26 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <!-- ? Load CSS-->
-    <link href="%PUBLIC_URL%/css/all.min.css" rel="stylesheet"> <!--load all styles -->
-    
+    <link href="%PUBLIC_URL%/css/all.min.css" rel="stylesheet" />
+    <!--load all styles -->
+
     <!-- ? Open graph meta tags-->
-    <meta property="og:url"                content="https://PERNB.netlify.com/" /> <!-- TODO CAMBIARE-->
-    <meta property="og:type"               content="Website" />
-    <meta property="og:title"              content="PERNB" />
-    <meta property="og:description"        content="PERN Boilerplate" />
-    <meta property="og:image"              content="%PUBLIC_URL%/img/icons/icon-192x192.png" />
+    <meta property="og:url" content="https://PERNB.netlify.com/" />
+    <!-- TODO CAMBIARE-->
+    <meta property="og:type" content="Website" />
+    <meta property="og:title" content="PERNB" />
+    <meta property="og:description" content="PERN Boilerplate" />
+    <meta
+      property="og:image"
+      content="%PUBLIC_URL%/img/icons/icon-192x192.png"
+    />
     <!--? navigation bar color -->
     <meta name="theme-color" content="#FFFFFFF" />
 
     <!-- ? title -->
     <title>PERN Boilerplate</title>
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
@@ -53,4 +59,26 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+
+  <script>
+    const isProduction = "%NODE_ENV%" === "production";
+
+    if (isProduction && "serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js").then((registration) => {
+        const channel = new BroadcastChannel("service-worker-channel");
+
+        channel.onmessage = (message) => {
+          if (message.data.promptToReload) {
+            if (confirm("Updates available. Would you like to reload?")) {
+              channel.postMessage({ skipWaiting: true });
+            }
+          }
+        };
+
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          window.location.reload();
+        });
+      });
+    }
+  </script>
 </html>
