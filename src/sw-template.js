@@ -1,25 +1,35 @@
 if (typeof importScripts === "function") {
-  /*  ? https://github.com/mikegeyser/building-pwas-with-react*/
-  // eslint-disable-next-line no-undef
-  /*importScripts(
-    "https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js"
-  );*/
-  importScripts("workbox-v5.1.3/workbox-sw.js");
+  //  ? https://github.com/mikegeyser/building-pwas-with-react*/
+  
+  //importScripts( "https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js"); //? Import from CDN
+  
+  // ? Import from local package
+  importScripts("workbox-v5.1.3/workbox-sw.js"); 
+
+  // ? Set the path of the package
   workbox.setConfig({ modulePathPrefix: "workbox-v5.1.3/" });
-  /* global workbox */
+
+
+  // ? Check if workboxexists
   if (workbox) {
     console.log("Workbox is loaded");
-    // This will trigger the importScripts() for workbox.strategies and its dependencies:
+
+    // ?  This will trigger the importScripts() for workbox.strategies and its dependencies, in order to have workbox strategies
     workbox.loadModule("workbox-strategies");
+    // ? skipWaiting make able the browser to register the new service worker without waiting for reload
     //workbox.core.skipWaiting();
     //workbox.core.clientsClaim();
 
-    /* injection point for manifest files.  */
+    // ? Injection point for manifest files and precached files
     workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
 
+    // ? Create a channel in order to submit messages around the app 
     const channel = new BroadcastChannel("service-worker-channel");
+    
+    // ? Post a message in order to trigger the form/dialog for the installation flow of the new service worker 
     channel.postMessage({ promptToReload: true });
 
+    // ? When a message with "skip Waiting" is received, trigger skipwaiting
     channel.onmessage = (message) => {
       if (message.data.skipWaiting) {
         console.log("Skipping waiting and installing service worker.");
@@ -27,9 +37,10 @@ if (typeof importScripts === "function") {
       }
     };
 
+    // ? cache with NetworkFirst strategy the JS and CSS files
     workbox.routing.registerRoute(
-      /\.(?:js|css)$/, // ? JS and CSS
-      new workbox.strategies.StaleWhileRevalidate({
+      /\.(?:js|css)$/,
+      new workbox.strategies.NetworkFirst({
         cacheName: "assets",
         plugins: [
           new workbox.expiration.ExpirationPlugin({
@@ -40,6 +51,7 @@ if (typeof importScripts === "function") {
       })
     );
 
+    // ? cache with CacheFirst strategy the PNG,JPG,SVG,ICO and GIF files
     workbox.routing.registerRoute(
       /\.(?:png|jpg|svg|ico|gif)$/, // ? Images
       new workbox.strategies.CacheFirst({
@@ -53,9 +65,10 @@ if (typeof importScripts === "function") {
       })
     );
 
+    // ? cache with NetworkFirst strategy the routes
     workbox.routing.registerRoute(
       /https?:\/\/localhost/, // ? Routes
-      new workbox.strategies.StaleWhileRevalidate({
+      new workbox.strategies.NetworkFirst({
         cacheName: "routes",
         plugins: [
           new workbox.expiration.ExpirationPlugin({
@@ -65,9 +78,10 @@ if (typeof importScripts === "function") {
       })
     );
 
+    // ? Cache with NetworkFirst strategy the data that comes from Backend
     workbox.routing.registerRoute(
       /https?:\/\/pernBoilerplate\.com/, //? the backend APIs and data
-      new workbox.strategies.StaleWhileRevalidate({
+      new workbox.strategies.NetworkFirst({
         cacheName: "data",
         plugins: [
           new workbox.expiration.ExpirationPlugin({
@@ -77,6 +91,7 @@ if (typeof importScripts === "function") {
       })
     );
 
+    // ? Creates a queue in order to stale the requests that are made while offline
     const queue = new workbox.backgroundSync.Queue("backgroundSyncQueue");
     self.addEventListener("fetch", (event) => {
       // Clone the request to ensure it's safe to read when
@@ -85,7 +100,7 @@ if (typeof importScripts === "function") {
         return queue.pushRequest({ request: event.request });
       });
 
-      //TODO TRY
+      //TODO TRY another way of manage the offline requests
       /*
       1. Submit request
       2. Invalidate cache (if successful)

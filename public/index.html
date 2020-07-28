@@ -29,7 +29,7 @@
     <!--load all styles -->
 
     <!-- ? Open graph meta tags-->
-    <meta property="og:url" content="https://PERNB.netlify.com/" />
+    <meta property="og:url" content="https://PERNB.netlify.com/" /> <!--? Frontend URL-->
     <!-- TODO CAMBIARE-->
     <meta property="og:type" content="Website" />
     <meta property="og:title" content="PERNB" />
@@ -63,18 +63,25 @@
   <script>
     const isProduction = "%NODE_ENV%" === "production";
 
+    // ? If it's production and it's possible to register the service worker, register it
     if (isProduction && "serviceWorker" in navigator) {
       navigator.serviceWorker.register("service-worker.js").then((registration) => {
+        
+        // ? Subscribe to a channel in order to receive messages
         const channel = new BroadcastChannel("service-worker-channel");
 
+        // ? When you receive a message from the channel with prompt to reload 
         channel.onmessage = (message) => {
           if (message.data.promptToReload) {
+            //? show popup for confirm the new service worker
             if (confirm("Updates available. Would you like to reload?")) {
+              //? send a message
               channel.postMessage({ skipWaiting: true });
             }
           }
         };
 
+        // ? when the controller changes, relad the page
         navigator.serviceWorker.addEventListener("controllerchange", () => {
           window.location.reload();
         });
