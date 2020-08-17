@@ -2,15 +2,16 @@ import React from "react";
 
 // ? import all the contexts
 import ThemeProvider from "./Providers/ThemeProvider";
+import UserProvider from "./Providers/UserProvider";
 
 
 function Provider(props) {
   return (
-
-          <ThemeProvider>
-            {props.children}
-          </ThemeProvider>
-
+    <ThemeProvider>
+        <UserProvider>
+          {props.children}
+        </UserProvider>
+    </ThemeProvider>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { Component, createContext } from 'react'
 import { Trans } from 'react-i18next'
-
+import config from 'configuration/config'
 export const ThemeContext = createContext('theme')
 
 class ThemeProvider extends Component {
@@ -23,7 +23,13 @@ class ThemeProvider extends Component {
     }
   }
 
+  showSidebarComponents = (matches) => {
 
+    if (!config.theme.sidebar.enabled) return false
+    else if (config.theme.bottomNavigation.enabled && matches) return false
+    else if (config.theme.bottomNavigation.enabled && !matches) return true
+    else return true
+  }
   setInstallEvent = installEvent => this.setState({ installEvent })
 
   toggleMuiType = () => {
@@ -94,58 +100,61 @@ class ThemeProvider extends Component {
     return { sidebarOpen: !state.sidebarOpen }
   })
 
-  setUIReportDownloader = (UIReportDownloader) => this.setState({UIReportDownloader})
+  setUIReportDownloader = (UIReportDownloader) => this.setState({ UIReportDownloader })
 
   setSidebarOpen = sidebarOpen => this.setState({ sidebarOpen })
+  setSidebarOpenedEvent = sidebarOpenedEvent => this.setState({ sidebarOpenedEvent })
+
+state = {
+
+  muiType: localStorage.getItem('theme') || "light",// ? mui theme 
+  toggleMuiType: this.toggleMuiType,// ? mui theme 
+  setMuiType: this.setMuiType,
+
+  UIReportDownloader: false,
+  setUIReportDownloader: this.setUIReportDownloader,
+  title: "", // ? Header and SEO title
+  icon: null, // ? Header Icon
+  setTitle: this.setTitle,// ? set title and icon
+
+  headerVisible: true,//? header visible or not
+  setHeaderVisible: this.setHeaderVisisble, //? header visible or not
+
+  sidebarOpen: false,
+  sidebarOpenedEvent: null,
+  setSidebarOpenedEvent: this.setSidebarOpenedEvent,
+  setSidebarOpen: this.setSidebarOpen,
+  toggleSidebar: this.toggleSidebar,
+  showSidebarComponents: this.showSidebarComponents,
+
+  setInstallEvent: this.setInstallEvent,
+
+  dialog: {},
+  showSuccessDialog: this.showDialog("success"),
+  showErrorDialog: this.showDialog("error"),
+  showInfoDialog: this.showDialog("info"),
+  showWarningDialog: this.showDialog("warning"),
+  showDialog: this.showDialog("info"),
+  hideDialog: this.hideDialog,
+
+  snackbar: this.snackbar,
+  showSuccessNotification: this.showSnackbar("success"),
+  showErrorNotification: this.showSnackbar("error"),
+  showInfoNotification: this.showSnackbar("info"),
+  showWarningNotification: this.showSnackbar("warning"),
+  showNotification: this.showSnackbar('info'),
+  hideSnackbar: this.hideSnackbar,
+
+}
 
 
-  state = {
-
-    muiType: localStorage.getItem('theme') || "light",// ? mui theme 
-    toggleMuiType: this.toggleMuiType,// ? mui theme 
-    setMuiType: this.setMuiType,
-
-    UIReportDownloader: false,
-    setUIReportDownloader: this.setUIReportDownloader,
-    title: "", // ? Header and SEO title
-    icon: null, // ? Header Icon
-    setTitle: this.setTitle,// ? set title and icon
-
-    headerVisible: true,//? header visible or not
-    setHeaderVisible: this.setHeaderVisisble, //? header visible or not
-
-    //sidebarOpen: !Boolean(window.md.mobile()),
-    sidebarOpen: !Boolean(window.md.mobile()),
-    setSidebarOpen: this.setSidebarOpen,
-    toggleSidebar: this.toggleSidebar,
-
-    setInstallEvent: this.setInstallEvent,
-
-    dialog: {},
-    showSuccessDialog: this.showDialog("success"),
-    showErrorDialog: this.showDialog("error"),
-    showInfoDialog: this.showDialog("info"),
-    showWarningDialog: this.showDialog("warning"),
-    showDialog: this.showDialog("info"),
-    hideDialog: this.hideDialog,
-
-    snackbar: this.snackbar,
-    showSuccessNotification: this.showSnackbar("success"),
-    showErrorNotification: this.showSnackbar("error"),
-    showInfoNotification: this.showSnackbar("info"),
-    showWarningNotification: this.showSnackbar("warning"),
-    showNotification: this.showSnackbar('info'),
-    hideSnackbar: this.hideSnackbar,
-  }
-
-
-  render() {
-    return (
-      <ThemeContext.Provider value={this.state}>
-        {this.props.children}
-      </ThemeContext.Provider>
-    )
-  }
+render() {
+  return (
+    <ThemeContext.Provider value={this.state}>
+      {this.props.children}
+    </ThemeContext.Provider>
+  )
+}
 }
 
 export default ThemeProvider

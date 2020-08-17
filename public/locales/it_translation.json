@@ -1,0 +1,36 @@
+{
+  "profileButton": {
+    "welcome": "Benvenuto",
+    "profile": "Profilo"
+  },
+  "auth": {
+    "wrongEmailOrPassword": "Email o passowrd errati",
+    "login": "Accedi",
+    "auth": "Autenticazione",
+    "activateAccount": "Attiva l'Account",
+    "loginSuccess": "Onboarding",
+    "remindPassword": "Ricorda Password",
+    "restorePassword": "Ripristina Password",
+    "signUp": "Registrazione",
+    "register": "Registrati",
+    "confirmPassword": "Conferma Password",
+    "forgotPassword": "Password Dimenticata?",
+    "insertInformation": "Inserisci le Informazioni",
+    "activation": {
+      "text": "Stiamo attivando il tuo account"
+    }
+  },
+
+  "yup": {
+    "invalidField": "Campo non Valido",
+    "required": "Campo Obbligatorio",
+    "email": "Il campo {{email}} dovrebbe essere un'email"
+  },
+  "placeholder": {
+    "backToHomepage": "Torna indietro",
+    "cannotFindPage": "Ooops! Ti sei perso!",
+    "notFound": "Pagina Non Trovata",
+    "errorInternalServer": "Oh No! Il server non risponde",
+    "youAreNotAuthorized": "Non sei Autorizzato!"
+  }
+}

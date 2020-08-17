@@ -22,9 +22,11 @@
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "qs": "^6.9.3",
-    "react": "^16.13.1",
+    "react": "^0.0.0-experimental-94c0244ba",
+    "react-cookie": "^4.0.3",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.13.1",
+    "react-dom": "^0.0.0-experimental-94c0244ba",
+    "react-error-boundary": "^2.3.1",
     "react-helmet": "^5.2.1",
     "react-i18next": "^10.13.2",
     "react-reveal": "^1.2.2",
@@ -40,7 +42,8 @@
     "start": "react-scripts start",
     "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
     "build-sw": "node ./src/sw-build.js",
-    "build": "react-scripts build && workbox copyLibraries build/ && npm run build-sw",
+    "copy-workbox-libraries": "workbox copyLibraries /build",
+    "build": "react-scripts build && npm run copy-workbox-libraries && npm run build-sw",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-tailwind": "yarn tailwind build ./src/css/tailwind-input.css -o ./src/css/tailwind.css",
@@ -62,5 +65,6 @@
     ]
   },
   "devDependencies": {
+    "workbox-cli": "^5.1.3"
   }
 }

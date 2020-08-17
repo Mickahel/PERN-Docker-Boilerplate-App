@@ -1,0 +1,26 @@
+#login{
+
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    #loginForm{
+        display: flex;
+        flex-direction: column;
+        #formInputs{
+            display: flex;
+            flex-direction: column;
+        }
+        #submitInput{
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        #auxiliaryLinks{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+    }
+}

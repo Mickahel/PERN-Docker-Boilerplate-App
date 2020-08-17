@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import '../configuration/variables.scss';
 
 
 #root{
@@ -19,52 +19,11 @@ body, html{
     margin: 10px !important;
 }
 
-
-/*.MuiFab-root{
-    position: fixed  !important;
-    bottom:0 !important;
-    right: 0 !important;
-    margin: 30px !important;
-}*/
-
-.circularProgressLoader{
-    position: fixed;
-    z-index: 99;
-    height: 2em;
-    width: 2em;
-    overflow: visible;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-}
-
-.MuiCircularProgress-colorPrimary{
-    color: $primaryColor !important;
-}
-
-
-.main-theme{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    flex: 1;
-    width: 100%;
-    overflow: hidden;
-}
-
-.main-content{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-}
 .contentHeight{
     height: 100%;
-    margin: 0 $standardMargin;
-    margin-top: $standardMargin/2;
-    margin-bottom: 40px;
+    //margin: 0 $standardMargin;
+    padding-top:100px;
+    //margin-bottom: 40px;
 }
 
 .MuiCard-root {
@@ -72,23 +31,17 @@ body, html{
 }
 
 button{
-    outline: 0px !important;  //disables Tailwind outline
+    outline: 0px !important;  // ? disables Tailwind outline
 }
 
 .MuiMenu-paper{
     @include greyBorder;
 }
 
-
 @media only screen and (max-width: $mobileWidth)  {
 
     .contentHeight{
-        margin: 0 $standardMargin;
+        //margin: 0 $standardMargin;
         justify-content: center;
-        display: flex;
-    }
-
-    header{
-        margin-top:10px
     }
 }

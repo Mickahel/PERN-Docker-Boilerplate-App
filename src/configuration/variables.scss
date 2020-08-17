@@ -1,0 +1,32 @@
+$mobileWidth: 800px;
+$primaryColor: #f2fe;
+$secondaryColor: white;
+
+$standardMargin:20px;
+
+$errorColor: red;
+$infoColor: #00b1ec;
+$confirmColor: rgb(86, 211, 253);
+$successColor: rgb(76, 175, 80);
+$warningColor: rgb(231, 197, 1);
+
+
+//$robotoFont: robotofont ;
+//@font-face {
+//    font-family: $robotoFont;
+//    src: url("/webfonts/Roboto-Medium.ttf");
+//  }
+//
+
+@mixin greyBorder{
+    border: 1px solid #d3d4d5 !important;
+}
+
+@mixin buttonSize($side) {
+    max-width: $side;
+    min-width: $side;
+    width: $side;
+    max-height: $side;
+    min-height: $side;
+    height: $side;
+}

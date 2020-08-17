@@ -2,33 +2,26 @@ import React, {useContext} from 'react'
 import {ThemeProvider} from '@material-ui/styles'
 import {createMuiTheme, CssBaseline} from '@material-ui/core'
 import {ThemeContext} from 'contexts/Providers/ThemeProvider'
-import {primaryColor,secondaryColor} from 'config'
+import config from 'configuration/config'
 function MUIThemeHandler(props){
 
     useContext(ThemeContext) 
 
-    if(!localStorage.getItem('theme')){
-      localStorage.setItem('theme', 'light')
-      //themeContext.setMuiType("light")
-    }
+    if(!localStorage.getItem('theme')) localStorage.setItem('theme', 'light')
 
     let muithemeConfig = {
         palette: {
             type:localStorage.getItem('theme'),
             primary: {
-              main: primaryColor,
+              main: config.palette.primaryColor,
+              ...config.theme.forceTextColor && {
+                contrastText: localStorage.getItem('theme')=="light" ? config.theme.forceTextColor.light : config.theme.forceTextColor.dark 
+              },
             },
             secondary:{
-              main: secondaryColor,
+              main: config.palette.secondaryColor,
             }
           },
-        /*overrides:{
-          MuiButton:{
-            root:{
-              backgroundColor: "white"
-            }
-          }
-        }*/
       }
 
     return(

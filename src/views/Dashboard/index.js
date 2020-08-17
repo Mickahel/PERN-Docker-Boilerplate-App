@@ -1,32 +1,31 @@
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-//import { UserContext } from 'context/Providers/UserProvider';
+import { ThemeContext } from "contexts/Providers/ThemeProvider";
+import useFetch from 'hooks/useFetch'
+import PaymentOutlinedIcon from '@material-ui/icons/PaymentOutlined';
+import RoundLoader from 'components/RoundLoader'
 import "./style.scss";
-function Dashboard(props) {
-  const history = useHistory();
 
+
+function Dashboard(props) {
+  const themeContext = useContext(ThemeContext);
+  const {data} = useFetch({
+    url: "https://api.exchangeratesapi.io/latest",
+    addBaseUrl:false,
+    addHeaders:false,
+    method: "GET"
+  })
+  console.log(data)
+  useEffect(() => {
+    themeContext.setTitle("dashboard.dashboard", <PaymentOutlinedIcon />)
+  }, [])
   return (
-    <div className="bg-red-500">
-      <button
-        onClick={() => {
-          history.push("/about");
-        }}
-      >
-        about
-      </button>
-      <button
-        onClick={() => {
-          navigator.serviceWorker
-            .register("service-worker.js")
-            .then((response) => console.log("RSP:", response))
-            .catch((error) => console.log("Error:", error));
-        }}
-      >
-        register SW
-      </button>
-      <img src="/logo192.png"></img>
+    <div>
+      {Object.keys(data.rates).map(key=>(
+        <p key={key}>-<strong>{key}:</strong>{data.rates[key]}</p>
+      ))}
     </div>
-  );
+  )
 }
 
 export default Dashboard;

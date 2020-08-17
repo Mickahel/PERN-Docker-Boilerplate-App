@@ -1,51 +1,74 @@
-import React, { useEffect, useCallback, useContext, useState } from 'react'
+import React, { lazy, useEffect, useCallback, useContext, useState, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
-//import ErrorNotFound from 'views/Placeholders/ErrorNotFound'
-//import Dashboard from 'views/Dashboard'
-import {ThemeContext} from 'contexts/Providers/ThemeProvider'
-//import Header from '../theme/Header'
-//import Sidebar from 'theme/Sidebar'
-//import Account from './Account'
-import Home from 'views/Home'
-import Dashboard from 'views/Dashboard'
-import About from 'views/About'
-import Team from 'views/Team'
-//import { isUserTokenValid, removeUserToken } from 'auxiliaries/AuthAuxiliaries'
-//import { UserContext } from 'context/Providers/UserProvider'
+import { ThemeContext } from 'contexts/Providers/ThemeProvider'
+import Theme from 'Theme'
+import Account from './Account'
+import { isUserTokenValid, removeUserToken } from 'auxiliaries/AuthAuxiliaries'
+import { UserContext } from 'contexts/Providers/UserProvider'
 import Endpoints from 'Endpoints'
 import "../sass/main.scss"
 import RoundLoader from 'components/RoundLoader'
-import useFetcher from 'hooks/useFetcher'
 import { useHistory } from 'react-router-dom'
-import { browserHistory } from 'react-router'
+import useFetch from 'hooks/useFetch'
+
+const ErrorNotFound = lazy(() => import('views/Placeholders/ErrorNotFound'))
+const Home = lazy(() => import('views/Home'))
+const Dashboard = lazy(() => import('views/Dashboard'))
 
 function App(props) {
     const themeContext = useContext(ThemeContext)
-//    const userContext = useContext(UserContext)
+    const userContext = useContext(UserContext)
+    const [loading, setLoading] = useState(true)
     const history = useHistory()
+    const {fetch} = useFetch()
 
-    const pushToLogin =useCallback(() => {
-        //removeUserToken()
-        props.history.push('/auth/login?returnUrl=' + props.location.pathname)
+
+    useEffect(() => {
+        checkUserIdentity()
     }, [])
 
+
+    const pushToLogin = useCallback(() => {
+        removeUserToken()
+        history.push('/auth/login?returnUrl=' + history.location.pathname)
+    }, [])
+
+
+
+    const checkUserIdentity = useCallback(async () => {
+        let tokenValid = isUserTokenValid()
+        if (userContext.user && tokenValid) {
+            setLoading(false)
+            return
+        }
+        // ? qui non ho l'utente
+        if (tokenValid) {
+            const data = await fetch({
+                method: "GET",
+                url: Endpoints.user.profile,
+            })
+            userContext.setUser(data)
+            setLoading(false)
+        }
+        else {
+            setLoading(false)
+            pushToLogin()
+        }
+    }, [])
+
+
+    if (loading) return <RoundLoader />
     return (
-        <div className="main-theme">
-            {/*<Sidebar>
-                <Header />*/}
-                <div className="contentHeight">
-                    <Switch >
-                        <Route exact path='/about' component={About} />
-                        <Route exact path='/team' component={Team} />
-                        <Route exact path='/dashboard' component={Dashboard} />
-                        <Route exact path='/' component={Home} />
-                        {/*<Route component={ErrorNotFound} />*/}
-                    </Switch>
-                </div>
-            {/*</Sidebar>*/}
-
-
-        </div>
+        <Theme>
+            <Suspense fallback={<RoundLoader />}>
+                <Switch >
+                    <Route exact path='/dashboard' component={Dashboard} />
+                    <Route path='/account*' exact component={Account} />
+                    <Route exact path='/' component={Home} />
+                    <Route component={ErrorNotFound} />
+                </Switch>
+            </Suspense>
+        </Theme>
     )
 }
 

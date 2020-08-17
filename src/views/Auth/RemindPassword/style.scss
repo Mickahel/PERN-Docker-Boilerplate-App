@@ -1,0 +1,28 @@
+#remindPassword{
+    
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    #remindPasswordForm{
+
+        display: flex;
+        flex-direction: column;
+        #formInputs{
+            display: flex;
+            flex-direction: column;
+        }
+        #submitInput{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+
+        #auxiliaryLinks{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+    }
+
+}
