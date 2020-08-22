@@ -11,7 +11,6 @@ import Chip from '@material-ui/core/Chip';
 import { useHistory } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import { useFormik } from 'formik';
-import { registerUserToken, registerUserId } from 'auxiliaries/AuthAuxiliaries'
 import VisibilityOffOutlinedIcon from '@material-ui/icons/VisibilityOffOutlined';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -55,7 +54,6 @@ function Login(props) {
             })
 
             console.log(data)
-            registerUserToken(data)
             userContext.setUser(data.user)
             pushInsideApp()
         },

@@ -6,7 +6,8 @@ import UrlPattern from "url-pattern";
 import { useHistory } from "react-router-dom";
 //import { Trans } from 'react-i18next'
 import { ThemeContext } from 'contexts/Providers/ThemeProvider'
-
+import useCookies from 'react-cookie'
+import Cookies from 'js-cookie'
 // ? https://www.npmjs.com/package/qs
 // ? https://www.npmjs.com/package/url-pattern
 
@@ -63,10 +64,9 @@ function useFetcher(props) {
 
     const CORSHeaders = addHeaders == true ? {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Set-Cookie",
       "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, PATCH, OPTIONS",
       "Access-Control-Allow-Credentials": "true",
-      crossorigin: "true",
     } : {}
 
     const headers = {
@@ -79,11 +79,10 @@ function useFetcher(props) {
     // ? Get UserToken if there is one and attach to Header
     if (
       _.get(options, "useToken", true) &&
-      localStorage.accessToken &&
+      Cookies.get("accessToken") &&
       addHeaders == true
-    ) {
-      headers["Authorization"] = `Bearer ${localStorage.accessToken}`;
-    }
+    ) headers["Authorization"] = `Bearer ${Cookies.get("accessToken")}`;
+    
 
     // ? Create custom axios instance
     const axiosGateway = axios.create({
@@ -91,16 +90,17 @@ function useFetcher(props) {
       timeout: 30000,
       json: true,
       headers,
+      withCredentials:true
     });
     // ? attach global headers
     if (addHeaders == false) {
-
       axiosGateway.defaults.headers.common = headers;
       axiosGateway.defaults.headers.patch = headers;
       axiosGateway.defaults.headers.post = headers;
       axiosGateway.defaults.headers.put = headers;
       axiosGateway.defaults.headers.get = headers;
       axiosGateway.defaults.headers.delete = headers;
+      axiosGateway.defaults.withCredentials = true;
     }
 
     axiosGateway.interceptors.request.use((response) => {

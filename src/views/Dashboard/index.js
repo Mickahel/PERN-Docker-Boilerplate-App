@@ -5,25 +5,27 @@ import useFetch from 'hooks/useFetch'
 import PaymentOutlinedIcon from '@material-ui/icons/PaymentOutlined';
 import RoundLoader from 'components/RoundLoader'
 import "./style.scss";
+import axios from 'axios'
 
 
 function Dashboard(props) {
   const themeContext = useContext(ThemeContext);
-  const {data} = useFetch({
-    url: "https://api.exchangeratesapi.io/latest",
-    addBaseUrl:false,
-    addHeaders:false,
-    method: "GET"
-  })
-  console.log(data)
+  const {fetch, data}= useFetch()
+
+  const loadData= async ()=>{
+   // console.log(await fetch({
+   //   url:"/v1/admin/server/healthcheck",
+   //   method:"GET"}))
+
+  }
+
   useEffect(() => {
     themeContext.setTitle("dashboard.dashboard", <PaymentOutlinedIcon />)
+    loadData()
   }, [])
   return (
     <div>
-      {Object.keys(data.rates).map(key=>(
-        <p key={key}>-<strong>{key}:</strong>{data.rates[key]}</p>
-      ))}
+
     </div>
   )
 }

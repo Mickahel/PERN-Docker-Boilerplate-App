@@ -18,7 +18,6 @@ import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import Brightness3OutlinedIcon from '@material-ui/icons/Brightness3Outlined';
 import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
 import { UserContext } from 'contexts/Providers/UserProvider'
-//import {removeUserToken, removeUserId} from 'auxiliaries/AuthAuxiliaries'
 const useStyles = makeStyles(theme => ({
   small: {
     width: theme.spacing(4),
@@ -45,7 +44,7 @@ function ProfileButton(props) {
           <Avatar className={classes.small} src={process.env.PUBLIC_URL + userContext?.user?.profileImg}></Avatar>
           <span className="ml-2">
             <Typography variant="body2" >
-              {userContext.user.firstname || <Trans>profileButton.welcome</Trans>}
+              {userContext?.user?.firstname || <Trans>profileButton.welcome</Trans>}
             </Typography>
           </span>
           {
@@ -101,8 +100,7 @@ function ProfileButton(props) {
         <Divider variant="middle" />
         <MenuItem onClick={() => {
           history.push("/auth/login")
-          //removeUserToken()
-          //removeUserId()
+          
         }}>
           <span className="menuItem">
             <ExitToAppOutlinedIcon className="menuProfileIcon" color="action" fontSize="small" />

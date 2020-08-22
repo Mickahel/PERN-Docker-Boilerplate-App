@@ -11,13 +11,15 @@ import Navigation from './Navigation'
 import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import CustomScrollbar from 'components/CustomScrollbar'
 import { useHistory } from 'react-router-dom'
-    
+
 const useStyles = makeStyles((theme) => ({
     drawer: {
         width: config.theme.sidebar.drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
-
+    },
+    paperDrawer: {
+        
     },
     drawerOpen: {
         overflowY: 'hidden',
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         width: theme.spacing(9) + 1,
     },
     fixMobileScrollBar:{
-        overflowY: 'hidden'
+        overflowY: 'hidden',
     },
     imageLogo:{
         opacity:1,
@@ -73,7 +75,7 @@ function Sidebar(props) {
     let sidebarProperties = !matches && {
         variant: "permanent",
         classes: {
-            paper: classnames({
+            paper: classnames( classes.paperDrawer, {
                 [classes.drawerOpen]: themeContext.sidebarOpen,
                 [classes.drawerClose]: !themeContext.sidebarOpen,
             }),

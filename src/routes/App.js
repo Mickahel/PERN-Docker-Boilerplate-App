@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import Theme from 'Theme'
 import Account from './Account'
-import { isUserTokenValid, removeUserToken } from 'auxiliaries/AuthAuxiliaries'
 import { UserContext } from 'contexts/Providers/UserProvider'
 import Endpoints from 'Endpoints'
 import "../sass/main.scss"
@@ -27,33 +26,19 @@ function App(props) {
         checkUserIdentity()
     }, [])
 
-
-    const pushToLogin = useCallback(() => {
-        removeUserToken()
-        history.push('/auth/login?returnUrl=' + history.location.pathname)
-    }, [])
-
-
-
     const checkUserIdentity = useCallback(async () => {
-        let tokenValid = isUserTokenValid()
-        if (userContext.user && tokenValid) {
+        if (userContext.user) {
             setLoading(false)
             return
         }
         // ? qui non ho l'utente
-        if (tokenValid) {
-            const data = await fetch({
+         const data = await fetch({
                 method: "GET",
                 url: Endpoints.user.profile,
             })
             userContext.setUser(data)
             setLoading(false)
-        }
-        else {
-            setLoading(false)
-            pushToLogin()
-        }
+        
     }, [])
 
 

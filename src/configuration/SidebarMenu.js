@@ -16,6 +16,41 @@ const SidebarMenu = [
     {
         id: "divider1",
         type: "divider"
+    },/*
+    {
+        type: "collapse",
+        id: 'Collapsed',
+        icon: <GroupOutlinedIcon />,
+        children : [
+            {
+                type: "item",
+                id: 'Ban',
+                to: "/dashboard",
+                icon: <ReportProblemOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Test',
+                to: "/dashboard",
+                icon: <BarChartOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'parapa',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Bobo',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            }, 
+        ]
     },
     {
         type: "collapse",
@@ -52,7 +87,182 @@ const SidebarMenu = [
             }, 
         ]
     },
-
+    {
+        type: "collapse",
+        id: 'Collapsed',
+        icon: <GroupOutlinedIcon />,
+        children : [
+            {
+                type: "item",
+                id: 'Ban',
+                to: "/dashboard",
+                icon: <ReportProblemOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Test',
+                to: "/dashboard",
+                icon: <BarChartOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'parapa',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Bobo',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            }, 
+        ]
+    },
+    {
+        type: "collapse",
+        id: 'Collapsed',
+        icon: <GroupOutlinedIcon />,
+        children : [
+            {
+                type: "item",
+                id: 'Ban',
+                to: "/dashboard",
+                icon: <ReportProblemOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Test',
+                to: "/dashboard",
+                icon: <BarChartOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'parapa',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Bobo',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            }, 
+        ]
+    },
+    {
+        type: "collapse",
+        id: 'Collapsed',
+        icon: <GroupOutlinedIcon />,
+        children : [
+            {
+                type: "item",
+                id: 'Ban',
+                to: "/dashboard",
+                icon: <ReportProblemOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Test',
+                to: "/dashboard",
+                icon: <BarChartOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'parapa',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Bobo',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            }, 
+        ]
+    },
+    {
+        type: "collapse",
+        id: 'Collapsed',
+        icon: <GroupOutlinedIcon />,
+        children : [
+            {
+                type: "item",
+                id: 'Ban',
+                to: "/dashboard",
+                icon: <ReportProblemOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Test',
+                to: "/dashboard",
+                icon: <BarChartOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'parapa',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Bobo',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            }, 
+        ]
+    },
+    {
+        type: "collapse",
+        id: 'Collapsed',
+        icon: <GroupOutlinedIcon />,
+        children : [
+            {
+                type: "item",
+                id: 'Ban',
+                to: "/dashboard",
+                icon: <ReportProblemOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Test',
+                to: "/dashboard",
+                icon: <BarChartOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'parapa',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            },
+            {
+                type: "item",
+                id: 'Bobo',
+                to: "/dashboard",
+                icon: <DashboardOutlinedIcon />,
+                exact: true,
+            }, 
+        ]
+    },
+    */
 ]
 
 

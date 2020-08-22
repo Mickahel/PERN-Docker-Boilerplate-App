@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import { Scrollbars } from 'react-custom-scrollbars'
-
+import './style.scss'
 
 function CustomScrollbar(props) {
 
@@ -18,12 +18,12 @@ function CustomScrollbar(props) {
     renderThumbHorizontal = props => <div {...props} style={{ display: "none" }} />
   }
 
-  //let renderTrackVertical = ({ style, ...props }) =><div {...props}  style={{ ...style }}/>
-  // let renderThumbVertical = ({ style, ...props }) =><div {...props} style={{ ...style, ...styleVertical }}/>
+  let renderTrackVertical = ({ style, ...props }) =><div {...props}  style={{ ...style }}/>
+  let renderThumbVertical = ({ style, ...props }) =><div {...props} style={{ ...style, ...styleVertical }}/>
   if (!props.vertical) {
     styleVertical.display = 'none'
-    renderTrackHorizontal = props => <div {...props} style={{ display: "none" }} />
-    renderThumbHorizontal = props => <div {...props} style={{ display: "none" }} />
+    renderTrackVertical = props => <div {...props} style={{ display: "none" }} />
+    renderThumbVertical = props => <div {...props} style={{ display: "none" }} />
   }
 
   let newProps = { ...props }
@@ -36,7 +36,7 @@ function CustomScrollbar(props) {
     hideTracksWhenNotNeeded={props.hideTracksWhenNotNeeded}
     autoHeight={props.autoHeight}
     autoHeightMin={'100%'}
-    className={classnames("scrollbar max-h-full", props.className)}
+    className={classnames("scrollbar", props.className)}
     renderTrackHorizontal={renderTrackHorizontal}
     renderThumbHorizontal={renderThumbHorizontal}
     {...newProps}>

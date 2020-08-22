@@ -18,7 +18,6 @@ import * as Yup from "yup";
 import TextField from "@material-ui/core/TextField";
 import { useFormik } from "formik";
 import Endpoints from "Endpoints";
-import {registerUserToken} from 'auxiliaries/AuthAuxiliaries'
 import { UserContext } from "contexts/Providers/UserProvider";
 function ChangePasswordBox(props) {
   const themeContext = useContext(ThemeContext);
@@ -54,8 +53,6 @@ function ChangePasswordBox(props) {
             userId: userContext.user.id,
           },
         });
-        registerUserToken(result.data)
-        
         handleClose();
         formikBag.resetForm();
         themeContext.showSuccessNotification({
