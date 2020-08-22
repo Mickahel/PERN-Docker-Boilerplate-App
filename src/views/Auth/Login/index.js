@@ -54,7 +54,7 @@ function Login(props) {
             })
 
             console.log(data)
-            userContext.setUser(data.user)
+            userContext.setUser(data)
             pushInsideApp()
         },
         validationSchema,

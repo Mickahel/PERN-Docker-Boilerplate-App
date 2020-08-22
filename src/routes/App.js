@@ -32,12 +32,18 @@ function App(props) {
             return
         }
         // ? qui non ho l'utente
+        try{
          const data = await fetch({
                 method: "GET",
                 url: Endpoints.user.profile,
             })
+            console.log("DATA",data)
             userContext.setUser(data)
             setLoading(false)
+        } catch(e){
+            console.log("error", e)
+        }
+
         
     }, [])
 
