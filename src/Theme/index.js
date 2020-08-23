@@ -44,9 +44,13 @@ export default function Theme(props) {
                 handleDrawerCloseOnClick={handleDrawerCloseOnClick}
                 handleDrawerOpenOnClick={handleDrawerOpenOnHover}
             />}
-            <div className="w-full contentHeight">
+            <div className="w-full h-full">
+                <div className="mt-20 mb-20 contentHeight">
                 {props.children}
+                </div>
+                <div>
                 {config.theme.bottomNavigation.enabled && <BottomNavigation />}
+                </div>
             </div>
 
         </div>

@@ -17,12 +17,14 @@ const useStyles = makeStyles((theme) => ({
         width: config.theme.sidebar.drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
+        overflowX: 'hidden',
     },
     paperDrawer: {
         
     },
     drawerOpen: {
         overflowY: 'hidden',
+        overflowX: 'hidden',
         width: config.theme.sidebar.drawerWidth,
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
@@ -104,7 +106,7 @@ function Sidebar(props) {
                 }
                 alt={"Logo"}
                 onClick={()=>{history.push('/')}}
-                width={190}
+                width={160}
                 src={process.env.PUBLIC_URL + '/img/logos/longLogo.svg' } />
                 {themeContext.sidebarOpen && <>
 

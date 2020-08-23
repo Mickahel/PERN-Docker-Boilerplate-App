@@ -42,7 +42,7 @@ function App(props) {
             setLoading(false)
         } catch(e){
             //themeContext.showWarningNotification({ message: "loginAgain" })
-            //history.push("auth?returnUrl=" + history.location.pathname)
+            history.push("auth?returnUrl=" + history.location.pathname)
             console.log("error", e)
         }
 

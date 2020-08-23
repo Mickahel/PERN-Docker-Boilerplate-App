@@ -32,7 +32,7 @@ const config = {
         bottomNavigation:{
             enabled:true,
             showLabels: false,
-            showOnDesktop: false,
+            showOnDesktop: true,
             activeColor:"#86DAF1"
         }
 

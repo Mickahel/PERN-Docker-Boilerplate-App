@@ -121,7 +121,7 @@ function useFetcher(props) {
                   })
                 console.log("User API,", apiFetched)
                 return apiFetched
-              } catch (e) { 
+              } catch (e) {
                 history.push("auth?returnUrl=" + history.location.pathname)
                 throw err
               }
@@ -130,7 +130,7 @@ function useFetcher(props) {
           }
           else if (err.response.data.message == "User doesn\'t have right permission") { }
           else if (err.response.data.message == "RefreshToken Not Found") {
-            if(history.location.pathname!="/") themeContext.showWarningNotification({ message: "loginAgain" })
+            if (history.location.pathname != "/") themeContext.showWarningNotification({ message: "loginAgain" })
 
             //history.push("auth?returnUrl=" + history.location.pathname)
             throw err
@@ -231,7 +231,6 @@ function useFetcher(props) {
     } catch (err) {
       console.log("Err in catch", err)
       if (err?.response?.status === 500 || err.message.toString() == "Network Error") {
-        console.log(err.response?.status === 500 || err.message.toString() == "Network Error", err.response?.status === 500, err.message.toString() == "Network Error")
         if (counter.current[options.url + JSON.stringify(options.data)] < 3) {
           counter.current[options.url + JSON.stringify(options.data)] = counter.current[options.url + JSON.stringify(options.data)] + 1
           await new Promise(resolve => setTimeout(resolve, 500));

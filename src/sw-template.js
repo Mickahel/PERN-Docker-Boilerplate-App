@@ -81,9 +81,16 @@ if (typeof importScripts === "function") {
       })
     );
 
+    const matchFunctionForNetworkOnly = ({url, request, event}) => {
+      return (url.href.startsWith('https://localhost:4000/v1/auth') ||url.href.startsWith('https://localhost:4000/v1/app/user'))
+    };
+    const matchFunctionForNetworkFirst = ({url, request, event}) => {
+      return !(url.href.startsWith('https://localhost:4000/v1/auth') ||url.href.startsWith('https://localhost:4000/v1/app/user'))
+    };
+
     // ? Cache with NetworkFirst strategy the data that comes from Backend
     workbox.routing.registerRoute(
-      /https?:\/\/pernBoilerplate\.com/, //? the backend APIs and data
+      matchFunctionForNetworkFirst, //? the backend APIs and data
       new workbox.strategies.NetworkFirst({
         cacheName: "data",
         plugins: [
@@ -95,6 +102,19 @@ if (typeof importScripts === "function") {
       })
     );
 
+    // ? Cache with NetworkOnly strategy for fresh data
+   /* workbox.routing.registerRoute(
+      matchFunctionForNetworkOnly, //? the backend APIs and data
+      new workbox.strategies.NetworkOnly({
+        cacheName: "freshData",
+        plugins: [
+          new workbox.expiration.ExpirationPlugin({
+            maxAgeSeconds: 10 * 60, // 10 minutes
+            purgeOnQuotaError: true
+          }),
+        ],
+      })
+    );*/
     // ? Creates a queue in order to stale the requests that are made while offline
     const queue = new workbox.backgroundSync.Queue("backgroundSyncQueue");
     self.addEventListener("fetch", (event) => {

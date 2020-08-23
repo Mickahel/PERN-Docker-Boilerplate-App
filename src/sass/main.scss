@@ -1,47 +1,50 @@
-@import '../configuration/variables.scss';
+@import "../configuration/variables.scss";
 
-
-#root{
-    width:100%;
-    height:100%;
-    padding:0;
-    margin: 0;
+#root {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
-body, html{
-    width:100%;
-    height:100%;
-    padding:0;
-    margin: 0;
+body,
+html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
-.MuiTextField-root{
-    margin: 10px !important;
+.MuiTextField-root {
+  margin: 10px !important;
 }
 
-.contentHeight{
+.contentHeight {
+  > div:first-of-type {
     height: 100%;
-    //margin: 0 $standardMargin;
-    padding-top:100px;
-    //margin-bottom: 40px;
+    width: 100%;
+  }
 }
 
 .MuiCard-root {
-    border-radius: 10px !important;
+  border-radius: 10px !important;
 }
 
-button{
-    outline: 0px !important;  // ? disables Tailwind outline
+button {
+  outline: 0px !important; // ? disables Tailwind outline
 }
 
-.MuiMenu-paper{
-    @include greyBorder;
+.MuiMenu-paper {
+  @include greyBorder;
 }
 
-@media only screen and (max-width: $mobileWidth)  {
-
-    .contentHeight{
-        //margin: 0 $standardMargin;
-        justify-content: center;
-    }
+@media only screen and (max-width: $mobileWidth) {
+  .contentHeight {
+    //margin: 0 $standardMargin;
+    /*>div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }*/
+  }
 }

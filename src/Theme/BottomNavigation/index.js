@@ -32,8 +32,9 @@ const useStyles = makeStyles((theme) => ({
                 duration: (theme.transitions.duration.enteringScreen*3),
             }),
         },
-        position: 'absolute',
-        bottom: 0
+        position: 'fixed',
+        bottom: 0,
+
     }),
     bottomNavigationActive: {
         color: `${config.theme.bottomNavigation.activeColor} !important`
