@@ -20,7 +20,7 @@ import useFetch from 'hooks/useFetch'
 import Endpoints from 'Endpoints';
 import { ThemeContext } from 'contexts/Providers/ThemeProvider';
 import { UserContext } from 'contexts/Providers/UserProvider';
-
+import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 function Login(props) {
     let history = useHistory();
     let [disableButton, setDisableButton] = useState(true)
@@ -56,8 +56,8 @@ function Login(props) {
                 userContext.setUser(data)
                 pushInsideApp()
             } catch (err) {
-                if(err.status==403) themeContext.showErrorNotification({ message: "wrongEmailOrPassword" })
-             }
+                if (err.status == 403) themeContext.showErrorNotification({ message: "wrongEmailOrPassword" })
+            }
         },
         validationSchema,
         validate: values => {
@@ -73,6 +73,11 @@ function Login(props) {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    function handleClick() {
+        alert("Hello!");
+    }
+
 
     return (
 
@@ -140,7 +145,15 @@ function Login(props) {
                     </div>
                 </form>
 
-
+                <div className="mb-4 mt-16">
+                        <FacebookLoginButton onClick={handleClick}>
+                            <Trans>auth.loginWithFacebook</Trans>
+                        </FacebookLoginButton>
+                        <GoogleLoginButton onClick={handleClick}>
+                            <Trans>auth.loginWithGoogle</Trans>
+                        </GoogleLoginButton>
+                    </div>
+                    
                 <div id="auxiliaryLinks">
                     <span className="mr-1"><Trans>auth.forgotPassword</Trans></span>
                     <Link href="/auth/password-remind" vcolor="primary">
