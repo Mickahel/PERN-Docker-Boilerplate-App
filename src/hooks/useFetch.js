@@ -130,8 +130,9 @@ function useFetcher(props) {
           }
           else if (err.response.data.message == "User doesn\'t have right permission") { }
           else if (err.response.data.message == "RefreshToken Not Found") {
-            themeContext.showWarningNotification({ message: "loginAgain" })
-            history.push("auth?returnUrl=" + history.location.pathname)
+            if(history.location.pathname!="/") themeContext.showWarningNotification({ message: "loginAgain" })
+
+            //history.push("auth?returnUrl=" + history.location.pathname)
             throw err
           } else {
             throw err
