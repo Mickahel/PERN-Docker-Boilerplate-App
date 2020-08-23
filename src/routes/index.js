@@ -3,11 +3,8 @@ import { Route, Switch } from 'react-router-dom'
 import RoutingApp from './App'
 import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import RoutingAuth from './Auth'
+import moment from 'moment'
 import i18n from 'i18n'
-import moment from 'moment';
-import RoundLoader from 'components/RoundLoader'
-
-
 
 const ErrorInternalServer = lazy(()=> import('views/Placeholders/ErrorInternalServer'))
 const ErrorNotAuthorized = lazy(()=> import('views/Placeholders/ErrorNotAuthorized'))
@@ -19,7 +16,7 @@ function App(props) {
 
   const themeContext = useContext(ThemeContext)
 
-  /*    useEffect(() => {
+      useEffect(() => {
           window.addEventListener('app-update', onAppUpdate)
           window.addEventListener('beforeinstallprompt', onBeforeInstallPrompt)
         }, [])
@@ -34,21 +31,23 @@ function App(props) {
   
       const onAppUpdate = () =>{
         let format = "YYYY-MM-DD HH:mm:ss"
-        if(localStorage.updateDialogLastShown){
+        /*if(localStorage.updateDialogLastShown){
           let date = moment(localStorage.updateDialogLastShown, format)
           if(moment().diff(date, "minute")<1) return
-        }
+        }*/
         
-        localStorage.updateDialogLastShown = moment().format(format)
+        //localStorage.updateDialogLastShown = moment().format(format)
+        const channel = new BroadcastChannel("service-worker-channel");
         themeContext.showInfoDialog({
           title: i18n.t("newUpdateAlert.title"),
           message: i18n.t("newUpdateAlert.message"),
           onClose:()=>{
+            channel.postMessage({ skipWaiting: true })
             window.location.reload(true)
           }
         })
       }
-  */
+  
 
   return (
         <Switch>

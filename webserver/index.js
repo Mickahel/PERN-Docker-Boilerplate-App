@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const dir = "C:/Users/Michelangelo/Desktop/Projects/PERN Boilerplate/PERN-Docker-Boilerplate-Frontend"
+const dir = "C:/Users/Michelangelo/Desktop/Projects/PERN Boilerplate/PERN-Docker-Boilerplate-App"
 app.use(express.static(path.join(dir, 'build')));
 app.use(express.static(dir, {maxAge: 0}));
 /*app.use(express.static(dir, { cacheControl: true, setHeaders: function(res, path) { 

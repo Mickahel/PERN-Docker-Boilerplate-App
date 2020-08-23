@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { ThemeContext } from "contexts/Providers/ThemeProvider";
 import useFetch from 'hooks/useFetch'
 import PaymentOutlinedIcon from '@material-ui/icons/PaymentOutlined';
-import RoundLoader from 'components/RoundLoader'
 import "./style.scss";
 import axios from 'axios'
 

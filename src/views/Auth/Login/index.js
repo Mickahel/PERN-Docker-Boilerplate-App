@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import config from 'configuration/config'
 import Helmet from 'react-helmet';
 import { t } from 'i18next';
@@ -27,7 +27,7 @@ function Login(props) {
     let [showPassword, setShowPassword] = useState(false);
     const themeContext = useContext(ThemeContext)
     const userContext = useContext(UserContext)
-    const {fetch} = useFetch()
+    const { fetch } = useFetch()
     const validationSchema = Yup.object({
         email: Yup.string().email().required(),
         password: Yup.string().required()
@@ -47,15 +47,17 @@ function Login(props) {
 
         },
         onSubmit: async (values, formikBag) => {
-            let data = await fetch({
-                url: Endpoints.auth.login,
-                data: values,
-                method: "POST",
-            })
-
-            console.log(data)
-            userContext.setUser(data)
-            pushInsideApp()
+            try {
+                let data = await fetch({
+                    url: Endpoints.auth.login,
+                    data: values,
+                    method: "POST",
+                })
+                userContext.setUser(data)
+                pushInsideApp()
+            } catch (err) {
+                if(err.status==403) themeContext.showErrorNotification({ message: "wrongEmailOrPassword" })
+             }
         },
         validationSchema,
         validate: values => {

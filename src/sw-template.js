@@ -46,6 +46,7 @@ if (typeof importScripts === "function") {
           new workbox.expiration.ExpirationPlugin({
             maxAgeSeconds: 10 * 60, // 10 minutes
             maxEntries: 1000,
+            purgeOnQuotaError: true
           }),
         ],
       })
@@ -60,6 +61,7 @@ if (typeof importScripts === "function") {
           new workbox.expiration.ExpirationPlugin({
             maxAgeSeconds: 10 * 60, // 10 minutes
             maxEntries: 1000,
+            purgeOnQuotaError: true
           }),
         ],
       })
@@ -67,12 +69,13 @@ if (typeof importScripts === "function") {
 
     // ? cache with NetworkFirst strategy the routes
     workbox.routing.registerRoute(
-      /https?:\/\/localhost/, // ? Routes
+      /https?:\/\/localhost:9000/, // ? Routes
       new workbox.strategies.NetworkFirst({
         cacheName: "routes",
         plugins: [
           new workbox.expiration.ExpirationPlugin({
             maxAgeSeconds: 10 * 60, // 10 minutes
+            purgeOnQuotaError: true
           }),
         ],
       })
@@ -86,6 +89,7 @@ if (typeof importScripts === "function") {
         plugins: [
           new workbox.expiration.ExpirationPlugin({
             maxAgeSeconds: 10 * 60, // 10 minutes
+            purgeOnQuotaError: true
           }),
         ],
       })
@@ -100,7 +104,6 @@ if (typeof importScripts === "function") {
         return queue.pushRequest({ request: event.request });
       });
 
-      //TODO TRY another way of manage the offline requests
       /*
       1. Submit request
       2. Invalidate cache (if successful)

@@ -20,12 +20,12 @@ function RoundLoader(props){
 
     const { size, className } = props
     const classes = useStyles();
-    useEffect(()=>{
-      console.log("mounted")
+    /*useEffect(()=>{
+      console.log("mounted", props.agent)
       return () => {
-        console.log("unmounted");
+        console.log("unmounted", props.agent) ;
       };
-    },[])
+    },[])*/
     return (
       <div className={classnames(className, classes.bgColor," flex flex-1 items-center justify-center w-full h-full")}>
         <CircularProgress size={size} className={classnames(classes.root, 'circularProgressLoader')} />

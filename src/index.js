@@ -4,7 +4,7 @@ import App from "./App";
 import RoundLoader from "./components/RoundLoader";
 import "./sass/main.scss";
 ReactDOM.render(
-  <Suspense fallback={<RoundLoader />}>
+  <Suspense fallback={<RoundLoader agent="suspense"/>}>
     <App />
   </Suspense>,
   document.getElementById("root")

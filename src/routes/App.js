@@ -41,6 +41,8 @@ function App(props) {
             userContext.setUser(data)
             setLoading(false)
         } catch(e){
+            themeContext.showWarningNotification({ message: "loginAgain" })
+            history.push("auth?returnUrl=" + history.location.pathname)
             console.log("error", e)
         }
 
@@ -51,7 +53,7 @@ function App(props) {
     if (loading) return <RoundLoader />
     return (
         <Theme>
-            <Suspense fallback={<RoundLoader />}>
+            <Suspense fallback={<RoundLoader agent="suspense in app"/>}>
                 <Switch >
                     <Route exact path='/dashboard' component={Dashboard} />
                     <Route path='/account*' exact component={Account} />

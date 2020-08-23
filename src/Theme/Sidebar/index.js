@@ -104,16 +104,8 @@ function Sidebar(props) {
                 }
                 alt={"Logo"}
                 onClick={()=>{history.push('/')}}
-                width={
-                    themeContext.sidebarOpenedEvent === "click"
-                    && 
-                        !matches 
-                        ? 30 
-                        : 190}
-                src={
-                    process.env.PUBLIC_URL + themeContext.sidebarOpenedEvent === "click" 
-                    && !matches ? '/img/logos/shortLogo.svg' 
-                    : '/img/logos/longLogo.svg'} />
+                width={190}
+                src={process.env.PUBLIC_URL + '/img/logos/longLogo.svg' } />
                 {themeContext.sidebarOpen && <>
 
                     {(themeContext.sidebarOpenedEvent === "click" && !matches) && <IconButton onClick={handleDrawerCloseOnClick}>

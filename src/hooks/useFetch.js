@@ -100,12 +100,12 @@ function useFetcher(props) {
     axiosGateway.interceptors.response.use(
       (response) => {
         // ? Do something with response data
-        if (process.env.REACT_APP_API_LOGGING === true) console.log(`Execution time for: ${response.config.url} - ${new Date().getTime() - response.config.meta.requestStartedAt} ms`);
         return response;
       },
       (err) => {
-        if ((err.response.status === 401 || err.response.status === 403 || err.response.status === 404)) {
-          console.log("Unauthorized", err.response)
+
+        if ((err?.response?.status === 401 || err?.response?.status === 403 || err?.response?.status === 404)) {
+          //console.log("Unauthorized", err.response)
           if (err.response.data.message == "User is not authorized" || err.response.data.message == "Token expired") {
             const fetchToken = async () => {
               try {
@@ -115,12 +115,13 @@ function useFetcher(props) {
                   setData: false,
                 })
                 let apiFetched = await fetch(
-                  {...err.config,
-                    sendRaw:true
+                  {
+                    ...err.config,
+                    sendRaw: true
                   })
                 console.log("User API,", apiFetched)
                 return apiFetched
-              } catch (e) {
+              } catch (e) { 
                 history.push("auth?returnUrl=" + history.location.pathname)
                 throw err
               }
@@ -129,20 +130,24 @@ function useFetcher(props) {
           }
           else if (err.response.data.message == "User doesn\'t have right permission") { }
           else if (err.response.data.message == "RefreshToken Not Found") {
+            themeContext.showWarningNotification({ message: "loginAgain" })
             history.push("auth?returnUrl=" + history.location.pathname)
             throw err
+          } else {
+            throw err
           }
-          // ? Gestiamolo al login
-
         }
         else if (counter.current[err.config.url + JSON.stringify(err.config.data)] >= 3) {
+
           if (err.response?.status == 500 && redirectToPage500 === true) history.push("/error/500")
           if (err.response?.status == 500 && showErrorSnackBar === true) themeContext.showErrorNotification({ message: "somethingWentWrong" })
           if (err.message.toString() == "Network Error") themeContext.showErrorNotification({ message: "disconnected" })
-          if (process.env.REACT_APP_API_LOGGING === true) console.log(`Execution time for: ${err.config.url} - ${new Date().getTime() - error.config.meta.requestStartedAt} ms`)
           throw err
         }
+        else {
 
+          throw err
+        }
       }
     );
 
@@ -208,7 +213,7 @@ function useFetcher(props) {
     if (!_.get(counter.current, options.url + JSON.stringify(options.data), false)) counter.current[options.url + JSON.stringify(options.data)] = 0
     const axiosGateway = createAxiosGateway(options)
     let url = createUrl(options);
-    try { 
+    try {
       if (options.paginated == true) fetchPaginated(options)
       else {
         let result = await axiosGateway({
@@ -219,12 +224,13 @@ function useFetcher(props) {
           setData(result.data)
           setLoading(false)
         }
-        console.log("send Raw", options.sendRaw)
-        if(options.sendRaw==true) return result
+        if (options.sendRaw == true) return result
         else return result.data
       }
     } catch (err) {
-      if (err.response?.status === 500 || err.message.toString() == "Network Error") {
+      console.log("Err in catch", err)
+      if (err?.response?.status === 500 || err.message.toString() == "Network Error") {
+        console.log(err.response?.status === 500 || err.message.toString() == "Network Error", err.response?.status === 500, err.message.toString() == "Network Error")
         if (counter.current[options.url + JSON.stringify(options.data)] < 3) {
           counter.current[options.url + JSON.stringify(options.data)] = counter.current[options.url + JSON.stringify(options.data)] + 1
           await new Promise(resolve => setTimeout(resolve, 500));

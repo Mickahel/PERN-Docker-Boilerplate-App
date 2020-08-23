@@ -5,7 +5,6 @@ import LanguageBox from "./LanguageBox";
 import ProfileBox from "./ProfileBox";
 import ChangePasswordBox from "./ChangePasswordBox";
 import Endpoints from "Endpoints";
-import RoundLoader from "components/RoundLoader";
 import _ from 'lodash'  
 function Profile(props) {
   const themeContext = useContext(ThemeContext);

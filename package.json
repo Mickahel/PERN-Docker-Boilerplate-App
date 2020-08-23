@@ -16,18 +16,18 @@
     "i18next-browser-languagedetector": "^3.1.1",
     "i18next-xhr-backend": "^3.2.2",
     "js-cookie": "^2.2.1",
-    "lodash": "^4.17.19",
+    "lodash": "4.17.19",
     "material-design-icons": "^3.0.1",
     "mobile-detect": "^1.4.4",
     "moment": "^2.24.0",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "qs": "^6.9.3",
-    "react": "^0.0.0-fec00a869",
+    "react": "16.13.1",
     "react-cookie": "^4.0.3",
     "react-cookies": "^0.1.1",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^0.0.0-fec00a869",
+    "react-dom": "16.13.1",
     "react-error-boundary": "^2.3.1",
     "react-helmet": "^5.2.1",
     "react-i18next": "^10.13.2",
@@ -42,14 +42,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
     "build-sw": "node ./src/sw-build.js",
-    "copy-workbox-libraries": "workbox copyLibraries /build",
+    "copy-workbox-libraries": "workbox copyLibraries ./build",
     "build": "react-scripts build && npm run copy-workbox-libraries && npm run build-sw",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-tailwind": "yarn tailwind build ./src/css/tailwind-input.css -o ./src/css/tailwind.css",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && pnpm install && npm start"
   },
   "eslintConfig": {
     "extends": "react-app"
