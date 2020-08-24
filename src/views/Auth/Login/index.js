@@ -21,6 +21,8 @@ import Endpoints from 'Endpoints';
 import { ThemeContext } from 'contexts/Providers/ThemeProvider';
 import { UserContext } from 'contexts/Providers/UserProvider';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
+import Divider from '@material-ui/core/Divider';
+
 function Login(props) {
     let history = useHistory();
     let [disableButton, setDisableButton] = useState(true)
@@ -139,21 +141,28 @@ function Login(props) {
                         />
                     </div>
                     <div id="submitInput" >
-                        <Button type="submit" disabled={disableButton || loginFormik.isSubmitting} variant="contained" color="primary">
+                        <Button size="large" type="submit" disabled={disableButton || loginFormik.isSubmitting} variant="contained" color="primary">
                             <Trans>auth.login</Trans>
                         </Button>
                     </div>
                 </form>
+                <span className="mb-3 mt-10">
+                    <Divider/>
+                    <span className="flex justify-center mt-1">
+                    <Typography variant="body2">
+                        <Trans>auth.loginWithThirdParty</Trans>
+                        </Typography>
+                </span>
+                </span>
+                <div className=" flex justify-center">
+                    <FacebookLoginButton iconSize="15px" align="center" onClick={handleClick}>
+                        <Trans>auth.loginWithFacebook</Trans>
+                    </FacebookLoginButton>
+                    <GoogleLoginButton iconSize="15px"  align="center"  onClick={handleClick}>
+                        <Trans>auth.loginWithGoogle</Trans>
+                    </GoogleLoginButton>
+                </div>
 
-                <div className="mb-4 mt-16">
-                        <FacebookLoginButton onClick={handleClick}>
-                            <Trans>auth.loginWithFacebook</Trans>
-                        </FacebookLoginButton>
-                        <GoogleLoginButton onClick={handleClick}>
-                            <Trans>auth.loginWithGoogle</Trans>
-                        </GoogleLoginButton>
-                    </div>
-                    
                 <div id="auxiliaryLinks">
                     <span className="mr-1"><Trans>auth.forgotPassword</Trans></span>
                     <Link href="/auth/password-remind" vcolor="primary">

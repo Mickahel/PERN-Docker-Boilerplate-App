@@ -97,7 +97,7 @@ function RemindPassowrd(props) {
 
                     </div>  
                 <div  id="submitInput" >    
-                    <Button type="submit" disabled={ disableButton|| isSubmitting} variant="contained"     color="primary">
+                    <Button size="large" type="submit" disabled={ disableButton|| isSubmitting} variant="contained"     color="primary">
                         <Trans>auth.remindPassword</Trans>
                     </Button>
                 </div>    
