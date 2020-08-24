@@ -17,7 +17,7 @@ import ProfileButton from "components/ProfileButton";
 
 const useStyles = makeStyles((theme) => ({
     appBarBase:{
-        boxShadow: config.theme.header.shadow ? null : 'unset',
+        boxShadow: config.theme.header.shadow ?  "0px 10px 10px rgba(151, 151, 151, 0.1)" : 'unset',
         backgroundColor:config.theme.header.color
     },
     appBar: props => ({

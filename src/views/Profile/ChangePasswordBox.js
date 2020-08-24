@@ -29,9 +29,9 @@ function ChangePasswordBox(props) {
   const [disableChangeButton, setDisableChangeButton] = useState(true);
 
   const validationSchema = Yup.object({
-    currentPassword: Yup.string().required("required"),
+    currentPassword: Yup.string().required(),
     newPassword: Yup.string()
-      .required("required")
+      .required()
       .min(8, "min8CharacterPassword"),
   });
 
@@ -93,7 +93,6 @@ function ChangePasswordBox(props) {
             </DialogContentText>
 
             <TextField
-              variant="outlined"
               id="currentPassword"
               label={<Trans>currentPassword</Trans>}
               type={passwordVisible ? "text" : "password"}
@@ -129,7 +128,6 @@ function ChangePasswordBox(props) {
               }}
             />
             <TextField
-              variant="outlined"
               id="newPassword"
               label={<Trans>newPassword</Trans>}
               type={passwordVisible ? "text" : "password"}
@@ -181,7 +179,7 @@ function ChangePasswordBox(props) {
         </form>
       </Dialog>
 
-      <Card id="changePassword" variant="outlined">
+      <Card id="changePassword">
         <CardHeader title={<Trans>changePassword</Trans>} />
         <Divider />
         <CardContent className="flex flex-col">

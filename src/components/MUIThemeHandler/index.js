@@ -1,35 +1,43 @@
-import React, {useContext} from 'react'
-import {ThemeProvider} from '@material-ui/styles'
-import {createMuiTheme, CssBaseline} from '@material-ui/core'
-import {ThemeContext} from 'contexts/Providers/ThemeProvider'
+import React, { useContext } from 'react'
+import { ThemeProvider } from '@material-ui/styles'
+import { createMuiTheme, CssBaseline } from '@material-ui/core'
+import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import config from 'configuration/config'
-function MUIThemeHandler(props){
+function MUIThemeHandler(props) {
 
-    useContext(ThemeContext) 
+  useContext(ThemeContext)
 
-    if(!localStorage.getItem('theme')) localStorage.setItem('theme', 'light')
+  if (!localStorage.getItem('theme')) localStorage.setItem('theme', 'light')
 
-    let muithemeConfig = {
-        palette: {
-            type:localStorage.getItem('theme'),
-            primary: {
-              main: config.palette.primaryColor,
-              ...config.theme.forceTextColor && {
-                contrastText: localStorage.getItem('theme')=="light" ? config.theme.forceTextColor.light : config.theme.forceTextColor.dark 
-              },
-            },
-            secondary:{
-              main: config.palette.secondaryColor,
-            }
-          },
+  let muithemeConfig = {
+    typography: {
+      "fontFamily": `"Nunito", "Roboto", "Helvetica", "Arial", sans-serif`,
+      "fontSize": 14,
+      "fontWeightLight": 400,
+      "fontWeightRegular": 600,
+      "fontWeightMedium": 700,
+      "fontWeightBold": 800,
+    },
+    palette: {
+      type: localStorage.getItem('theme'),
+      primary: {
+        main: config.palette.primaryColor,
+        ...config.theme.forceTextColor && {
+          contrastText: localStorage.getItem('theme') == "light" ? config.theme.forceTextColor.light : config.theme.forceTextColor.dark
+        },
+      },
+      secondary: {
+        main: config.palette.secondaryColor,
       }
+    },
+  }
 
-    return(
-        <ThemeProvider theme ={createMuiTheme(muithemeConfig)}>
-            <CssBaseline />
-            {props.children}
-        </ThemeProvider>
-    )
+  return (
+    <ThemeProvider theme={createMuiTheme(muithemeConfig)}>
+      <CssBaseline />
+      {props.children}
+    </ThemeProvider>
+  )
 
 }
 

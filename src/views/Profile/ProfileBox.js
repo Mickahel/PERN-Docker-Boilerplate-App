@@ -75,7 +75,7 @@ function ProfileBox(props) {
   };
   
   return (
-    <Card id="personalInformation" variant="outlined" className="flex-2">
+    <Card id="personalInformation"className="flex-2">
       <form onSubmit={formikProfile.handleSubmit}>
         <CardHeader title={<Trans>personalInformation</Trans>} />
         <Divider />
@@ -108,7 +108,7 @@ function ProfileBox(props) {
                 disabled={disabledFields}
                 id="email"
                 label={<Trans>email</Trans>}
-                variant="outlined"
+
                 onChange={formikProfile.handleChange}
                 value={formikProfile.values.email}
               />
@@ -116,7 +116,7 @@ function ProfileBox(props) {
                 disabled={disabledFields}
                 id="firstname"
                 label={<Trans>firstname</Trans>}
-                variant="outlined"
+
                 onChange={formikProfile.handleChange}
                 value={formikProfile.values.firstname}
               />
@@ -125,7 +125,7 @@ function ProfileBox(props) {
                 disabled={disabledFields}
                 id="lastname"
                 label={<Trans>lastname</Trans>}
-                variant="outlined"
+
                 onChange={formikProfile.handleChange}
                 value={formikProfile.values.lastname}
               />

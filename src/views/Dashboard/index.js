@@ -26,7 +26,7 @@ function Dashboard(props) {
   //return <RoundLoader/>
   return (
     <div className="dashboard">
-      <div>a</div>
+      <div>b</div>
       <br></br>
       <div>a</div>
       <br></br>
@@ -93,7 +93,6 @@ function Dashboard(props) {
       <div>a</div>
       <br></br>
       <div>b</div>
-      <br></br>
     </div>
   )
 }

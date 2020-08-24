@@ -45,7 +45,8 @@ export default function Theme(props) {
                 handleDrawerOpenOnClick={handleDrawerOpenOnHover}
             />}
             <div className="w-full h-full">
-                <div className="mt-20 mb-20 contentHeight">
+                <div className="mb-16 contentHeight">
+                <div className={classes.toolbar} />
                 {props.children}
                 </div>
                 <div>

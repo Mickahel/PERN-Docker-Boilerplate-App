@@ -6,7 +6,7 @@ import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 const BottombarMenu = [
     {
-        id: "profile",
+        id: "profile.profile",
         to: "/account/profile",
         icon: <PersonOutlineOutlinedIcon/>,
     },

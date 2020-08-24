@@ -1,40 +1,46 @@
 {
-    "profileButton": {
-        "welcome": "Welcome",
-        "profile": "Profile"
-      },
-    "auth": {
-        "wrongEmailOrPassword": "Wrong Email or Password",
-        "auth": "Authentication",
-        "login": "Login",
-        "loginWithFacebook": "Facebook",
-        "loginWithGoogle": "Google",
-        "activateAccount": "Activate Account",
-        "loginWithThirdParty":"Or Login with a 3rd Party Service",
-        "signupWithThirdParty":"Or Signup with a 3rd Party Service",
-        "loginSuccess": "Onboarding",
-        "remindPassword": "Remind Password",
-        "restorePassword": "Restore Password",
-        "signUp": "Sign Up",
-        "register": "Register",
-        "confirmPassword": "Confirm Password",
-        "forgotPassword": "Forgot Password?",
-        "insertInformation": "Insert Information",
-        "activation": {
-            "text": "We are activating your account"
-        }
-    },
+  "profileButton": {
+    "welcome": "Welcome",
+    "profile": "Profile"
+  },
+  "dashboard": {
+    "dashboard": "Dashboard"
+  },
+  "auth": {
+    "wrongEmailOrPassword": "Wrong Email or Password",
+    "auth": "Authentication",
+    "login": "Login",
+    "loginWithFacebook": "Facebook",
+    "loginWithGoogle": "Google",
+    "activateAccount": "Activate Account",
+    "loginWithThirdParty": "Or Login with a 3rd Party Service",
+    "signupWithThirdParty": "Or Signup with a 3rd Party Service",
+    "loginSuccess": "Onboarding",
+    "remindPassword": "Remind Password",
+    "restorePassword": "Restore Password",
+    "signUp": "Sign Up",
+    "register": "Register",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "insertInformation": "Insert Information",
+    "activation": {
+      "text": "We are activating your account"
+    }
+  },
 
-    "yup":{
-        "invalidField": "Invalid Field",
-        "required": "Required Field",
-        "email":"The field {{email}} should be an email"
-    },
-    "placeholder": {
-        "backToHomepage": "Back to Dashboard",
-        "cannotFindPage": "Ooops! You seem lost!",
-        "notFound": "Page Not Found",
-        "errorInternalServer": "Oh No! The server is Down",
-        "youAreNotAuthorized": "You Are not Authorized!"
-      }
+  "yup": {
+    "invalidField": "Invalid Field",
+    "required": "Required Field",
+    "email": "The field {{email}} should be an email"
+  },
+  "placeholder": {
+    "backToHomepage": "Back to Dashboard",
+    "cannotFindPage": "Ooops! You seem lost!",
+    "notFound": "Page Not Found",
+    "errorInternalServer": "Oh No! The server is Down",
+    "youAreNotAuthorized": "You Are not Authorized!"
+  },
+  "profile":{
+    "profile": "Profile"
+  }
 }

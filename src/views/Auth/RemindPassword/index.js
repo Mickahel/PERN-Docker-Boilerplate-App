@@ -85,7 +85,7 @@ function RemindPassowrd(props) {
                             error={Boolean(errors.email)}
                             id="email"
                             label="Email" 
-                            variant="outlined"
+                            variant="filled"
                             type="email"
                             name="email"
                             onChange={handleChange}

@@ -9,29 +9,24 @@ function Profile(props) {
   const themeContext = useContext(ThemeContext);
 
   useEffect(() => {
-    themeContext.setTitle("profile");
+    themeContext.setTitle("profile.profile");
   }, []);
 
-  //let activeSubscription = data.subscriptions.find((subscription) => { return subscription.active = true })
   return (
     <div className="profile flex flex-col">
-      <div className="flex flex-row justify-between topBox ">
         <span id="profileBox" className="w-3/6">
           <ProfileBox />
         </span>
 
         <span className="flex flex-col w-3/6 rightBoxes">
-          <span className="flex flex-row CPLBox">
-            <span id="changePasswordBox" className="">
-              <ChangePasswordBox />
-            </span>
-            <span id="languageBox" className="">
-              <LanguageBox />
-            </span>
+          <span id="changePasswordBox">
+            <ChangePasswordBox />
+          </span>
+          <span id="languageBox">
+            <LanguageBox />
           </span>
         </span>
       </div>
-    </div>
   );
 }
 export default Profile;

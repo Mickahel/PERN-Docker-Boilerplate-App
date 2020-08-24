@@ -17,7 +17,7 @@ function LanguageBox(props) {
   };
 
   return (
-    <Card id="language" variant="outlined">
+    <Card id="language" >
       <CardHeader title={<Trans>language</Trans>} />
       <Divider />
       <CardContent className="flex flex-col">
@@ -26,7 +26,6 @@ function LanguageBox(props) {
         </div>
         <div className="mt-3 flex justify-center">
           <Select
-            variant="outlined"
             id="languageSelect"
             value={localStorage.getItem("i18nextLng")}
             onChange={changeLanguage}

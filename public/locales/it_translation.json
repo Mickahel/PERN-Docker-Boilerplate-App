@@ -3,6 +3,9 @@
     "welcome": "Benvenuto",
     "profile": "Profilo"
   },
+  "dashboard": {
+    "dashboard": "Dashboard"
+  },
   "auth": {
     "wrongEmailOrPassword": "Email o passowrd errati",
     "login": "Accedi",
@@ -10,8 +13,8 @@
     "activateAccount": "Attiva l'Account",
     "loginWithFacebook": "Facebook",
     "loginWithGoogle": "Google",
-    "loginWithThirdParty":"Oppure Accedi con un Servizio di Terze Parti",
-    "signupWithThirdParty":"Oppure Registrati con un Servizio di Terze Parti",
+    "loginWithThirdParty": "Oppure Accedi con un Servizio di Terze Parti",
+    "signupWithThirdParty": "Oppure Registrati con un Servizio di Terze Parti",
     "loginSuccess": "Onboarding",
     "remindPassword": "Ricorda Password",
     "restorePassword": "Ripristina Password",
@@ -36,5 +39,8 @@
     "notFound": "Pagina Non Trovata",
     "errorInternalServer": "Oh No! Il server non risponde",
     "youAreNotAuthorized": "Non sei Autorizzato!"
+  },
+  "profile":{
+    "profile": "Profilo"
   }
 }

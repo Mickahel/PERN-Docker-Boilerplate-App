@@ -11,17 +11,6 @@ $successColor: rgb(76, 175, 80);
 $warningColor: rgb(231, 197, 1);
 
 
-//$robotoFont: robotofont ;
-//@font-face {
-//    font-family: $robotoFont;
-//    src: url("/webfonts/Roboto-Medium.ttf");
-//  }
-//
-
-@mixin greyBorder{
-    border: 1px solid #d3d4d5 !important;
-}
-
 @mixin buttonSize($side) {
     max-width: $side;
     min-width: $side;
