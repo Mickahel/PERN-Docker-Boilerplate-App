@@ -11,7 +11,7 @@ function MUIThemeHandler(props) {
 
   let muithemeConfig = {
     typography: {
-      "fontFamily": `"Nunito", "Roboto", "Helvetica", "Arial", sans-serif`,
+      "fontFamily": `"Comfortaa", "Roboto", "Helvetica", "Arial", sans-serif`,
       "fontSize": 14,
       "fontWeightLight": 400,
       "fontWeightRegular": 600,

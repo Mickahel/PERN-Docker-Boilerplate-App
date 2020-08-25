@@ -59,7 +59,7 @@ function ProfileButton(props) {
 
 
       <Menu
-        elevation={0}
+        elevation={1}
         getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',

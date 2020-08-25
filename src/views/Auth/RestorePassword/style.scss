@@ -1,0 +1,33 @@
+.MuiTextField-root {
+    width: 300px !important;
+  }
+
+
+#RestorePassword{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    #RestorePasswordForm{
+
+        display: flex;
+        flex-direction: column;
+        #formInputs{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #submitInput{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+
+        #auxiliaryLinks{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+    }
+
+}

@@ -37,16 +37,13 @@ function App(props) {
                 method: "GET",
                 url: Endpoints.user.profile,
             })
-            console.log("DATA",data)
             userContext.setUser(data)
             setLoading(false)
         } catch(e){
             //themeContext.showWarningNotification({ message: "loginAgain" })
-            history.push("auth?returnUrl=" + history.location.pathname)
-            console.log("error", e)
+            //console.log("BBB",history.location.pathname)
+            //history.push("auth?returnUrl=" + history.location.pathname)
         }
-
-        
     }, [])
 
 

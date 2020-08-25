@@ -119,10 +119,9 @@ function useFetcher(props) {
                     ...err.config,
                     sendRaw: true
                   })
-                console.log("User API,", apiFetched)
                 return apiFetched
               } catch (e) {
-                history.push("auth?returnUrl=" + history.location.pathname)
+                if(redirectToLogin) history.push("/auth?returnUrl="+ history.location.pathname)
                 throw err
               }
             }
@@ -130,9 +129,7 @@ function useFetcher(props) {
           }
           else if (err.response.data.message == "User doesn\'t have right permission") { }
           else if (err.response.data.message == "RefreshToken Not Found") {
-            if (history.location.pathname != "/") themeContext.showWarningNotification({ message: "loginAgain" })
-
-            //history.push("auth?returnUrl=" + history.location.pathname)
+            if (history.location.pathname != "/" && !history.location.pathname.includes("/auth")) themeContext.showWarningNotification({ message: "loginAgain" })
             throw err
           } else {
             throw err
@@ -229,7 +226,6 @@ function useFetcher(props) {
         else return result.data
       }
     } catch (err) {
-      console.log("Err in catch", err)
       if (err?.response?.status === 500 || err.message.toString() == "Network Error") {
         if (counter.current[options.url + JSON.stringify(options.data)] < 3) {
           counter.current[options.url + JSON.stringify(options.data)] = counter.current[options.url + JSON.stringify(options.data)] + 1
@@ -242,6 +238,7 @@ function useFetcher(props) {
           throw err.response
         }
       } else {
+        if (options.setLoading != false) setLoading(false);
         throw err.response
       }
     }

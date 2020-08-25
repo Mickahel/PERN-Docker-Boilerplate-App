@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect,useCallback } from 'react';
 import config from 'configuration/config'
 import Helmet from 'react-helmet';
 import { t } from 'i18next';
@@ -22,22 +22,47 @@ import { ThemeContext } from 'contexts/Providers/ThemeProvider';
 import { UserContext } from 'contexts/Providers/UserProvider';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import Divider from '@material-ui/core/Divider';
+import RoundLoader from 'components/RoundLoader';
 
 function Login(props) {
-    let history = useHistory();
     let [disableButton, setDisableButton] = useState(true)
     let [showPassword, setShowPassword] = useState(false);
     const themeContext = useContext(ThemeContext)
     const userContext = useContext(UserContext)
+    const history = useHistory()
     const { fetch } = useFetch()
+    const { loading,fetch: fetcheUser  } = useFetch()
     const validationSchema = Yup.object({
         email: Yup.string().email().required(),
         password: Yup.string().required()
     });
 
+    useEffect(() => {
+        isUserLogged()
+    }, [])
+
+    const isUserLogged = useCallback(async () => {
+        try{
+         const data = await fetcheUser({
+                method: "GET",
+                url: Endpoints.user.profile,
+                redirectToLogin:false
+            })
+            console.log("DATA",data)
+            userContext.setUser(data)
+            history.push("/")
+
+        } catch(e){
+            console.log("error", e)
+        }
+    }, [])
+
+
     const pushInsideApp = () => {
+
         const usp = new URLSearchParams(props.location.search)
         const returnUrl = usp.get('returnUrl')
+        console.log("data", returnUrl)
         if (returnUrl) history.push(returnUrl)
         else history.push('/')
     }
@@ -55,7 +80,9 @@ function Login(props) {
                     data: values,
                     method: "POST",
                 })
+
                 userContext.setUser(data)
+
                 pushInsideApp()
             } catch (err) {
                 if (err.status == 403) themeContext.showErrorNotification({ message: "wrongEmailOrPassword" })
@@ -80,7 +107,7 @@ function Login(props) {
         alert("Hello!");
     }
 
-
+if(loading) return <RoundLoader />
     return (
 
         <div id="login">
@@ -89,7 +116,7 @@ function Login(props) {
 
             <div id="loginForm">
 
-                <img width="300px" className='mb-5' src={process.env.PUBLIC_URL + '/img/logos/longLogo.svg'} alt='Main logo' />
+                <img width="300px" className='mb-5 self-center' src={process.env.PUBLIC_URL + '/img/logos/longLogo.svg'} alt='Main logo' />
                 <Typography align="center" variant="h3" gutterBottom>
                     <Trans>auth.login</Trans>
                 </Typography>
@@ -165,7 +192,7 @@ function Login(props) {
 
                 <div id="auxiliaryLinks">
                     <span className="mr-1"><Trans>auth.forgotPassword</Trans></span>
-                    <Link href="/auth/password-remind" vcolor="primary">
+                    <Link href="/auth/restore-password" vcolor="primary">
                         <Trans>auth.restorePassword</Trans>
                     </Link>
                 </div>
