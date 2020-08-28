@@ -5,6 +5,7 @@ import qs from "qs";
 import UrlPattern from "url-pattern";
 import { useHistory } from "react-router-dom";
 import { ThemeContext } from 'contexts/Providers/ThemeProvider'
+import { FetchContext } from 'contexts/Providers/FetchProvider'
 import Endpoints from 'Endpoints'
 // ? https://www.npmjs.com/package/qs
 // ? https://www.npmjs.com/package/url-pattern
@@ -15,6 +16,7 @@ function useFetcher(props) {
   const [loading, setLoading] = useState(_.get(props, "initialLoading", true));
   const [data, setData] = useState();
   const themeContext = useContext(ThemeContext)
+  const fetchContext = useContext(FetchContext)
   const counter = React.useRef({})
 
   useEffect(() => {
@@ -22,6 +24,7 @@ function useFetcher(props) {
     else if (typeof props == "object") fetch(props);
   }, []);
 
+  //useEffect(()=>console.log(counter.current), [counter])
 
   // ? if there is a UrlParams
   const createUrl = useCallback((axiosOptions) => {
@@ -121,7 +124,7 @@ function useFetcher(props) {
                   })
                 return apiFetched
               } catch (e) {
-                if(redirectToLogin) history.push("/auth?returnUrl="+ history.location.pathname)
+                if (redirectToLogin) history.push("/auth?returnUrl=" + history.location.pathname)
                 throw err
               }
             }
@@ -204,42 +207,54 @@ function useFetcher(props) {
     setLoading(false)
     return totalResult
   }
-
-
   const fetch = useCallback(async (options) => {
     if (options.setLoading != false) setLoading(true);
     if (!_.get(counter.current, options.url + JSON.stringify(options.data), false)) counter.current[options.url + JSON.stringify(options.data)] = 0
     const axiosGateway = createAxiosGateway(options)
     let url = createUrl(options);
-    try {
-      if (options.paginated == true) fetchPaginated(options)
-      else {
-        let result = await axiosGateway({
-          ...options,
-          url,
-        })
-        if (options.setData != false) {
-          setData(result.data)
-          setLoading(false)
-        }
-        if (options.sendRaw == true) return result
-        else return result.data
-      }
-    } catch (err) {
-      if (err?.response?.status === 500 || err.message.toString() == "Network Error") {
-        if (counter.current[options.url + JSON.stringify(options.data)] < 3) {
-          counter.current[options.url + JSON.stringify(options.data)] = counter.current[options.url + JSON.stringify(options.data)] + 1
-          await new Promise(resolve => setTimeout(resolve, 500));
-          return fetch(err.config)
-        } else {
-          counter.current[options.url + JSON.stringify(options.data)] = 0
+    console.log(fetchContext.fetchedApis)
+    if (fetchContext.isApiAlreadyFetched(options)) {
+      console.log("wating for promise to resolve")
+
+      let result = await fetchContext.fetchPromise
+      console.log("result", result)
+      setData(result)
+      setLoading(false)
+    }
+    else {
+
+      try {
+        if (options.paginated == true) fetchPaginated(options)
+        else {
+          let result = await axiosGateway({
+            ...options,
+            url,
+          })
+          if (options.setData != false) {
+            setData(result.data)
+            fetchContext.x.a = result.data
+
+          }
           if (options.setLoading != false) setLoading(false);
-          if (options.setError != false) setError(err.response)
+          if (options.sendRaw == true) return result
+          else return result.data
+        }
+      } catch (err) {
+        if (err?.response?.status === 500 || err.message.toString() == "Network Error") {
+          if (counter.current[options.url + JSON.stringify(options.data)] < 3) {
+            counter.current[options.url + JSON.stringify(options.data)] = counter.current[options.url + JSON.stringify(options.data)] + 1
+            await new Promise(resolve => setTimeout(resolve, 500));
+            return fetch(err.config)
+          } else {
+            counter.current[options.url + JSON.stringify(options.data)] = 0
+            if (options.setLoading != false) setLoading(false);
+            if (options.setError != false) setError(err.response)
+            throw err.response
+          }
+        } else {
+          if (options.setLoading != false) setLoading(false);
           throw err.response
         }
-      } else {
-        if (options.setLoading != false) setLoading(false);
-        throw err.response
       }
     }
   }, [])

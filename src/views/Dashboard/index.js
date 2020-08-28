@@ -6,10 +6,11 @@ import PaymentOutlinedIcon from '@material-ui/icons/PaymentOutlined';
 import "./style.scss";
 import axios from 'axios'
 import RoundLoader from 'components/RoundLoader'
-
+import ComponentA from './ComponentA'
+import ComponentB from './ComponentB'
 function Dashboard(props) {
   const themeContext = useContext(ThemeContext);
-  const { fetch, data } = useFetch()
+  const { fetch, data,loading } = useFetch()
 
   const loadData = async () => {
     // console.log(await fetch({
@@ -25,74 +26,9 @@ function Dashboard(props) {
   //return <div className="dashboard"></div>
   //return <RoundLoader/>
   return (
-    <div className="dashboard">
-      <div>b</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>a</div>
-      <br></br>
-      <div>b</div>
+    <div className="flex dashboard">
+      <div className="w-3/6"><ComponentA /></div>
+      <div className="w-3/6"><ComponentB /></div>
     </div>
   )
 }

@@ -11,11 +11,9 @@ const ErrorNotAuthorized = lazy(()=> import('views/Placeholders/ErrorNotAuthoriz
 const ErrorNotFound = lazy(()=> import('views/Placeholders/ErrorNotFound'))
 const PrivacyPolicy = lazy(()=> import('views/TOS/PrivacyPolicy'))
 const TermsOfService = lazy(()=> import('views/TOS/TermsOfService'))
+const Debug = lazy(()=> import('views/Debug'))
 function App(props) {
-
-
   const themeContext = useContext(ThemeContext)
-
       useEffect(() => {
           window.addEventListener('app-update', onAppUpdate)
           window.addEventListener('beforeinstallprompt', onBeforeInstallPrompt)
@@ -51,6 +49,7 @@ function App(props) {
 
   return (
         <Switch>
+          {process.env.NODE_ENV!="production" && <Route path='/debug' component={Debug} />}
           <Route path='/terms-of-service' component={TermsOfService} />
           <Route path='/privacy-policy' component={PrivacyPolicy} />
           <Route path="/error/404" component={ErrorNotFound} />

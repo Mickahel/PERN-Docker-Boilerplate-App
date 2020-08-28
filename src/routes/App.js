@@ -17,13 +17,13 @@ const Dashboard = lazy(() => import('views/Dashboard'))
 function App(props) {
     const themeContext = useContext(ThemeContext)
     const userContext = useContext(UserContext)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const history = useHistory()
     const {fetch} = useFetch()
 
 
     useEffect(() => {
-        checkUserIdentity()
+        //checkUserIdentity()
     }, [])
 
     const checkUserIdentity = useCallback(async () => {

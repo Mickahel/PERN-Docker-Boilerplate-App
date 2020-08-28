@@ -37,6 +37,7 @@ dependencies:
   workbox-build: 5.1.3
   yup: 0.28.5
 devDependencies:
+  react-json-pretty: 2.2.0_react-dom@16.13.1+react@16.13.1
   workbox-cli: 5.1.3
 lockfileVersion: 5.1
 packages:
@@ -8706,7 +8707,6 @@ packages:
     resolution:
       integrity: sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==
   /object-assign/4.1.1:
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
@@ -10089,7 +10089,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: false
     resolution:
       integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
   /property-expr/2.0.2:
@@ -10338,7 +10337,6 @@ packages:
       prop-types: 15.7.2
       react: 16.13.1
       scheduler: 0.19.1
-    dev: false
     peerDependencies:
       react: ^16.13.1
     resolution:
@@ -10388,9 +10386,19 @@ packages:
     resolution:
       integrity: sha512-DGoauWUdPEv/+PLa03nN+wlW31XrGmQJz+zIyOA+tRTIwlRaNgeM62nGP1WG3g7fJrphMZUwPcAQqNv6XBYM4w==
   /react-is/16.13.1:
-    dev: false
     resolution:
       integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+  /react-json-pretty/2.2.0_react-dom@16.13.1+react@16.13.1:
+    dependencies:
+      prop-types: 15.7.2
+      react: 16.13.1
+      react-dom: 16.13.1_react@16.13.1
+    dev: true
+    peerDependencies:
+      react: '>=15.0'
+      react-dom: '>=15.0'
+    resolution:
+      integrity: sha512-3UMzlAXkJ4R8S4vmkRKtvJHTewG4/rn1Q18n0zqdu/ipZbUPLVZD+QwC7uVcD/IAY3s8iNVHlgR2dMzIUS0n1A==
   /react-reveal/1.2.2_react@16.13.1:
     dependencies:
       prop-types: 15.7.2
@@ -10543,7 +10551,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       prop-types: 15.7.2
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
@@ -11130,7 +11137,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-    dev: false
     resolution:
       integrity: sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
   /schema-utils/1.0.0:
@@ -13171,6 +13177,7 @@ specifiers:
   react-error-boundary: ^2.3.1
   react-helmet: ^5.2.1
   react-i18next: ^10.13.2
+  react-json-pretty: ^2.2.0
   react-reveal: ^1.2.2
   react-router: ^5.1.2
   react-router-dom: ^5.1.2

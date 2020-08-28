@@ -67,6 +67,7 @@
     ]
   },
   "devDependencies": {
+    "react-json-pretty": "^2.2.0",
     "workbox-cli": "^5.1.3"
   }
 }
