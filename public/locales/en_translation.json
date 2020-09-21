@@ -21,6 +21,9 @@
     "previousPage": "Previous Page"
   },
   "auth": {
+    "signedupSuccessfully": "You Signed Up successfully, you will receive an activation email, check your inbox to activate your account",
+    "User is already registered": "User is Already Registered",
+    "User is not activated":"User is Not Activated",
     "signup": "Signup",
     "logout": "logout",
     "wrongEmailOrPassword": "Wrong Email or Password",
@@ -38,7 +41,12 @@
     "forgotPassword": "Forgot Password?",
     "insertInformation": "Insert Information",
     "activation": {
-      "text": "We are activating your account"
+      "activatedText": "Your account has been activated",
+      "User not found": "User to activate not found",
+      "retry":"Retry",
+      "goToApp": "Login to the App",
+      "title":"Activate your Account",
+      "activatingText": "We are activating your account"
     }
   },
 
@@ -76,7 +84,8 @@
     "personalInformation": "Personal Information"
   },
   "apiErrors": {
-    "networkError": "Network Error"
+    "networkError": "Network Error",
+    "loginAgain": "Login Again"
   },
   "newUpdateAlert": {
     "title": "New Update!",

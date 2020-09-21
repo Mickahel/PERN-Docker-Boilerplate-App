@@ -1,8 +1,8 @@
 const Endpoints = {
     auth:{
-        registration:       "/v1/auth/registration",                // ? POST
+        signup:             "/v1/auth/signup",                      // ? POST
         login:              "/v1/auth/login",                       // ? POST
-        activationCode:     "/v1/auth/activation/:activationCode",  // ? POST
+        activation:         "/v1/auth/activation/:activationCode",  // ? POST
         lostPasswordEmail:  "/v1/auth/lost-password-email",         // ? POST
         passwordReset:      "/v1/auth/password-reset",              // ? POST
         newAccessToken:     "/v1/auth/token",                       // ? POST

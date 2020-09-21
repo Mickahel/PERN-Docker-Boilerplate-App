@@ -16,9 +16,9 @@ import ProfileButton from "components/ProfileButton";
 
 
 const useStyles = makeStyles((theme) => ({
-    appBarBase:{
-        boxShadow: config.theme.header.shadow ?  "0px 10px 10px rgba(151, 151, 151, 0.1)" : 'unset',
-        backgroundColor:config.theme.header.color
+    appBarBase: {
+        boxShadow: config.theme.header.shadow ? "0px 10px 10px rgba(151, 151, 151, 0.1)" : 'unset',
+        backgroundColor: config.theme.header.color
     },
     appBar: props => ({
         //zIndex: theme.zIndex.drawer + (props.sidebarOpen ? 0 : 1),
@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
             duration: (theme.transitions.duration.enteringScreen * 3.3),
         }),
     }),
-    title:{
-        fontSize:"1.15rem"
+    title: {
+        fontSize: "1.15rem"
     },
     appBarShift: {
 
@@ -81,11 +81,11 @@ function Header(props) {
     const { icon, title, headerVisible } = themeContext;
     const matches = useMediaQuery('(max-width:' + config.mobileScreenWidth + ')');
     const classes = useStyles({ sidebarOpen: themeContext.sidebarOpen });
-    if(!headerVisible) return null
+    if (!headerVisible) return null
     return <AppBar
         position="fixed"
         className={
-            classnames(classes.appBarBase, !matches && classes.appBar, !matches && { [classes.appBarShift]: themeContext.sidebarOpen }) }
+            classnames(classes.appBarBase, !matches && classes.appBar, !matches && { [classes.appBarShift]: themeContext.sidebarOpen })}
     >
         {title
             ? <Helmet title={`${config.name.short} - ${t(title)}`} />
@@ -107,16 +107,17 @@ function Header(props) {
             </IconButton>}
             <span className="flex  items-center w-full">
                 {icon}
-            <Typography 
-                variant="h6"
-                classes={{
-                    h6 : matches && classes.title
-                }}>
-                <span className="ml-2">
-                    <Trans>{title}</Trans>
+                <span className="mt-1">
+                    <Typography
+                        variant="h6"
+                        classes={{
+                            h6: matches && classes.title
+                        }}>
+                        <span className="ml-2">
+                            <Trans>{title}</Trans>
+                        </span>
+                    </Typography>
                 </span>
-            </Typography>
-
                 <ProfileButton />
             </span>
         </Toolbar>

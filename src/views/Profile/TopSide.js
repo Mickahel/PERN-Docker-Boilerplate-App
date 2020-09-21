@@ -1,13 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from '@material-ui/core/Avatar';
-import PhotoCameraOutlinedIcon from '@material-ui/icons/PhotoCameraOutlined';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import { UserContext } from "contexts/Providers/UserProvider";
 import Typography from '@material-ui/core/Typography';
 import { ThemeContext } from "contexts/Providers/ThemeProvider";
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Trans } from "react-i18next";
@@ -30,7 +26,7 @@ function TopSide(props) {
     const themeContext = useContext(ThemeContext);
 
     return (
-        <div className="flex justify-between">
+        <div className="topSide flex justify-between">
             <div className="flex">
                 <div>
                     <Avatar className={classes.large} src={userContext.user.avatar}></Avatar>
@@ -44,7 +40,7 @@ function TopSide(props) {
                     </Typography>
                 </div>
             </div>
-            <div>
+            <div className="mt-5">
                 <FormControlLabel
                     control={<Switch color="primary" checked={themeContext.muiType == "dark"} onChange={themeContext.toggleMuiType} />}
                     label={<Trans>theme.{themeContext.muiType}Theme</Trans>}

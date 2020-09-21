@@ -12,11 +12,11 @@ function Auth(props){
     return(
             <PublicTemplate>
                 <Switch>
-                    <Route path = "/auth/login"             component={Login} /> 
-                    <Route path = "/auth/signup"             component={Signup} /> 
-                    <Route path = "/auth/activate"          component={Activation} /> 
-                    <Route path = "/auth/restore-password"    component={RestorePassword}/>
-                    <Route path=  '/auth*'                  component={Login} />
+                    <Route path = "/auth/login"                     component={Login} /> 
+                    <Route path = "/auth/signup"                    component={Signup} /> 
+                    <Route path = "/auth/activate/:activationCode"  component={Activation} /> 
+                    <Route path = "/auth/restore-password"          component={RestorePassword}/>
+                    <Route path=  '/auth*'                          component={Login} />
                 </Switch>
             </PublicTemplate>
     )

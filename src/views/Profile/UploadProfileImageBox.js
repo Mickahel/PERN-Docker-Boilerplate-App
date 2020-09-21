@@ -61,7 +61,7 @@ function UploadProfileImageBox(props) {
                     <div className="flex flex-col items-center">
                     <div className="flex">
                         <Avatar className={classes.large} src={userContext.user.avatar}></Avatar>
-                        <div>
+                        <div className="ml-24 absolute ">
                             {userContext.user.avatar &&
                                 <IconButton onClick={() => {
                                     userContext.setUser(

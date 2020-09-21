@@ -1,31 +1,27 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import config from 'configuration/config'
 import Helmet from 'react-helmet';
 import { t } from 'i18next';
 import { Trans } from 'react-i18next'
 import "./style.scss"
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import Chip from '@material-ui/core/Chip';
 import { useHistory } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
-import { useFormik } from 'formik';
-import VisibilityOffOutlinedIcon from '@material-ui/icons/VisibilityOffOutlined';
-import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
 import * as Yup from 'yup';
 import useFetch from 'hooks/useFetch'
 import Endpoints from 'Endpoints';
 import { ThemeContext } from 'contexts/Providers/ThemeProvider';
 import { UserContext } from 'contexts/Providers/UserProvider';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
 
-function Login(props) {
+
+function Activation(props) {
     let history = useHistory();
     const themeContext = useContext(ThemeContext)
     const userContext = useContext(UserContext)
-    const {fetch,loading, error} = useFetch()
+    const { fetch, loading, error } = useFetch()
+    const [activationStatus, setActivationStatus] = useState("ACTIVATION")
+
     const pushInsideApp = () => {
         const usp = new URLSearchParams(props.location.search)
         const returnUrl = usp.get('returnUrl')
@@ -33,22 +29,69 @@ function Login(props) {
         else history.push('/')
     }
 
+    const loadData = async ()=>{
+        setActivationStatus("ACTIVATION")
+        try{
+            await fetch({
+                    url: Endpoints.auth.activation,
+                    urlParams:{
+                        activationCode: props.match.params.activationCode
+                    },
+                    method: "POST",
+            })
+            setActivationStatus("ACTIVATED")
+
+        } catch(e){
+            
+            setActivationStatus("ERROR")
+        }
+    }
+    useEffect(()=>{
+        loadData()
+    },[])
     return (
-
         <div id="activation">
+            <Helmet title={`${config.name.short} - ${t("auth.activation.title")}`} />
 
-            <Helmet title={`${config.name.short} - ${t("auth.activation")}`} />
+            <div id="activationForm">
 
-            <div id="loginForm">
-
-                <img width="300px" className='mb-5' src={process.env.PUBLIC_URL + '/img/logos/longLogo.svg'} alt='Main logo' />
+                <img width="300px" className='mb-5 self-center' src={process.env.PUBLIC_URL + '/img/logos/longLogo.svg'} alt='Main logo' />
                 <Typography align="center" variant="h3" gutterBottom>
-                    <Trans>auth.activation</Trans>
+                    <Trans>auth.activation.title</Trans>
                 </Typography>
-
+                {activationStatus == "ACTIVATING" &&
+                    <>
+                        <Typography align="center" variant="body1" gutterBottom>
+                            <Trans>auth.activation.activatingText</Trans>
+                        </Typography>
+                        <div className="flex justify-center mt-5">
+                            <CircularProgress color="primary" size={75} />
+                        </div>
+                    </>
+                }
+                {activationStatus == "ACTIVATED" &&
+                    <>
+                        <Typography align="center" variant="body1" gutterBottom>
+                            <Trans>auth.activation.activatedText</Trans>
+                        </Typography>
+                        <img width="100px" className='mt-5 mb-10 self-center' src={process.env.PUBLIC_URL + '/img/tick.svg'} alt='Confirm Image' />
+                        <div className="flex justify-center">
+                            <Button variant="contained" color="primary" onClick={() => { pushInsideApp() }}><Trans>auth.activation.goToApp</Trans></Button>
+                        </div>
+                    </>}
+                {activationStatus == "ERROR" &&
+                    <>
+                        <Typography align="center" variant="body1" gutterBottom>
+                            <Trans>{`auth.activation.${error.data.message}`}</Trans>
+                        </Typography>
+                        <img width="100px" className='mt-5 mb-10 self-center' src={process.env.PUBLIC_URL + '/img/cross.svg'} alt='Confirm Image' />
+                        <div className="flex justify-center">
+                            <Button variant="contained" color="primary" onClick={() => { loadData() }}><Trans>auth.activation.retry</Trans></Button>
+                        </div>
+                    </>}
             </div>
         </div>
     )
 }
 
-export default Login
+export default Activation

@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import { Trans } from "react-i18next";
 import TabPanel from 'components/TabPanel'
 import UploadProfileImageBox from './UploadProfileImageBox'
-
+import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 
 const useStyles = makeStyles(theme => ({
   rootTabs: {
@@ -50,7 +50,7 @@ function Profile(props) {
   const handleChange = (event, newValue) => setValue(newValue);
 
   useEffect(() => {
-    themeContext.setTitle("profile.profile");
+    themeContext.setTitle("profile.profile", <PersonOutlineOutlinedIcon />);
   }, []);
 
   return (
@@ -64,7 +64,7 @@ function Profile(props) {
         </AppBar>
       </div>
       <TabPanel value={value} index={0}>
-        <div className=" flex">
+        <div className=" profileTab flex">
           <div className="leftBox flex flex-col w-3/6">
             <ProfileBox/>
             <ChangePasswordBox />

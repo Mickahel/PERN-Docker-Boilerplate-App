@@ -129,7 +129,7 @@ function useFetcher(props) {
           }
           else if (err.response.data.message == "User doesn\'t have right permission") { }
           else if (err.response.data.message == "RefreshToken Not Found") {
-            if (history.location.pathname != "/" && !history.location.pathname.includes("/auth")) themeContext.showWarningNotification({ message: "loginAgain" })
+            if (history.location.pathname != "/" && !history.location.pathname.includes("/auth")) themeContext.showWarningNotification({ message: "apiErrors.loginAgain" })
             throw err
           } else {
             throw err
@@ -238,6 +238,7 @@ function useFetcher(props) {
         }
       } else {
         if (options.setLoading != false) setLoading(false);
+        if (options.setError != false) setError(err.response)
         throw err.response
       }
     }

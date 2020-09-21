@@ -19,3 +19,7 @@ $warningColor: rgb(231, 197, 1);
     min-height: $side;
     height: $side;
 }
+
+@media only screen and (max-width: $mobileWidth)  {
+
+}
