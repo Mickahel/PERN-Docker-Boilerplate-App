@@ -30,7 +30,7 @@ const config = {
             activeColor:"#86DAF1"
         },
         bottomNavigation:{
-            enabled:true,
+            enabled:false,
             showLabels: false,
             showOnDesktop: true,
             activeColor:"#86DAF1"

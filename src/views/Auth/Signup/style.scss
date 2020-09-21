@@ -3,20 +3,19 @@
   }
 
   
-#login{
+#signup{
 
     display: flex;
     justify-content: center;
     height: 100%;
     align-items: center;
-    #loginForm{
+    #signupForm{
         display: flex;
         flex-direction: column;
         #formInputs{
             display: flex;
             flex-direction: column;
             align-items: center;
-
         }
         #submitInput{
             display: flex;

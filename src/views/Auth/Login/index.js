@@ -48,21 +48,18 @@ function Login(props) {
                 url: Endpoints.user.profile,
                 redirectToLogin:false
             })
-            console.log("DATA",data)
             userContext.setUser(data)
             history.push("/")
 
         } catch(e){
-            console.log("error", e)
+            //console.log("error", e)
         }
     }, [])
 
 
     const pushInsideApp = () => {
-
         const usp = new URLSearchParams(props.location.search)
         const returnUrl = usp.get('returnUrl')
-        console.log("data", returnUrl)
         if (returnUrl) history.push(returnUrl)
         else history.push('/')
     }
@@ -80,9 +77,7 @@ function Login(props) {
                     data: values,
                     method: "POST",
                 })
-
-                userContext.setUser(data)
-
+                userContext.setUser(data.user)
                 pushInsideApp()
             } catch (err) {
                 if (err.status == 403) themeContext.showErrorNotification({ message: "wrongEmailOrPassword" })
@@ -122,10 +117,10 @@ if(loading) return <RoundLoader />
                 </Typography>
                 <div className="flex w-full justify-end">
                     <Chip
-                        label={<Trans>auth.register</Trans>}
+                        label={<Trans>auth.signup</Trans>}
                         variant="outlined"
                         color="primary"
-                        onClick={() => { window.open(config.name.link) }} />
+                        onClick={() => { history.push("/auth/signup") }} />
                 </div>
                 {// ? FORM 
                 }

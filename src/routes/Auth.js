@@ -5,6 +5,7 @@ import PublicTemplate from 'components/PublicTemplate'
 
 const Activation       =lazy(()=>import('views/Auth/Activation')) 
 const Login            =lazy(()=>import('views/Auth/Login')) 
+const Signup           =lazy(()=>import('views/Auth/Signup')) 
 const RestorePassword  =lazy(()=>import('views/Auth/RestorePassword')) 
 
 function Auth(props){
@@ -12,6 +13,7 @@ function Auth(props){
             <PublicTemplate>
                 <Switch>
                     <Route path = "/auth/login"             component={Login} /> 
+                    <Route path = "/auth/signup"             component={Signup} /> 
                     <Route path = "/auth/activate"          component={Activation} /> 
                     <Route path = "/auth/restore-password"    component={RestorePassword}/>
                     <Route path=  '/auth*'                  component={Login} />

@@ -11,16 +11,13 @@ import Navigation from './Navigation'
 import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import CustomScrollbar from 'components/CustomScrollbar'
 import { useHistory } from 'react-router-dom'
-
+import InstallPWAButton from 'components/InstallPWAButton'
 const useStyles = makeStyles((theme) => ({
     drawer: {
         width: config.theme.sidebar.drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
         overflowX: 'hidden',
-    },
-    paperDrawer: {
-        
     },
     drawerOpen: {
         overflowY: 'hidden',
@@ -125,6 +122,7 @@ function Sidebar(props) {
                     <Navigation />
                 </span>
             </CustomScrollbar>
+            
         </SwipeableDrawer >
     )
 }

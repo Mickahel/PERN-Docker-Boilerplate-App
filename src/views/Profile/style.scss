@@ -1,5 +1,29 @@
 @import '../../configuration/variables.scss';
 
+.singleInfo{
+    display: flex;
+    align-items: baseline;
+}
+
+#changePassword{
+    margin-top: $itemMargin;
+}
+
+.rightBox{
+    margin-left: $itemMargin;
+}
+
+.leftBox{
+    margin-right: $itemMargin;
+}
+#personalInformation, .UploadProfileImage{
+    margin-bottom: $itemMargin;
+}
+.languageBox, .themeBox{
+    margin-top: $itemMargin;
+
+}
+
 @media only screen and (max-width: $mobileWidth)  {
 
 }

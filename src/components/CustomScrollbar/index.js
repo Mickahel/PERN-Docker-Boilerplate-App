@@ -35,6 +35,7 @@ function CustomScrollbar(props) {
     autoHide={props.autoHide}
     hideTracksWhenNotNeeded={props.hideTracksWhenNotNeeded}
     autoHeight={props.autoHeight}
+    autoHeightMax={props.autoHeightMax}
     autoHeightMin={'100%'}
     className={classnames("scrollbar", props.className)}
     renderTrackHorizontal={renderTrackHorizontal}
@@ -51,6 +52,7 @@ CustomScrollbar.propTypes = {
   autoHeight: PropTypes.bool,
   autoHide: PropTypes.bool,
   universal: PropTypes.bool,
+  autoHeightMax: PropTypes.number,
 }
 
 CustomScrollbar.defaultProps = {

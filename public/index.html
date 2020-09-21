@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <!--? navigation bar color -->
+    <meta name="theme-color" content="%REACT_APP_THEME_COLOR%" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="%REACT_APP_DESCRIPTION%"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -29,20 +30,19 @@
     <!--load all styles -->
 
     <!-- ? Open graph meta tags-->
-    <meta property="og:url" content="https://PERNB.netlify.com/" /> <!--? Frontend URL-->
-    <!-- TODO CAMBIARE-->
+    <meta property="og:url" content="%REACT_APP_FRONTEND_LINK%" /> <!--? Frontend URL-->
     <meta property="og:type" content="Website" />
-    <meta property="og:title" content="PERNB" />
-    <meta property="og:description" content="PERN Boilerplate" />
+    <meta property="og:title" content="%REACT_APP_NAME%" />
+    <meta property="og:description" content="%REACT_APP_DESCRIPTION%" />
     <meta
       property="og:image"
       content="%PUBLIC_URL%/img/icons/icon-192x192.png"
     />
-    <!--? navigation bar color -->
-    <meta name="theme-color" content="#FFFFFFF" />
+
+    <meta name="theme-color" content="#FFFFFF" />
 
     <!-- ? title -->
-    <title>PERN Boilerplate</title>
+    <title>%REACT_APP_NAME%</title>
   </head>
 
   <body>
@@ -84,9 +84,9 @@
         };
 
         // ? when the controller changes, relad the page
-        navigator.serviceWorker.addEventListener("controllerchange", () => {
-          window.location.reload();
-        });
+        //navigator.serviceWorker.addEventListener("controllerchange", () => {
+        //  window.location.reload();
+        //});
       });
     }
   </script>

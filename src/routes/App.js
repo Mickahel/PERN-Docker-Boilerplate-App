@@ -36,6 +36,7 @@ function App(props) {
          const data = await fetch({
                 method: "GET",
                 url: Endpoints.user.profile,
+                redirectToPage500: true
             })
             userContext.setUser(data)
             setLoading(false)

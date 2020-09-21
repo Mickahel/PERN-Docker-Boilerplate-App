@@ -1,0 +1,51 @@
+@import "../../configuration/variables.scss";
+.enhancedTable {
+  .trueIcon {
+    color: $successColor !important;
+  }
+  .falseIcon {
+    color: $errorColor !important;
+  }
+  .linkIconButton {
+    padding: 0px !important;
+  }
+
+  .iconPadding {
+    padding-left: 30px !important;
+  }
+
+  th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-paddingCheckbox {
+    padding-left: 7px !important;
+  }
+
+  .singleCellIcon {
+    .MuiSvgIcon-root {
+      //margin-top: -2px !important;
+      //padding-bottom: 2px !important;
+    }
+  }
+
+  .headRowWithHelperText {
+    margin-left: 60px;
+  }
+
+  .headRowWithoutHelperText {
+    margin-left: 26px;
+  }
+
+  .collapsibleTable .MuiTable-root .MuiTableHead-root .MuiTableCell-root {
+    border-bottom: unset !important;
+    padding-bottom: 0px;
+  }
+  .lightHeader {
+    .MuiTableCell-stickyHeader {
+      background-color: white !important;
+    }
+  }
+
+  .darkHeader {
+    .MuiTableCell-stickyHeader {
+      background-color: #424242 !important;
+    }
+  }
+}

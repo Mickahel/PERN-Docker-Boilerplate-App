@@ -1,12 +1,28 @@
 {
+  "theme": {
+    "darkTheme":  "Tema Scuro",
+    "lightTheme": "Tema Chiaro"
+  },
   "profileButton": {
     "welcome": "Benvenuto",
-    "profile": "Profilo"
+    "profile": "Profilo",
+    "changeTheme": "Cambia Tema"
   },
   "dashboard": {
     "dashboard": "Dashboard"
   },
+  "enhancedTable": {
+    "rows": "Righe",
+    "moreThan": "Più di",
+    "of": "di",
+    "search": "Cerca",
+    "filtersList": "Lista Filtri",
+    "nextPage": "Pagina Successiva",
+    "previousPage": "Pagina Precedente"
+  },
   "auth": {
+    "signup": "Registrati",
+    "logout": "Esci",
     "wrongEmailOrPassword": "Email o passowrd errati",
     "login": "Accedi",
     "auth": "Autenticazione",
@@ -17,8 +33,7 @@
     "signupWithThirdParty": "Oppure Registrati con un Servizio di Terze Parti",
     "loginSuccess": "Onboarding",
     "restorePassword": "Ripristina Password",
-    "signUp": "Registrazione",
-    "register": "Registrati",
+    "signUp": "Registrati",
     "confirmPassword": "Conferma Password",
     "forgotPassword": "Password Dimenticata?",
     "insertInformation": "Inserisci le Informazioni",
@@ -39,7 +54,34 @@
     "errorInternalServer": "Oh No! Il server non risponde",
     "youAreNotAuthorized": "Non sei Autorizzato!"
   },
-  "profile":{
-    "profile": "Profilo"
+  "profile": {
+    "upload": "Scegli File",
+    "uploadImageText": "JPG, GIF o PNG",
+    "personalInformation": "Informazioni Personali",
+    "changeYourPassword": "Cambia La Tua Password",
+    "back": "Indietro",
+    "change": "Modifica",
+    "currentPassword": "Password Attuale",
+    "newPassword": "Nuova Password",
+    "preferredLanguageText": "Cambiando lingua cambierà il linguaggio della piattaforma",
+    "language": "Lingua",
+    "changePassword": "Cambia Password",
+    "changePasswordText": "Dovresti cambiare la password ogni mese per evitare problemi di sicurezza",
+    "profile": "Profilo",
+    "continue": "Continua",
+    "firstname": "Nome",
+    "lastname": "Cognome",
+    "close": "Chiudi",
+    "cancel": "Cancella",
+    "passwordMustMatch": "Le password devono coincidere",
+    "passwordChanged": "La Password è stata cambiata",
+    "changePersonalInformation": "Modifica Informazioni Personali"
+  },
+  "apiErrors": {
+    "networkError": "Errore di Connessione"
+  },
+  "newUpdateAlert": {
+    "title": "Nuovo aggiornamento!",
+    "message": "È arrivato un nuovo aggiornamento"
   }
 }

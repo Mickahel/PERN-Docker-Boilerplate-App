@@ -20,13 +20,16 @@ html {
 }
 
 .contentHeight {
+  margin-left: $standardMargin;
+  margin-right: $standardMargin;
+  margin-top: $standardMargin;
+  margin-bottom: $standardMargin;
   > div:first-of-type {
     height: 100%;
     width: 100%;
   }
 }
 .MuiCard-root {
-  box-shadow: 0px 10px 10px rgba(151, 151, 151, 0.1) !important;
   border-radius: 5px !important;
 }
 button {

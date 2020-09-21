@@ -17,8 +17,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import * as Yup from "yup";
 import TextField from "@material-ui/core/TextField";
 import { useFormik } from "formik";
-import Endpoints from "Endpoints";
+import useFetch from "hooks/useFetch";
 import { UserContext } from "contexts/Providers/UserProvider";
+import Endpoints from "Endpoints";
 function ChangePasswordBox(props) {
   const themeContext = useContext(ThemeContext);
   const userContext = useContext(UserContext);
@@ -27,12 +28,13 @@ function ChangePasswordBox(props) {
   );
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [disableChangeButton, setDisableChangeButton] = useState(true);
+  const { fetch, error} = useFetch();
 
   const validationSchema = Yup.object({
     currentPassword: Yup.string().required(),
     newPassword: Yup.string()
       .required()
-      .min(8, "min8CharacterPassword"),
+      .min(8),
   });
 
   const changePasswordFormik = useFormik({
@@ -42,7 +44,7 @@ function ChangePasswordBox(props) {
     },
     onSubmit: async (values, formikBag) => {
       try {
-        let result = await fetch({
+        await fetch({
           method: "PUT",
           url: Endpoints.auth.passwordReset,
           data: {
@@ -56,11 +58,11 @@ function ChangePasswordBox(props) {
         handleClose();
         formikBag.resetForm();
         themeContext.showSuccessNotification({
-          message: <Trans>passwordChanged</Trans>,
+          message: <Trans>profile.passwordChanged</Trans>,
         });
       } catch (e) {
         themeContext.showErrorNotification({
-          message: "somethingWentWrong",
+          message: <Trans>profile.somethingWentWrong</Trans>,
         });
       }
     },
@@ -83,18 +85,19 @@ function ChangePasswordBox(props) {
         className="p-5"
       >
         <DialogTitle id="form-dialog-title">
-          <Trans>changePassword</Trans>
+          <Trans>profile.changePassword</Trans>
         </DialogTitle>
         <Divider />
         <form onSubmit={changePasswordFormik.handleSubmit}>
           <DialogContent>
             <DialogContentText>
-              <Trans>changePasswordText</Trans>
+              <Trans>profile.changePasswordText</Trans>
             </DialogContentText>
 
             <TextField
+              variant="outlined"
               id="currentPassword"
-              label={<Trans>currentPassword</Trans>}
+              label={<Trans>profile.currentPassword</Trans>}
               type={passwordVisible ? "text" : "password"}
               value={changePasswordFormik.values.currentPassword}
               onBlur={changePasswordFormik.handleBlur}
@@ -128,8 +131,9 @@ function ChangePasswordBox(props) {
               }}
             />
             <TextField
+              variant="outlined"
               id="newPassword"
-              label={<Trans>newPassword</Trans>}
+              label={<Trans>profile.newPassword</Trans>}
               type={passwordVisible ? "text" : "password"}
               fullWidth
               onBlur={changePasswordFormik.handleBlur}
@@ -165,7 +169,7 @@ function ChangePasswordBox(props) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
-              <Trans>back</Trans>
+              <Trans>profile.back</Trans>
             </Button>
             <Button
               type="submit"
@@ -173,18 +177,18 @@ function ChangePasswordBox(props) {
               color="primary"
               disabled={disableChangeButton}
             >
-              <Trans>change</Trans>
+              <Trans>profile.change</Trans>
             </Button>
           </DialogActions>
         </form>
       </Dialog>
 
-      <Card id="changePassword">
-        <CardHeader title={<Trans>changePassword</Trans>} />
+      <Card id="changePassword" >
+        <CardHeader title={<Trans>profile.changePassword</Trans>} />
         <Divider />
         <CardContent className="flex flex-col">
           <div>
-            <Trans>changePasswordText</Trans>
+            <Trans>profile.changePasswordText</Trans>
           </div>
         </CardContent>
         <CardActions>
@@ -194,7 +198,7 @@ function ChangePasswordBox(props) {
               setOpenChangePasswordDialog(true);
             }}
           >
-            <Trans>changeYourPassword</Trans>
+            <Trans>profile.changeYourPassword</Trans>
           </Button>
         </CardActions>
       </Card>

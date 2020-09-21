@@ -8,39 +8,45 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { ThemeContext } from 'contexts/Providers/ThemeProvider';
 import Typography from '@material-ui/core/Typography';
-import { Formik } from 'formik';
+import { useFormik } from 'formik';
 import Endpoints from 'Endpoints'
 import "./style.scss"
+import * as Yup from 'yup';
+import useFetch from 'hooks/useFetch'
 
 
 function RestorePassword(props) {
     let [disableButton, setDisableButton] = useState(true)
+    const { fetch,loading,error,data } = useFetch()
 
+    const validationSchema = Yup.object({
+        email: Yup.string().email().required(),
+    });
 
-    const fetchRestorePassword = ()=>{
-        try{
-            fetch({
-                method: "POST",
-                url: Endpoints.auth.login,
-            })
-        } catch(e){
+    const restorePasswordFormik = useFormik({
+        initialValues: {
+            email: '',
 
+        },
+        onSubmit: async (values, formikBag) => {
+            try {
+                let data = await fetch({
+                    url: Endpoints.auth.restorePassword,
+                    data: values,
+                    method: "POST",
+                })
+
+            } catch (err) {
+
+            }
+        },
+        validationSchema,
+        validate: values => {
+            validationSchema.isValid(values)
+                .then(e => setDisableButton(!e))
         }
-    }
+    });
 
-    let checkEmailValidity = (errors, {email})=> {
-        if(!email) {
-            errors.email = 'required'
-
-            setDisableButton(true)
-        }
-        else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)
-          ) {
-            errors.email = 'invalidEmailAddress';
-            setDisableButton(true)
-          } else{setDisableButton(false)}
-    }
 
     return(
         <div id="RestorePassword">
@@ -55,57 +61,29 @@ function RestorePassword(props) {
                 </Typography>
                 {// ? FORM 
                 }
-                <Formik
-                    initialValues = {{email: ""}}
-                    validate = { values =>{
-                        const errors = {}
-                        checkEmailValidity(errors, values)
-                        return errors      
-                    }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                          console.log(JSON.stringify(values, null, 2))
-                          setSubmitting(false);
-                        }, 400);
-                      }}
-                    >
-            {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isSubmitting,
-                /* and other goodies */
-            }) => (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={restorePasswordFormik.handleSubmit}>
                     <div id="formInputs">
                         <TextField
-                            error={Boolean(errors.email)}
+                            error={restorePasswordFormik.touched.email && Boolean(restorePasswordFormik.errors.email)}
                             id="email"
                             label="Email" 
                             variant="filled"
                             type="email"
                             name="email"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
-                            helperText={<Trans>{errors.email}</Trans>}
+                            onChange={restorePasswordFormik.handleChange}
+                            onBlur={restorePasswordFormik.handleBlur}
+                            value={restorePasswordFormik.values.email}
+                            helperText={restorePasswordFormik.touched.email && <Trans>{restorePasswordFormik.errors.email}</Trans>}
                         />
                         
 
                     </div>  
                 <div  id="submitInput" >    
-                    <Button size="large" type="submit" disabled={ disableButton|| isSubmitting} variant="contained"     color="primary">
-                        <Trans>auth.resetPassword</Trans>
+                    <Button size="large" type="submit" disabled={ disableButton|| restorePasswordFormik .isSubmitting} variant="contained"     color="primary">
+                        <Trans>auth.restorePassword</Trans>
                     </Button>
                 </div>    
                 </form>
-            )}
-         
-                </Formik>
-
             </div>
         </div>
     )    

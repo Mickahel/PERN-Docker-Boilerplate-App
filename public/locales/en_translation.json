@@ -1,12 +1,28 @@
 {
+  "theme":{
+    "darkTheme":"Dark Theme",
+    "lightTheme":"Light Theme"
+  },
   "profileButton": {
     "welcome": "Welcome",
-    "profile": "Profile"
+    "profile": "Profile",
+    "changeTheme": "Change Theme"
   },
   "dashboard": {
     "dashboard": "Dashboard"
   },
+  "enhancedTable": {
+    "rows": "Rows",
+    "moreThan": "More than",
+    "of": "of",
+    "search": "Search",
+    "filtersList": "Filters List",
+    "nextPage": "Next Page",
+    "previousPage": "Previous Page"
+  },
   "auth": {
+    "signup": "Signup",
+    "logout": "logout",
     "wrongEmailOrPassword": "Wrong Email or Password",
     "auth": "Authentication",
     "login": "Login",
@@ -18,7 +34,6 @@
     "loginSuccess": "Onboarding",
     "restorePassword": "Restore Password",
     "signUp": "Sign Up",
-    "register": "Register",
     "confirmPassword": "Confirm Password",
     "forgotPassword": "Forgot Password?",
     "insertInformation": "Insert Information",
@@ -39,7 +54,32 @@
     "errorInternalServer": "Oh No! The server is Down",
     "youAreNotAuthorized": "You Are not Authorized!"
   },
-  "profile":{
-    "profile": "Profile"
+  "profile": {
+    "upload": "Choose File",
+    "uploadImageText": "JPG, GIF or PNG",
+    "profile": "Profile",
+    "type": "Type",
+    "preferredLanguageText": "Selecting this will change the language of your dashboard",
+    "changePassword": "Change Password",
+    "changePasswordText": "You should change your password every month to avoid security issues.",
+    "language": "Language",
+    "delete": "Delete",
+    "changeYourPassword": "Change Your Password",
+    "currentPassword": "Current Password",
+    "back": "Back",
+    "change": "Change",
+    "newPassword": "New Password",
+    "firstname": "Firstname",
+    "cancel": "Cancel",
+    "changePersonalInformation": "Change Personal Information",
+    "lastname": "Lastname",
+    "personalInformation": "Personal Information"
+  },
+  "apiErrors": {
+    "networkError": "Network Error"
+  },
+  "newUpdateAlert": {
+    "title": "New Update!",
+    "message": "A new Update has been release"
   }
 }

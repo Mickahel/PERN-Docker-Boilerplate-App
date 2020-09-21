@@ -12,20 +12,22 @@ function LanguageBox(props) {
   const themeContext = useContext(ThemeContext)
   const changeLanguage = (e) => {
     i18n.changeLanguage(e.target.value, (err, t) => {
-      if (err) themeContext.showErrorNotification({message:"somethingWentWrong"})
+      if (err) themeContext.showErrorNotification({message:<Trans>somethingWentWrong</Trans>})
     });
   };
 
   return (
-    <Card id="language" >
-      <CardHeader title={<Trans>language</Trans>} />
+    <div className="languageBox">
+    <Card>
+      <CardHeader title={<Trans>profile.language</Trans>} />
       <Divider />
       <CardContent className="flex flex-col">
         <div>
-          <Trans>preferredLanguageText</Trans>
+          <Trans>profile.preferredLanguageText</Trans>
         </div>
         <div className="mt-3 flex justify-center">
           <Select
+            variant="outlined"
             id="languageSelect"
             value={localStorage.getItem("i18nextLng")}
             onChange={changeLanguage}
@@ -36,6 +38,7 @@ function LanguageBox(props) {
         </div>
       </CardContent>
     </Card>
+    </div>
   );
 }
 

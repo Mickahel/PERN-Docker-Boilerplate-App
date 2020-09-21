@@ -121,7 +121,7 @@ function useFetcher(props) {
                   })
                 return apiFetched
               } catch (e) {
-                if(redirectToLogin) history.push("/auth?returnUrl="+ history.location.pathname)
+                if (redirectToLogin) history.push("/auth?returnUrl=" + history.location.pathname)
                 throw err
               }
             }
@@ -136,10 +136,9 @@ function useFetcher(props) {
           }
         }
         else if (counter.current[err.config.url + JSON.stringify(err.config.data)] >= 3) {
-
-          if (err.response?.status == 500 && redirectToPage500 === true) history.push("/error/500")
-          if (err.response?.status == 500 && showErrorSnackBar === true) themeContext.showErrorNotification({ message: "somethingWentWrong" })
-          if (err.message.toString() == "Network Error") themeContext.showErrorNotification({ message: "disconnected" })
+          if ((err.response?.status == 500 || err.message.toString() == "Network Error") && redirectToPage500 === true) history.push("/error/500?returnUrl=" + history.location.pathname)
+          if ((err.response?.status == 500 || err.message.toString() == "Network Error") && redirectToPage500 === false && showErrorSnackBar === true) themeContext.showErrorNotification({ message: "somethingWentWrong" })
+          if (err.message.toString() == "Network Error" && redirectToPage500 == false) themeContext.showErrorNotification({ message: "apiErrors.networkError" })
           throw err
         }
         else {
