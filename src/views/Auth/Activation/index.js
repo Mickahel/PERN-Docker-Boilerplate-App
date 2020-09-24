@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import config from 'configuration/config'
 import Helmet from 'react-helmet';
-import { t } from 'i18next';
-import { Trans } from 'react-i18next'
+import { Trans,useTranslation } from 'react-i18next'
 import "./style.scss"
 import { useHistory } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
@@ -19,6 +18,7 @@ function Activation(props) {
     let history = useHistory();
     const themeContext = useContext(ThemeContext)
     const userContext = useContext(UserContext)
+    const [t, i18n] = useTranslation();
     const { fetch, loading, error } = useFetch()
     const [activationStatus, setActivationStatus] = useState("ACTIVATION")
 

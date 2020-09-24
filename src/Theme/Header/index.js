@@ -10,8 +10,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import config from 'configuration/config'
 import { Helmet } from "react-helmet";
-import { t } from "i18next";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation} from "react-i18next";
 import ProfileButton from "components/ProfileButton";
 
 
@@ -79,6 +78,7 @@ function Header(props) {
     const { handleDrawerOpenOnClick } = props
     const themeContext = useContext(ThemeContext);
     const { icon, title, headerVisible } = themeContext;
+    const [t, i18n] = useTranslation();
     const matches = useMediaQuery('(max-width:' + config.mobileScreenWidth + ')');
     const classes = useStyles({ sidebarOpen: themeContext.sidebarOpen });
     if (!headerVisible) return null

@@ -4,10 +4,10 @@ if (typeof importScripts === "function") {
   //importScripts( "https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js"); //? Import from CDN
   
   // ? Import from local package
-  importScripts("workbox-v5.1.3/workbox-sw.js"); 
+  importScripts("workbox-v5.1.4/workbox-sw.js"); 
 
   // ? Set the path of the package
-  workbox.setConfig({ modulePathPrefix: "workbox-v5.1.3/" });
+  workbox.setConfig({ modulePathPrefix: "workbox-v5.1.4/" });
 
 
   // ? Check if workboxexists

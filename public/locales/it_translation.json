@@ -21,6 +21,8 @@
     "previousPage": "Pagina Precedente"
   },
   "auth": {
+    "resetPasswordEmailSent": "Email di Reset Password Inviata",
+    "User not found": "Utente Non Trovato",
     "signedupSuccessfully": "Ti sei registrato correttaente, riceverai un'email di attivazione, controlla la tua email per attivare il tuo account.",
     "User is already registered": "L'utente è Già Registrato",
     "User is not activated":"L'utente non è Attivato",

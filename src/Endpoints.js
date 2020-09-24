@@ -3,7 +3,7 @@ const Endpoints = {
         signup:             "/v1/auth/signup",                      // ? POST
         login:              "/v1/auth/login",                       // ? POST
         activation:         "/v1/auth/activation/:activationCode",  // ? POST
-        lostPasswordEmail:  "/v1/auth/lost-password-email",         // ? POST
+        lostPasswordEmail:  "/v1/auth/lost-password-mail",         // ? POST
         passwordReset:      "/v1/auth/password-reset",              // ? POST
         newAccessToken:     "/v1/auth/token",                       // ? POST
         logout:             "/v1/auth/logout",                      // ? DELETE

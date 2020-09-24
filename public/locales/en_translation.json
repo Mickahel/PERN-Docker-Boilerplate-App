@@ -21,6 +21,8 @@
     "previousPage": "Previous Page"
   },
   "auth": {
+    "resetPasswordEmailSent": "Reset Password Email Sent",
+    "User not found": "User Not Found",
     "signedupSuccessfully": "You Signed Up successfully, you will receive an activation email, check your inbox to activate your account",
     "User is already registered": "User is Already Registered",
     "User is not activated":"User is Not Activated",

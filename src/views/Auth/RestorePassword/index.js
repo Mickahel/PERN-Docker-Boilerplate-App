@@ -1,8 +1,7 @@
 import React,{useState, useContext} from 'react';
 import config from 'configuration/config'
 import Helmet from 'react-helmet';
-import {t} from 'i18next';
-import { Trans } from 'react-i18next'
+import { Trans,useTranslation } from 'react-i18next'
 import "./style.scss"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -18,7 +17,7 @@ import useFetch from 'hooks/useFetch'
 function RestorePassword(props) {
     let [disableButton, setDisableButton] = useState(true)
     const { fetch,loading,error,data } = useFetch()
-
+    const [t, i18n] = useTranslation();
     const validationSchema = Yup.object({
         email: Yup.string().email().required(),
     });

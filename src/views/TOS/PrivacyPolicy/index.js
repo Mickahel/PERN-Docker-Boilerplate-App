@@ -1,6 +1,5 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { t } from 'i18next';
 import { Trans } from 'react-i18next'
 import "./style.scss"
 import PublicAppBar from 'components/PublicAppBar'

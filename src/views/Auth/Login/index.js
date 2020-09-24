@@ -1,8 +1,7 @@
 import React, { useState, useContext,useEffect,useCallback } from 'react';
 import config from 'configuration/config'
 import Helmet from 'react-helmet';
-import { t } from 'i18next';
-import { Trans } from 'react-i18next'
+import { Trans,useTranslation  } from 'react-i18next'
 import "./style.scss"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -27,6 +26,7 @@ import RoundLoader from 'components/RoundLoader';
 function Login(props) {
     let [disableButton, setDisableButton] = useState(true)
     let [showPassword, setShowPassword] = useState(false);
+    const [t, i18n] = useTranslation();
     const themeContext = useContext(ThemeContext)
     const userContext = useContext(UserContext)
     const history = useHistory()
