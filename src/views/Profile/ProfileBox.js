@@ -28,15 +28,28 @@ function ProfileBox(props) {
   const userContext = useContext(UserContext);
   const classes = useStyles();
   const { fetch, data } = useFetch();
-  const [disabledFields, setDisabledFields] = useState(true); 
+  const [disabledFields, setDisabledFields] = useState(true);
   const formikProfile = useFormik({
     initialValues: {
       firstname: userContext.user.firstname,
       lastname: userContext.user.lastname,
       email: userContext.user.email,
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const newInformations = await fetch({
+          url: Endpoints.user.editProfile,
+          data: {
+            firstname: values.firstname,
+            lastname: values.lastname,
+            email: values.email,
+          },
+          method: "PUT",
+        })
+        userContext.setUser(newInformations)
+      } catch (e) {
+
+      }
     },
   });
 
@@ -50,31 +63,31 @@ function ProfileBox(props) {
         <CardContent>
 
           <div id="personalInformationData" className="flex flex-col">
-              <TextField
-                disabled={disabledFields}
-                id="firstname"
-                label={<Trans>profile.firstname</Trans>}
-                variant="filled"
-                onChange={formikProfile.handleChange}
-                value={formikProfile.values.firstname}
-              />
+            <TextField
+              disabled={disabledFields}
+              id="firstname"
+              label={<Trans>profile.firstname</Trans>}
+              variant="filled"
+              onChange={formikProfile.handleChange}
+              value={formikProfile.values.firstname}
+            />
 
-              <TextField
-                disabled={disabledFields}
-                id="lastname"
-                label={<Trans>profile.lastname</Trans>}
-                variant="filled"
-                onChange={formikProfile.handleChange}
-                value={formikProfile.values.lastname}
-              />
-              <TextField
-                disabled={disabledFields}
-                id="email"
-                label="Email"
-                variant="filled"
-                onChange={formikProfile.handleChange}
-                value={formikProfile.values.email}
-              />
+            <TextField
+              disabled={disabledFields}
+              id="lastname"
+              label={<Trans>profile.lastname</Trans>}
+              variant="filled"
+              onChange={formikProfile.handleChange}
+              value={formikProfile.values.lastname}
+            />
+            <TextField
+              disabled={disabledFields}
+              id="email"
+              label="Email"
+              variant="filled"
+              onChange={formikProfile.handleChange}
+              value={formikProfile.values.email}
+            />
           </div>
         </CardContent>
 

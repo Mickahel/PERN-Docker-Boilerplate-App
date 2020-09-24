@@ -13,7 +13,8 @@ export default function yupConfig () {
 
     },
     string:{
-      email:({email}) =>i18n.t("yup.email", {email})
+      email:({email}) =>i18n.t("yup.email", {email}),
+      min: ({num}) =>i18n.t("yup.min", {num})
     }
   });
 }

@@ -7,12 +7,29 @@ import MenuItem from "@material-ui/core/MenuItem";
 import i18n from "i18n";
 import Select from "@material-ui/core/Select";
 import { ThemeContext } from 'contexts/Providers/ThemeProvider'
+import useFetch from "hooks/useFetch";
+import Endpoints from "Endpoints";
 
 function LanguageBox(props) {
   const themeContext = useContext(ThemeContext)
-  const changeLanguage = (e) => {
-    i18n.changeLanguage(e.target.value, (err, t) => {
+  const { fetch, data } = useFetch();
+  const changeLanguage =  (e) => {
+    i18n.changeLanguage(e.target.value, async(err, t) => {
       if (err) themeContext.showErrorNotification({message:<Trans>somethingWentWrong</Trans>})
+      else {
+        console.log(e.target.value)
+        try {
+          await fetch({
+            url: Endpoints.user.editProfile,
+            data: {
+              language: e.target.value
+            },
+            method: "PUT",
+          })
+        } catch (e) {
+  
+        }
+      }
     });
   };
 

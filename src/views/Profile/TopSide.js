@@ -7,11 +7,13 @@ import { ThemeContext } from "contexts/Providers/ThemeProvider";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Trans } from "react-i18next";
+import useFetch from "hooks/useFetch";
+import Endpoints from "Endpoints";
 
 const useStyles = makeStyles(theme => ({
     large: {
-        width: theme.spacing(9),
-        height: theme.spacing(9),
+        width: theme.spacing(12),
+        height: theme.spacing(12),
     },
     input: {
         display: 'none'
@@ -24,7 +26,25 @@ function TopSide(props) {
     const userContext = useContext(UserContext);
     const { avatar } = props
     const themeContext = useContext(ThemeContext);
+    const { fetch } = useFetch()
 
+    const changeTheme = async () => {
+        themeContext.toggleMuiType()
+        console.log(themeContext.muiType)
+        try {
+            await fetch({
+                url: Endpoints.user.editProfile,
+                data: {
+                    theme: themeContext.muiType =="light" ?"dark": "light",
+                    //theme: "dark"
+                },
+                method: "PUT",
+            })
+
+        } catch (e) {
+        }
+        
+    }
     return (
         <div className="topSide flex justify-between">
             <div className="flex">
@@ -33,7 +53,8 @@ function TopSide(props) {
                 </div>
                 <div className="flex flex-col justify-center ml-3">
                     <Typography variant="h6" gutterBottom>
-                        {userContext.user.username}
+                        {`${userContext.user.firstname} ${userContext.user.lastname}`}
+                        
                     </Typography>
                     <Typography color="primary" variant="body1" gutterBottom>
                         {userContext.user.email}
@@ -42,7 +63,7 @@ function TopSide(props) {
             </div>
             <div className="mt-5">
                 <FormControlLabel
-                    control={<Switch color="primary" checked={themeContext.muiType == "dark"} onChange={themeContext.toggleMuiType} />}
+                    control={<Switch color="primary" checked={themeContext.muiType == "dark"} onChange={changeTheme} />}
                     label={<Trans>theme.{themeContext.muiType}Theme</Trans>}
                 />
             </div>

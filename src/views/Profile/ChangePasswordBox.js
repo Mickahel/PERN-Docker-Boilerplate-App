@@ -23,16 +23,14 @@ import Endpoints from "Endpoints";
 function ChangePasswordBox(props) {
   const themeContext = useContext(ThemeContext);
   const userContext = useContext(UserContext);
-  const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(
-    false
-  );
+  const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [disableChangeButton, setDisableChangeButton] = useState(true);
   const { fetch, error} = useFetch();
 
   const validationSchema = Yup.object({
     currentPassword: Yup.string().required(),
-    newPassword: Yup.string()
+    password: Yup.string()
       .required()
       .min(8),
   });
@@ -40,7 +38,7 @@ function ChangePasswordBox(props) {
   const changePasswordFormik = useFormik({
     initialValues: {
       currentPassword: "",
-      newPassword: "",
+      password: "",
     },
     onSubmit: async (values, formikBag) => {
       try {
@@ -48,11 +46,8 @@ function ChangePasswordBox(props) {
           method: "PUT",
           url: Endpoints.auth.passwordReset,
           data: {
-            password: values.currentPassword,
-            new_password: values.newPassword,
-          },
-          urlParams: {
-            userId: userContext.user.id,
+            currentPassword: values.currentPassword,
+            password: values.password,
           },
         });
         handleClose();
@@ -62,7 +57,7 @@ function ChangePasswordBox(props) {
         });
       } catch (e) {
         themeContext.showErrorNotification({
-          message: <Trans>profile.somethingWentWrong</Trans>,
+          message: <Trans>profile.passwordIsWrong</Trans>,
         });
       }
     },
@@ -132,19 +127,19 @@ function ChangePasswordBox(props) {
             />
             <TextField
               variant="outlined"
-              id="newPassword"
+              id="password"
               label={<Trans>profile.newPassword</Trans>}
               type={passwordVisible ? "text" : "password"}
               fullWidth
               onBlur={changePasswordFormik.handleBlur}
-              value={changePasswordFormik.values.newPassword}
+              value={changePasswordFormik.values.password}
               error={
-                changePasswordFormik.touched.newPassword &&
-                Boolean(changePasswordFormik.errors.newPassword)
+                changePasswordFormik.touched.password &&
+                Boolean(changePasswordFormik.errors.password)
               }
               helperText={
-                changePasswordFormik.touched.newPassword && (
-                  <Trans>{changePasswordFormik.errors.newPassword}</Trans>
+                changePasswordFormik.touched.password && (
+                  <Trans>{changePasswordFormik.errors.password}</Trans>
                 )
               }
               onChange={changePasswordFormik.handleChange}

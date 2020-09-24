@@ -21,7 +21,12 @@
     "previousPage": "Previous Page"
   },
   "auth": {
-    "resetPasswordEmailSent": "Reset Password Email Sent",
+    "restorePassword":{
+      "title": "Restore Password",
+      "error":"An Error Has Occurred, Try Again",
+      "resetPasswordEmailSent": "Restore Password Email Sent",
+     // "resettedSuccessfully":"Restore Password Email Sent"
+    },
     "User not found": "User Not Found",
     "signedupSuccessfully": "You Signed Up successfully, you will receive an activation email, check your inbox to activate your account",
     "User is already registered": "User is Already Registered",
@@ -37,7 +42,6 @@
     "loginWithThirdParty": "Or Login with a 3rd Party Service",
     "signupWithThirdParty": "Or Signup with a 3rd Party Service",
     "loginSuccess": "Onboarding",
-    "restorePassword": "Restore Password",
     "signUp": "Sign Up",
     "confirmPassword": "Confirm Password",
     "forgotPassword": "Forgot Password?",
@@ -55,7 +59,8 @@
   "yup": {
     "invalidField": "Invalid Field",
     "required": "Required Field",
-    "email": "The field {{email}} should be an email"
+    "email": "The field {{email}} should be an email",
+    "min":"Password Must Be At Least {{num}} Characters"
   },
   "placeholder": {
     "backToHomepage": "Back to Dashboard",
@@ -65,6 +70,8 @@
     "youAreNotAuthorized": "You Are not Authorized!"
   },
   "profile": {
+    "passwordChanged": "Password Has Been Changed",
+    "passwordIsWrong": "Current Password is Wrong",
     "upload": "Choose File",
     "uploadImageText": "JPG, GIF or PNG",
     "profile": "Profile",

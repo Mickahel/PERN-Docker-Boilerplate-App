@@ -41,7 +41,10 @@ function App(props) {
             userContext.setUser(data)
             setLoading(false)
         } catch(e){
-            //themeContext.showWarningNotification({ message: "loginAgain" })
+            if(e.status==404) {
+                history.push("auth/login?returnUrl=" + history.location.pathname)
+                //themeContext.showWarningNotification({ message: "loginAgain" })
+            }
             //console.log("BBB",history.location.pathname)
             //history.push("auth?returnUrl=" + history.location.pathname)
         }
