@@ -1,14 +1,14 @@
 .MuiTextField-root {
-    width: 100% !important;
+    width: 300px !important;
   }
 
-  
-#login{
+
+#ResetPassword{
     display: flex;
     justify-content: center;
     height: 100%;
     align-items: center;
-    #loginForm{
+    #ResetPasswordForm{
         display: flex;
         flex-direction: column;
         #formInputs{
@@ -19,7 +19,7 @@
         #submitInput{
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin: 10px;
         }
 
         #auxiliaryLinks{
@@ -28,4 +28,5 @@
             margin-top: 30px;
         }
     }
+
 }

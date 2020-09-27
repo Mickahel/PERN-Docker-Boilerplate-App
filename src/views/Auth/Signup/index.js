@@ -172,7 +172,7 @@ function Signup(props) {
                 <div id="auxiliaryLinks">
                     <span className="mr-1"><Trans>auth.forgotPassword</Trans></span>
                     <Link href="/auth/restore-password" vcolor="primary">
-                        <Trans>auth.restorePassword</Trans>
+                        <Trans>auth.restorePassword.title</Trans>
                     </Link>
                 </div>
             </div>

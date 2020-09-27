@@ -21,11 +21,19 @@
     "previousPage": "Pagina Precedente"
   },
   "auth": {
+    "alreadyHaveAnAccount":"Hai già un Account?",
+    "error": "Un errore è accaduto, Prova di nuovo",
     "restorePassword": {
       "title": "Ripristina Password",
-      "error":"Un errore è accaduto, Prova di nuovo",
       "resetPasswordEmailSent": "Email di Ripristino Password Inviata",
-      //"resettedSuccessfully":"Password Resettata Con Successo"
+    },
+    "resetPassword": {
+      "title":"Resetta la tua Password",
+      "resettedSuccessfully": "Password Resettata Con Successo",
+      "insertNewPassword":"Inserisci la Nuova Password",
+      "insertNewPasswordAgain":"Inserisci la Nuova Password di Nuovo",
+      "goToApp":"Accedi all'app",
+      "resettedPasswordText": "Password Resettata Correttamente"
     },
     "User not found": "Utente Non Trovato",
     "signedupSuccessfully": "Ti sei registrato correttaente, riceverai un'email di attivazione, controlla la tua email per attivare il tuo account.",
@@ -42,7 +50,6 @@
     "loginWithThirdParty": "Oppure Accedi con un Servizio di Terze Parti",
     "signupWithThirdParty": "Oppure Registrati con un Servizio di Terze Parti",
     "loginSuccess": "Onboarding",
-
     "signUp": "Registrati",
     "confirmPassword": "Conferma Password",
     "forgotPassword": "Password Dimenticata?",
@@ -61,7 +68,9 @@
     "invalidField": "Campo non Valido",
     "required": "Campo Obbligatorio",
     "email": "Il campo {{email}} dovrebbe essere un'email",
-    "min": " La Password Deve Essere Lunga Almeno {{num}} Caratteri"
+    "min": " La Password Deve Essere Lunga Almeno {{num}} Caratteri",   
+    "RefEqualTo": "{{path}} Deve Essere Uguale A {{reference}}",
+    "equalTo": "I Campi Devono Essere Uguali"
   },
   "placeholder": {
     "backToHomepage": "Torna indietro",

@@ -1,7 +1,41 @@
 import { setLocale } from 'yup';
 import i18n from 'i18n'
-
+import * as Yup from 'yup';
 export default function yupConfig () {
+
+
+  function equalTo(ref, msg) {
+    return this.test({
+      name: 'equalTo',
+      exclusive: false,
+      message: ({path, reference}) => msg || i18n.t('yup.equalTo'),
+      params: {
+        reference: ref.path
+      },
+      test:function(value) {
+        return value === this.resolve(ref) 
+      }
+    })
+  };
+
+  function refEqualTo(ref, msg) {
+    return this.test({
+      name: 'RefEqualTo',
+      exclusive: false,
+      message: ({path, reference}) => msg || i18n.t('yup.refEqualTo', {path,reference}),
+      params: {
+        reference: ref.path
+      },
+      test:function(value) {
+        return value === this.resolve(ref) 
+      }
+    })
+  };
+
+  Yup.addMethod(Yup.string, 'equalTo', equalTo);
+  Yup.addMethod(Yup.string, 'refEqualTo', refEqualTo);
+
+  
   setLocale({
     // use constant translation keys for messages without values
     mixed: {

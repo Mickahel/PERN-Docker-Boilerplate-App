@@ -16,6 +16,7 @@ import useFetch from 'hooks/useFetch'
 
 function RestorePassword(props) {
     let [disableButton, setDisableButton] = useState(true)
+    const themeContext = useContext(ThemeContext)
     const { fetch, loading, error, data } = useFetch()
     const [t, i18n] = useTranslation();
     const [restorePasswordStatus, setRestorePasswordStatus] = useState("INSERTING_EMAIL")
@@ -37,7 +38,8 @@ function RestorePassword(props) {
                 })
                 setRestorePasswordStatus("EMAIL_SENT")
             } catch (err) {
-                setRestorePasswordStatus("ERROR")
+                if(err.status == 404) themeContext.showErrorNotification({message: "auth."+err.data.message})
+                else themeContext.showErrorNotification({message: "auth.error"})
             }
         },
         validationSchema,
@@ -60,16 +62,9 @@ function RestorePassword(props) {
                     <Trans>auth.restorePassword.title</Trans>
                 </Typography>
 
-                {(restorePasswordStatus == "INSERTING_EMAIL" || restorePasswordStatus=="ERROR") &&
+                {(restorePasswordStatus == "INSERTING_EMAIL") &&
                     <form onSubmit={restorePasswordFormik.handleSubmit}>
                         <div id="formInputs">
-                        {restorePasswordStatus == "ERROR" &&
-                                    <>
-                                    <Typography align="center" variant="body1" gutterBottom>
-                                        <Trans>{`auth.restorePassword.error`}</Trans>
-                                    </Typography>
-                                    <img width="100px" className='mt-5 mb-10 self-center' src={process.env.PUBLIC_URL + '/img/cross.svg'} alt='Confirm Image' />
-                                </>}
                             <TextField
                                 error={restorePasswordFormik.touched.email && Boolean(restorePasswordFormik.errors.email)}
                                 id="email"

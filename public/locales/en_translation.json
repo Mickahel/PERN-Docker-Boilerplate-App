@@ -1,7 +1,7 @@
 {
-  "theme":{
-    "darkTheme":"Dark Theme",
-    "lightTheme":"Light Theme"
+  "theme": {
+    "darkTheme": "Dark Theme",
+    "lightTheme": "Light Theme"
   },
   "profileButton": {
     "welcome": "Welcome",
@@ -21,16 +21,24 @@
     "previousPage": "Previous Page"
   },
   "auth": {
-    "restorePassword":{
+    "alreadyHaveAnAccount":"Do You Already Have an Account?",
+    "error": "An Error Has Occurred, Try Again",
+    "restorePassword": {
       "title": "Restore Password",
-      "error":"An Error Has Occurred, Try Again",
-      "resetPasswordEmailSent": "Restore Password Email Sent",
-     // "resettedSuccessfully":"Restore Password Email Sent"
+      "resetPasswordEmailSent": "Restore Password Email Sent"
+    },
+    "resetPassword": {
+      "title":"Reset your Password",
+      "resettedSuccessfully": "Restore Password Email Sent",
+      "insertNewPassword":"Insert New Password",
+      "insertNewPasswordAgain":"Insert New Password Again",
+      "goToApp":"Login to the App",
+      "resettedPasswordText":"Resetted Password Successfully"
     },
     "User not found": "User Not Found",
     "signedupSuccessfully": "You Signed Up successfully, you will receive an activation email, check your inbox to activate your account",
     "User is already registered": "User is Already Registered",
-    "User is not activated":"User is Not Activated",
+    "User is not activated": "User is Not Activated",
     "signup": "Signup",
     "logout": "logout",
     "wrongEmailOrPassword": "Wrong Email or Password",
@@ -49,9 +57,9 @@
     "activation": {
       "activatedText": "Your account has been activated",
       "User not found": "User to activate not found",
-      "retry":"Retry",
+      "retry": "Retry",
       "goToApp": "Login to the App",
-      "title":"Activate your Account",
+      "title": "Activate your Account",
       "activatingText": "We are activating your account"
     }
   },
@@ -60,7 +68,9 @@
     "invalidField": "Invalid Field",
     "required": "Required Field",
     "email": "The field {{email}} should be an email",
-    "min":"Password Must Be At Least {{num}} Characters"
+    "min": "Password Must Be At Least {{num}} Characters",
+    "RefEqualTo": "{{path}} must be the same as {{reference}}",
+    "equalTo": "Fields Must Be The Same"
   },
   "placeholder": {
     "backToHomepage": "Back to Dashboard",
