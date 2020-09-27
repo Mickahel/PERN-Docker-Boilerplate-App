@@ -10,7 +10,7 @@ import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import { UserContext } from 'contexts/Providers/UserProvider'
 import { Trans } from "react-i18next";
 import { useHistory } from 'react-router-dom'
-import ProfileButton from 'components/ProfileButton'
+import ProfileButton from 'Theme/Header/ProfileButton'
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 
 const useStyles = makeStyles((theme) => ({

@@ -43,7 +43,7 @@ function ProfileButton(props) {
     <div className="profileButton flex-grow flex justify-end">
       <Tooltip title={<Trans>profileButton.profile</Trans>}>
         <Button color="inherit" id="avatarButton" size="small" onClick={handleClick} >
-          <Avatar className={classes.small} src={process.env.PUBLIC_URL + userContext?.user?.profileImg}></Avatar>
+          <Avatar className={classes.small} src={process.env.REACT_APP_API_URL+ "/public/uploads/profileImgs/"+ userContext.user.profileImageUrl}></Avatar>
           <span className="ml-2">
             <Typography variant="body2" >
               {userContext?.user?.firstname || <Trans>profileButton.welcome</Trans>}

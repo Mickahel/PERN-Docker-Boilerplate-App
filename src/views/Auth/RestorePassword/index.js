@@ -12,7 +12,7 @@ import Endpoints from 'Endpoints'
 import "./style.scss"
 import * as Yup from 'yup';
 import useFetch from 'hooks/useFetch'
-
+import Link from '@material-ui/core/Link';
 
 function RestorePassword(props) {
     let [disableButton, setDisableButton] = useState(true)
@@ -95,7 +95,12 @@ function RestorePassword(props) {
                         <img width="100px" className='mt-5 mb-10 self-center' src={process.env.PUBLIC_URL + '/img/tick.svg'} alt='Confirm Image' />
                     </>
                 }
-
+                <div id="auxiliaryLinks">
+                    <span className="mr-1"><Trans>auth.alreadyHaveAnAccount</Trans></span>
+                    <Link href="/auth/login" vcolor="primary">
+                        <Trans>auth.login</Trans>
+                    </Link>
+                </div>
             </div>
         </div>
     )

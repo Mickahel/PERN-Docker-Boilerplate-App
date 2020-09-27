@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import config from 'configuration/config'
 import Helmet from 'react-helmet';
-import { Trans,useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import "./style.scss"
 import { useHistory } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
@@ -12,7 +12,7 @@ import { ThemeContext } from 'contexts/Providers/ThemeProvider';
 import { UserContext } from 'contexts/Providers/UserProvider';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
-
+import Link from '@material-ui/core/Link';
 
 function Activation(props) {
     let history = useHistory();
@@ -29,26 +29,26 @@ function Activation(props) {
         else history.push('/')
     }
 
-    const loadData = async ()=>{
+    const loadData = async () => {
         setActivationStatus("ACTIVATION")
-        try{
+        try {
             await fetch({
-                    url: Endpoints.auth.activation,
-                    urlParams:{
-                        activationCode: props.match.params.activationCode
-                    },
-                    method: "POST",
+                url: Endpoints.auth.activation,
+                urlParams: {
+                    activationCode: props.match.params.activationCode
+                },
+                method: "POST",
             })
             setActivationStatus("ACTIVATED")
 
-        } catch(e){
-            
+        } catch (e) {
+
             setActivationStatus("ERROR")
         }
     }
-    useEffect(()=>{
+    useEffect(() => {
         loadData()
-    },[])
+    }, [])
     return (
         <div id="activation">
             <Helmet title={`${config.name.short} - ${t("auth.activation.title")}`} />
@@ -89,6 +89,12 @@ function Activation(props) {
                             <Button variant="contained" color="primary" onClick={() => { loadData() }}><Trans>auth.activation.retry</Trans></Button>
                         </div>
                     </>}
+                <div id="auxiliaryLinks">
+                    <span className="mr-1"><Trans>auth.alreadyHaveAnAccount</Trans></span>
+                    <Link href="/auth/login" vcolor="primary">
+                        <Trans>auth.login</Trans>
+                    </Link>
+                </div>
             </div>
         </div>
     )

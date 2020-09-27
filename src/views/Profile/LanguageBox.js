@@ -15,7 +15,8 @@ function LanguageBox(props) {
   const { fetch, data } = useFetch();
   const changeLanguage =  (e) => {
     i18n.changeLanguage(e.target.value, async(err, t) => {
-      if (err) themeContext.showErrorNotification({message:<Trans>somethingWentWrong</Trans>})
+      console.log("hello")
+     /* if (err) themeContext.showErrorNotification({message:<Trans>somethingWentWrong</Trans>})
       else {
         console.log(e.target.value)
         try {
@@ -29,7 +30,7 @@ function LanguageBox(props) {
         } catch (e) {
   
         }
-      }
+      }*/
     });
   };
 

@@ -24,13 +24,11 @@ const useStyles = makeStyles(theme => ({
 function TopSide(props) {
     const classes = useStyles();
     const userContext = useContext(UserContext);
-    const { avatar } = props
     const themeContext = useContext(ThemeContext);
     const { fetch } = useFetch()
 
     const changeTheme = async () => {
         themeContext.toggleMuiType()
-        console.log(themeContext.muiType)
         try {
             await fetch({
                 url: Endpoints.user.editProfile,
@@ -49,7 +47,7 @@ function TopSide(props) {
         <div className="topSide flex justify-between">
             <div className="flex">
                 <div>
-                    <Avatar className={classes.large} src={userContext.user.avatar}></Avatar>
+                    <Avatar className={classes.large} src={process.env.REACT_APP_API_URL+ "/public/uploads/profileImgs/"+ userContext.user.profileImageUrl}></Avatar>
                 </div>
                 <div className="flex flex-col justify-center ml-3">
                     <Typography variant="h6" gutterBottom>

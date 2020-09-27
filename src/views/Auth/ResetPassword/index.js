@@ -16,7 +16,7 @@ import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
-
+import Link from '@material-ui/core/Link';
 function RestorePassword(props) {
     let history = useHistory();
     const themeContext = useContext(ThemeContext)
@@ -65,10 +65,10 @@ function RestorePassword(props) {
                     method: "POST",
                 })
                 setRestorePasswordStatus("RESETTED")
-    
+
             } catch (e) {
-                if(e.status==404) themeContext.showErrorNotification({ message: "auth." + e.data.message})
-                else themeContext.showErrorNotification({ message: "auth.error"})
+                if (e.status == 404) themeContext.showErrorNotification({ message: "auth." + e.data.message })
+                else themeContext.showErrorNotification({ message: "auth.error" })
             }
         },
         validationSchema,
@@ -155,6 +155,12 @@ function RestorePassword(props) {
                             <Button variant="contained" color="primary" onClick={() => { pushInsideApp() }}><Trans>auth.resetPassword.goToApp</Trans></Button>
                         </div>
                     </>}
+                <div id="auxiliaryLinks">
+                    <span className="mr-1"><Trans>auth.alreadyHaveAnAccount</Trans></span>
+                    <Link href="/auth/login" vcolor="primary">
+                        <Trans>auth.login</Trans>
+                    </Link>
+                </div>
             </div>
         </div>
     )

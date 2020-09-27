@@ -11,7 +11,7 @@ import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import config from 'configuration/config'
 import { Helmet } from "react-helmet";
 import { Trans, useTranslation} from "react-i18next";
-import ProfileButton from "components/ProfileButton";
+import ProfileButton from "Theme/Header/ProfileButton";
 
 
 const useStyles = makeStyles((theme) => ({

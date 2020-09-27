@@ -1,4 +1,5 @@
 {
+  "error": "Un errore è accaduto, Prova di nuovo",
   "theme": {
     "darkTheme": "Tema Scuro",
     "lightTheme": "Tema Chiaro"
@@ -21,6 +22,7 @@
     "previousPage": "Pagina Precedente"
   },
   "auth": {
+    "logout": "Esci",
     "alreadyHaveAnAccount":"Hai già un Account?",
     "error": "Un errore è accaduto, Prova di nuovo",
     "restorePassword": {
@@ -40,7 +42,7 @@
     "User is already registered": "L'utente è Già Registrato",
     "User is not activated": "L'utente non è Attivato",
     "signup": "Registrati",
-    "logout": "Esci",
+
     "wrongEmailOrPassword": "Email o passowrd errati",
     "login": "Accedi",
     "auth": "Autenticazione",

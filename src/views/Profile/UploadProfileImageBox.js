@@ -10,6 +10,9 @@ import "./style.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from '@material-ui/core/Avatar';
 import { Trans } from 'react-i18next';
+import useFetch from 'hooks/useFetch'
+import Endpoints from 'Endpoints';
+
 const useStyles = makeStyles(theme => ({
     large: {
         width: theme.spacing(12),
@@ -25,8 +28,9 @@ const useStyles = makeStyles(theme => ({
 
 function UploadProfileImageBox(props) {
     const userContext = useContext(UserContext);
+    const themeContext = useContext(ThemeContext);
     const classes = useStyles();
-
+    const {fetch} = useFetch()
 
     const handleUploadClick = (event) => {
         //console.log(event)
@@ -35,14 +39,23 @@ function UploadProfileImageBox(props) {
             const reader = new FileReader();
             var url = reader.readAsDataURL(file);
 
-            reader.onloadend = function (e) {
+            reader.onloadend = async function (e) {
                 //console.log(reader.result)
                 /*this.setState({
                   selectedFile: [reader.result]
                 });*/
+                let data = new FormData()
+                data.append('profileImageUrl', reader.result)
+                console.log(reader.result)
+                await fetch({
+                    url : Endpoints.user.editProfile,
+                    method: "PUT",
+                    data,
+                })
+
                 userContext.setUser(
                     prevState=>{
-                        return {...prevState, avatar: reader.result}
+                        return {...prevState, profileImageUrl: reader.result}
                     })
             }.bind(this);
             //console.log(url); // Would see a path?
@@ -59,17 +72,24 @@ function UploadProfileImageBox(props) {
             <Card>
                 <CardContent>
                     <div className="flex flex-col items-center">
-                    <div className="flex">
-                        <Avatar className={classes.large} src={userContext.user.avatar}></Avatar>
-                        <div className="ml-24 absolute ">
-                            {userContext.user.avatar &&
-                                <IconButton onClick={() => {
+                    <div className="flex relative">
+                        <Avatar className={classes.large} src={process.env.REACT_APP_API_URL+ "/public/uploads/profileImgs/"+ userContext.user.profileImageUrl}></Avatar>
+                        <div className=" ml-24 absolute">
+                            {userContext.user.profileImageUrl &&
+                                <IconButton onClick={async () => {
+                                    await fetch({
+                                        url : Endpoints.user.editProfile,
+                                        method: "PUT",
+                                        data:{
+                                            removeProfileImageUrl:true
+                                        },
+                                    })
                                     userContext.setUser(
                                         prevState=>{
                                             //delete prevState.avatar
                                             return {
                                                 ...prevState,
-                                                avatar: undefined
+                                                profileImageUrl: undefined
                                                 }
                                         })
                                 }}>
@@ -83,7 +103,7 @@ function UploadProfileImageBox(props) {
                                 <input
                                     accept="image/*"
                                     className={classes.input}
-                                    id="contained-button-file"
+                                    id="profileImageUrl"
                                     multiple
                                     type="file"
                                     onChange={handleUploadClick}
