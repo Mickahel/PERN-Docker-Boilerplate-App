@@ -33,38 +33,23 @@ function UploadProfileImageBox(props) {
     const {fetch} = useFetch()
 
     const handleUploadClick = (event) => {
-        //console.log(event)
+        console.log(event.target)
         if (event?.target?.files[0]) {
             var file = event.target.files[0];
             const reader = new FileReader();
             var url = reader.readAsDataURL(file);
 
             reader.onloadend = async function (e) {
-                //console.log(reader.result)
-                /*this.setState({
-                  selectedFile: [reader.result]
-                });*/
-                let data = new FormData()
-                data.append('profileImageUrl', reader.result)
-                console.log(reader.result)
-                await fetch({
+                let form = new FormData()
+                form.append('profileImageUrl', file)
+                let result = await fetch({
                     url : Endpoints.user.editProfile,
                     method: "PUT",
-                    data,
+                    data: form,
+                    addHeadersForFiles:true
                 })
-
-                userContext.setUser(
-                    prevState=>{
-                        return {...prevState, profileImageUrl: reader.result}
-                    })
+                userContext.setUser(result)
             }.bind(this);
-            //console.log(url); // Would see a path?
-
-            /*this.setState({
-              mainState: "uploaded",
-              selectedFile: event.target.files[0],
-              imageUploaded: 1
-            });*/
         }
     };
     return (
@@ -73,25 +58,18 @@ function UploadProfileImageBox(props) {
                 <CardContent>
                     <div className="flex flex-col items-center">
                     <div className="flex relative">
-                        <Avatar className={classes.large} src={process.env.REACT_APP_API_URL+ "/public/uploads/profileImgs/"+ userContext.user.profileImageUrl}></Avatar>
+                        <Avatar className={classes.large} src={process.env.REACT_APP_API_PUBLIC_URL+ userContext.user.profileImageUrl}></Avatar>
                         <div className=" ml-24 absolute">
                             {userContext.user.profileImageUrl &&
                                 <IconButton onClick={async () => {
-                                    await fetch({
+                                    let result = await fetch({
                                         url : Endpoints.user.editProfile,
                                         method: "PUT",
                                         data:{
                                             removeProfileImageUrl:true
                                         },
                                     })
-                                    userContext.setUser(
-                                        prevState=>{
-                                            //delete prevState.avatar
-                                            return {
-                                                ...prevState,
-                                                profileImageUrl: undefined
-                                                }
-                                        })
+                                    userContext.setUser(result)
                                 }}>
                                     <DeleteOutlineOutlinedIcon color="primary" />
                                 </IconButton>
@@ -104,9 +82,12 @@ function UploadProfileImageBox(props) {
                                     accept="image/*"
                                     className={classes.input}
                                     id="profileImageUrl"
-                                    multiple
+                                    name="profileImageUrl"
                                     type="file"
-                                    onChange={handleUploadClick}
+                                    onChange={(e)=>{handleUploadClick(e)}}
+                                    onClick={(event)=> { 
+                                        event.target.value = null
+                                   }}
                                 />
                                 <Trans>profile.upload</Trans>
                             </Button>

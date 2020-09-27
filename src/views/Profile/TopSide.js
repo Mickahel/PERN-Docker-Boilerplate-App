@@ -47,7 +47,7 @@ function TopSide(props) {
         <div className="topSide flex justify-between">
             <div className="flex">
                 <div>
-                    <Avatar className={classes.large} src={process.env.REACT_APP_API_URL+ "/public/uploads/profileImgs/"+ userContext.user.profileImageUrl}></Avatar>
+                    <Avatar className={classes.large} src={process.env.REACT_APP_API_PUBLIC_URL+ userContext.user.profileImageUrl}></Avatar>
                 </div>
                 <div className="flex flex-col justify-center ml-3">
                     <Typography variant="h6" gutterBottom>

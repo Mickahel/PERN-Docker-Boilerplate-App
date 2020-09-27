@@ -27,7 +27,7 @@
     "error": "Un errore è accaduto, Prova di nuovo",
     "restorePassword": {
       "title": "Ripristina Password",
-      "resetPasswordEmailSent": "Email di Ripristino Password Inviata",
+      "resetPasswordEmailSent": "Email di Ripristino Password Inviata"
     },
     "resetPassword": {
       "title":"Resetta la tua Password",

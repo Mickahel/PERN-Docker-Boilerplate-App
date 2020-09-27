@@ -56,7 +56,7 @@ function useFetcher(props) {
     const showErrorSnackBar = _.get(options, "showErrorSnackBar", true);
     const redirectToLogin = _.get(options, "redirectToLogin", true)
     const addBaseUrl = _.get(options, "addBaseUrl", true);
-
+    const addHeadersForFiles = _.get(options, "addHeadersForFiles", false);
     const CORSHeaders = addHeaders == true ? {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Set-Cookie",
@@ -67,7 +67,8 @@ function useFetcher(props) {
     const headers = {
       accept: "application/json",
       "Content-Type": "application/json", //"application/x-www-form-urlencoded" "multipart/form-data or" "text/plain" "application/json"
-      ...CORSHeaders
+      ...CORSHeaders,
+      ...(addHeadersForFiles &&  {"Content-Type": "multipart/form-data"})
     };
 
     // ? Create custom axios instance
