@@ -1,5 +1,11 @@
 {
+  "installApp": "Installa L'App",
   "error": "Un errore è accaduto, Prova di nuovo",
+  "yes":"Si",
+  "notificationHandler": {
+    "title": "Possiamo invarti delle notifiche?",
+    "content": "La piattaforma inviarti delle notifiche"
+},
   "theme": {
     "darkTheme": "Tema Scuro",
     "lightTheme": "Tema Chiaro"

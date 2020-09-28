@@ -9,7 +9,6 @@ import "../sass/main.scss"
 import RoundLoader from 'components/RoundLoader'
 import { useHistory } from 'react-router-dom'
 import useFetch from 'hooks/useFetch'
-
 const ErrorNotFound = lazy(() => import('views/Placeholders/ErrorNotFound'))
 const Home = lazy(() => import('views/Home'))
 const Dashboard = lazy(() => import('views/Dashboard'))
@@ -19,7 +18,7 @@ function App(props) {
     const userContext = useContext(UserContext)
     const [loading, setLoading] = useState(true)
     const history = useHistory()
-    const {fetch} = useFetch()
+    const { fetch } = useFetch()
 
 
     useEffect(() => {
@@ -32,16 +31,16 @@ function App(props) {
             return
         }
         // ? qui non ho l'utente
-        try{
-         const data = await fetch({
+        try {
+            const data = await fetch({
                 method: "GET",
                 url: Endpoints.user.profile,
                 redirectToPage500: true
             })
             userContext.setUser(data)
             setLoading(false)
-        } catch(e){
-            if(e.status==404) {
+        } catch (e) {
+            if (e?.status == 404) {
                 history.push("auth/login?returnUrl=" + history.location.pathname)
                 //themeContext.showWarningNotification({ message: "loginAgain" })
             }
@@ -54,7 +53,7 @@ function App(props) {
     if (loading) return <RoundLoader />
     return (
         <Theme>
-            <Suspense fallback={<RoundLoader agent="suspense in app"/>}>
+            <Suspense fallback={<RoundLoader agent="suspense in app" />}>
                 <Switch >
                     <Route exact path='/dashboard' component={Dashboard} />
                     <Route path='/account*' exact component={Account} />

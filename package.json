@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "dependencies": {
     "@date-io/moment": "^2.10.6",
+    "@firebase/messaging": "^0.7.1",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -10,6 +11,7 @@
     "@material-ui/styles": "^4.10.0",
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
+    "firebase": "^7.21.1",
     "form-data": "^3.0.0",
     "formik": "^2.1.5",
     "i18next": "^19.7.0",
@@ -38,14 +40,14 @@
     "react-sidebar": "^3.0.2",
     "react-social-login-buttons": "^3.1.0",
     "url-pattern": "^1.0.3",
+    "webpack": "4.42.0",
     "workbox-build": "^5.1.4",
     "yup": "^0.29.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build-sw": "node ./src/sw-build.js",
-    "copy-workbox-libraries": "workbox copyLibraries ./build",
-    "build": "react-scripts build && npm run copy-workbox-libraries && npm run build-sw",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-tailwind": "yarn tailwind build ./src/css/tailwind-input.css -o ./src/css/tailwind.css",

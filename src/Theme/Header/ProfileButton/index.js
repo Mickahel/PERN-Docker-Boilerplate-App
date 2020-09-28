@@ -20,6 +20,9 @@ import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
 import { UserContext } from 'contexts/Providers/UserProvider'
 import InstallPWAButton from 'components/InstallPWAButton'
 import useFetch from 'hooks/useFetch'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import config from 'configuration/config'
+
 const useStyles = makeStyles(theme => ({
   small: {
     width: theme.spacing(4),
@@ -35,6 +38,7 @@ function ProfileButton(props) {
   const themeContext = useContext(ThemeContext)
   const userContext = useContext(UserContext)
   const history = useHistory();
+  const matches = useMediaQuery('(max-width:' + config.mobileScreenWidth + ')');
   const { fetch } = useFetch()
   const handleClick = event => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -44,11 +48,11 @@ function ProfileButton(props) {
       <Tooltip title={<Trans>profileButton.profile</Trans>}>
         <Button color="inherit" id="avatarButton" size="small" onClick={handleClick} >
           <Avatar className={classes.small} src={process.env.REACT_APP_API_PUBLIC_URL+ userContext.user.profileImageUrl}></Avatar>
-          <span className="ml-2">
+          {!matches && <span className="ml-2">
             <Typography variant="body2" >
               {userContext?.user?.firstname || <Trans>profileButton.welcome</Trans>}
             </Typography>
-          </span>
+          </span>}
           {
             anchorEl
               ?

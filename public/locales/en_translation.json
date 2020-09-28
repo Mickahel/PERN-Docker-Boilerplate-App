@@ -1,5 +1,11 @@
 {
+  "installApp": "Install App",
   "error": "An Error Has Occurred, Try Again",
+  "yes":"Yes",
+  "notificationHandler": {
+    "title": "Can we Send You Notifications?",
+    "content": "The platform wants to send you notifications"
+},
   "theme": {
     "darkTheme": "Dark Theme",
     "lightTheme": "Light Theme"
