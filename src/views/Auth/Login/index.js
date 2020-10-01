@@ -80,7 +80,8 @@ function Login(props) {
                 userContext.setUser(data.user)
                 pushInsideApp()
             } catch (err) {
-                if (err.status == 403) themeContext.showErrorNotification({ message: "wrongEmailOrPassword" })
+                if (err.status == 403) themeContext.showErrorSnackbar({ message: "wrongEmailOrPassword" })
+                else if (err.status == 404) themeContext.showErrorSnackbar({ message: err.data.message})
             }
         },
         validationSchema,

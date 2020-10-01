@@ -30,7 +30,7 @@ html {
   }
 }
 .MuiCard-root {
-  border-radius: 5px !important;
+  border-radius: $standardBorderRadius !important;
 }
 button {
   outline: 0px !important; // ? disables Tailwind outline

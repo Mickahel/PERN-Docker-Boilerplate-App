@@ -38,8 +38,8 @@ function RestorePassword(props) {
                 })
                 setRestorePasswordStatus("EMAIL_SENT")
             } catch (err) {
-                if(err.status == 404) themeContext.showErrorNotification({message: "auth."+err.data.message})
-                else themeContext.showErrorNotification({message: "auth.error"})
+                if(err?.status == 404) themeContext.showErrorSnackbar({message: "auth."+err.data.message})
+                else if(err?.status < 500)themeContext.showErrorSnackbar({message: "auth.error"})
             }
         },
         validationSchema,

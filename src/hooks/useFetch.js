@@ -130,7 +130,7 @@ function useFetcher(props) {
           }
           else if (err.response.data.message == "User doesn\'t have right permission") { }
           else if (err.response.data.message == "RefreshToken Not Found") {
-            if (history.location.pathname != "/" && !history.location.pathname.includes("/auth")) themeContext.showWarningNotification({ message: "apiErrors.loginAgain" })
+            if (history.location.pathname != "/" && !history.location.pathname.includes("/auth")) themeContext.showWarningSnackbar({ message: "apiErrors.loginAgain" })
             throw err
           } else {
             throw err
@@ -138,8 +138,8 @@ function useFetcher(props) {
         }
         else if (counter.current[err.config.url + JSON.stringify(err.config.data)] >= 3) {
           if ((err.response?.status == 500 || err.message.toString() == "Network Error") && redirectToPage500 === true) history.push("/error/500?returnUrl=" + history.location.pathname)
-          if ((err.response?.status == 500 || err.message.toString() == "Network Error") && redirectToPage500 === false && showErrorSnackBar === true) themeContext.showErrorNotification({ message: "somethingWentWrong" })
-          if (err.message.toString() == "Network Error" && redirectToPage500 == false) themeContext.showErrorNotification({ message: "apiErrors.networkError" })
+          if ((err.response?.status == 500 || err.message.toString() == "Network Error") && redirectToPage500 === false && showErrorSnackBar === true) themeContext.showErrorSnackbar({ message: "somethingWentWrong" })
+          if (err.message.toString() == "Network Error" && redirectToPage500 == false) themeContext.showErrorSnackbar({ message: "apiErrors.networkError" })
           throw err
         }
         else {

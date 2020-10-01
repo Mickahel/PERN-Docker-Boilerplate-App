@@ -67,8 +67,8 @@ function RestorePassword(props) {
                 setRestorePasswordStatus("RESETTED")
 
             } catch (e) {
-                if (e?.status == 404) themeContext.showErrorNotification({ message: "auth." + e.data.message })
-                else themeContext.showErrorNotification({ message: "auth.error" })
+                if (e?.status === 404) themeContext.showErrorSnackbar({ message: "auth." + e.data.message })
+                else if (e?.status < 500)themeContext.showErrorSnackbar({ message: "auth.error" })
             }
         },
         validationSchema,

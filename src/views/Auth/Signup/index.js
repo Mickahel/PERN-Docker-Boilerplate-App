@@ -52,7 +52,7 @@ function Signup(props) {
                 })
                 setIsSignupSucceded(true)
             } catch (err) {
-                themeContext.showErrorNotification({ message: "auth." + err.data.message })
+                if(err?.status<500) themeContext.showErrorSnackbar({ message: "auth." + err.data.message })
             }
         },
         validationSchema,

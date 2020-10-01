@@ -2,62 +2,40 @@
 
 
 
-.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthMd.MuiPaper-elevation24.MuiPaper-rounded {
-  border-radius: 10px !important;
-}
+
 .standard-dialog {
 
-  .iconTitleColor{
-    color:white;
+  .MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthMd.MuiPaper-elevation24.MuiPaper-rounded {
+    border-radius: $standardBorderRadius !important;
   }
-
+  
   &.error {
-    .title {
-      background: $errorColor;
-
-      span {
-        color: white;
-      }
+    .iconTitleColor {
+      color: $errorColor;
     }
   }
 
   &.info {
-    .title {
-      background: $infoColor;
-
-      span {
-        color: white;
-      }
+    .iconTitleColor {
+      color: $infoColor;
     }
   }
 
   &.success {
-    .title {
-      background: $successColor;
-
-      span {
-        color: white;
-      }
+    .iconTitleColor {
+      color: $successColor;
     }
   }
 
   &.warning {
-    .title {
-      background: $warningColor;
-
-      span {
-        color: white;
-      }
+    .iconTitleColor {
+      color: $warningColor;
     }
   }
 
   &.confirm {
     .title {
       background: $confirmColor;
-
-      span {
-        color: white;
-      }
     }
   }
 
@@ -77,7 +55,7 @@
       align-items: center;
 
       .text {
-        padding-left: 5px;
+        padding-left: 10px;
       }
     }
   }

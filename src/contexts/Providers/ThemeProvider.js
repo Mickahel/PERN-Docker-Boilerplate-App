@@ -138,11 +138,11 @@ state = {
   hideDialog: this.hideDialog,
 
   snackbar: this.snackbar,
-  showSuccessNotification: this.showSnackbar("success"),
-  showErrorNotification: this.showSnackbar("error"),
-  showInfoNotification: this.showSnackbar("info"),
-  showWarningNotification: this.showSnackbar("warning"),
-  showNotification: this.showSnackbar('info'),
+  showSuccessSnackbar: this.showSnackbar("success"),
+  showErrorSnackbar: this.showSnackbar("error"),
+  showInfoSnackbar: this.showSnackbar("info"),
+  showWarningSnackbar: this.showSnackbar("warning"),
+  showSnackbar: this.showSnackbar('info'),
   hideSnackbar: this.hideSnackbar,
 
 }

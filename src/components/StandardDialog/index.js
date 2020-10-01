@@ -51,8 +51,8 @@ function StandardDialog(props){
   const createValidationSchema = () => {
     validationSchema = Yup.object().shape({
       text: Yup.string()
-        .min(5, 'has to be longer than 5 characters')
-        .required('Required')
+        .min(5)
+        .required()
     });
 
     return validationSchema;

@@ -50,8 +50,8 @@ function SnackBar(props){
                 </Button>
               }
               >
-                <div className="flex ">
-                  <div className="snackbarMessage"><Trans>{themeContext.snackbar.message}</Trans></div>
+                <div className="flex">
+                  <Trans>{themeContext.snackbar.message}</Trans>
                 </div>
                   
           </MuiAlert>

@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
-
+import CallToActionOutlinedIcon from '@material-ui/icons/CallToActionOutlined';
 
 const SidebarMenu = [
     {
@@ -13,6 +13,13 @@ const SidebarMenu = [
     {
         id: "divider1",
         type: "divider"
+    },
+    {
+        type: "item",
+        id: 'helpers',
+        to: "/helpers",
+        icon: <CallToActionOutlinedIcon />,
+        exact: true,
     }
 ]
 

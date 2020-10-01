@@ -52,11 +52,11 @@ function ChangePasswordBox(props) {
         });
         handleClose();
         formikBag.resetForm();
-        themeContext.showSuccessNotification({
+        themeContext.showSuccessSnackbar({
           message: <Trans>profile.passwordChanged</Trans>,
         });
       } catch (e) {
-        themeContext.showErrorNotification({
+        if(e?.status < 500) themeContext.showErrorSnackbar({
           message: <Trans>profile.passwordIsWrong</Trans>,
         });
       }

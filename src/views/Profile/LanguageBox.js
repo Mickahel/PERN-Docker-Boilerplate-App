@@ -16,7 +16,7 @@ function LanguageBox(props) {
   const changeLanguage = (e) => {
     console.log(e.target.value)
     i18next.changeLanguage(e.target.value, async (err, t) => {
-      if (err) themeContext.showErrorNotification({ message: <Trans>somethingWentWrong</Trans> })
+      if (err) themeContext.showErrorSnackbar({ message: <Trans>somethingWentWrong</Trans> })
       else {
         try {
           await fetch({
