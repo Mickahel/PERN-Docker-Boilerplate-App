@@ -6,6 +6,10 @@
     "title": "Can we Send You Notifications?",
     "content": "The platform wants to send you notifications"
 },
+"cookieConsentDrawer":{
+  "text": "This platform uses Cookies to ensure the usability of it, if you want to know more, visit our ",
+  "ok": "Ok, I Understood"
+},
   "theme": {
     "darkTheme": "Dark Theme",
     "lightTheme": "Light Theme"
@@ -116,5 +120,11 @@
   "newUpdateAlert": {
     "title": "New Update!",
     "message": "A new Update has been release"
+  },
+  "publicAppBar": {
+    "goToApp": "Go To App"
+  },
+  "tos":{
+    "termsOfService": "Terms of Service"
   }
 }

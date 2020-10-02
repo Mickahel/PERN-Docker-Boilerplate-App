@@ -10,9 +10,9 @@ import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import { UserContext } from 'contexts/Providers/UserProvider'
 import { Trans } from "react-i18next";
 import { useHistory } from 'react-router-dom'
-import ProfileButton from 'Theme/Header/ProfileButton'
-import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
-
+import ProfileButton from 'theme/Header/ProfileButton'
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import Tooltip from '@material-ui/core/Tooltip';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar(props) {
   const classes = useStyles();
   const themeContext = useContext(ThemeContext)
-  const userContext = useContext(UserContext)
   const history = useHistory()
   useEffect(() => {
     if (props.title) themeContext.setTitle(props.title)
@@ -47,15 +46,11 @@ export default function ButtonAppBar(props) {
           <Typography variant="h6" className={classes.title}>
             <Trans>{props.title}</Trans>
           </Typography>
-
-          {userContext.user
-            ? <ProfileButton />
-            : <IconButton onClick={() => {history.push("/auth/login")}}>
-            <VpnKeyOutlinedIcon />
+          <Tooltip title={<Trans>publicAppBar.goToApp</Trans>}>
+            <IconButton onClick={() => {history.push("/auth/login")}}>
+            <ExitToAppOutlinedIcon />
             </IconButton>
-          }
-
-
+            </Tooltip>
         </Toolbar>
       </AppBar>
 

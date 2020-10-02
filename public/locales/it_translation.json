@@ -1,11 +1,15 @@
 {
   "installApp": "Installa L'App",
   "error": "Un errore è accaduto, Prova di nuovo",
-  "yes":"Si",
+  "yes": "Si",
   "notificationHandler": {
     "title": "Possiamo invarti delle notifiche?",
     "content": "La piattaforma inviarti delle notifiche"
-},
+  },
+  "cookieConsentDrawer": {
+    "text": "Questa piattaforma usa i cookies per assicurare l'usabilità della stessa, se vuoi saperne di più, visita la nostra ",
+    "ok": "Ok, Ho Capito"
+  },
   "theme": {
     "darkTheme": "Tema Scuro",
     "lightTheme": "Tema Chiaro"
@@ -29,18 +33,18 @@
   },
   "auth": {
     "logout": "Esci",
-    "alreadyHaveAnAccount":"Hai già un Account?",
+    "alreadyHaveAnAccount": "Hai già un Account?",
     "error": "Un errore è accaduto, Prova di nuovo",
     "restorePassword": {
       "title": "Ripristina Password",
       "resetPasswordEmailSent": "Email di Ripristino Password Inviata"
     },
     "resetPassword": {
-      "title":"Resetta la tua Password",
+      "title": "Resetta la tua Password",
       "resettedSuccessfully": "Password Resettata Con Successo",
-      "insertNewPassword":"Inserisci la Nuova Password",
-      "insertNewPasswordAgain":"Inserisci la Nuova Password di Nuovo",
-      "goToApp":"Accedi all'app",
+      "insertNewPassword": "Inserisci la Nuova Password",
+      "insertNewPasswordAgain": "Inserisci la Nuova Password di Nuovo",
+      "goToApp": "Accedi all'app",
       "resettedPasswordText": "Password Resettata Correttamente"
     },
     "User not found": "Utente Non Trovato",
@@ -76,7 +80,7 @@
     "invalidField": "Campo non Valido",
     "required": "Campo Obbligatorio",
     "email": "Il campo {{email}} dovrebbe essere un'email",
-    "min": " La Password Deve Essere Lunga Almeno {{num}} Caratteri",   
+    "min": " La Password Deve Essere Lunga Almeno {{num}} Caratteri",
     "RefEqualTo": "{{path}} Deve Essere Uguale A {{reference}}",
     "equalTo": "I Campi Devono Essere Uguali"
   },
@@ -118,5 +122,11 @@
   "newUpdateAlert": {
     "title": "Nuovo aggiornamento!",
     "message": "È arrivato un nuovo aggiornamento"
+  },
+  "publicAppBar": {
+    "goToApp": "Accedi all'App"
+  },
+  "tos":{
+    "termsOfService": "Termini e Condizioni d'Uso"
   }
 }

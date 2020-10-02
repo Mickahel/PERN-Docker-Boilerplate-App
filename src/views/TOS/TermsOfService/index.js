@@ -6,7 +6,7 @@ import PublicAppBar from 'components/PublicAppBar'
 function TermsOfService(props) {
 
     return (
-        <PublicAppBar title ="termsOfService">
+        <PublicAppBar title ="tos.termsOfService">
             <div id="termsOfService">
 
                 <Typography variant="body1" gutterBottom>

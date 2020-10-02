@@ -1,6 +1,6 @@
 import React, { lazy, useEffect, useCallback, useContext, useState, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Theme from 'Theme'
+import Theme from 'theme'
 import Account from './Account'
 import { UserContext } from 'contexts/Providers/UserProvider'
 import Endpoints from 'Endpoints'

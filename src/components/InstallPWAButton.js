@@ -18,9 +18,7 @@ function InstallPWAButton(props) {
     return (
         <div id='install-app'>
             <MenuItem
-                size="small"
-                variant="outlined"
-                color="primary"
+                dense={true}
                 className='install-button'
                 onClick={async () => {
                     setShowButton(false)
