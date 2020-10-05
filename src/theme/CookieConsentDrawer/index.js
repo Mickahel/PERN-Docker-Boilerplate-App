@@ -9,7 +9,7 @@ import {getCookie, setCookie} from 'auxiliaries/cookies'
 function CookieConsentDrawer(props) {
     const [cookieConsentOpen, setCookieConsentOpen] = useState(!getCookie("acceptedCookies"))
     const createAcceptCookieConsent =  ()=>{
-        setCookie("acceptedCookies", true)
+        setCookie("acceptedCookies", true,356*60)
         setCookieConsentOpen(false)
       }
  

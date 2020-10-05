@@ -6,9 +6,18 @@
     "title": "Possiamo invarti delle notifiche?",
     "content": "La piattaforma inviarti delle notifiche"
   },
+  "close":"Chiudi",
   "cookieConsentDrawer": {
     "text": "Questa piattaforma usa i cookies per assicurare l'usabilità della stessa, se vuoi saperne di più, visita la nostra ",
     "ok": "Ok, Ho Capito"
+  },
+  "feedback":{
+    "sendAFeedback": "Invia un Feedback",
+    "send": "Invia",
+    "text": "Scrivi un feedback sulla piattaforma",
+    "type": "Tipo",
+    "includeScreenshot":"Includi uno Screenshot della pagina",
+    "thankYouForTheFeedback": "Grazie per il Feedback"
   },
   "theme": {
     "darkTheme": "Tema Scuro",
@@ -52,7 +61,7 @@
     "User is already registered": "L'utente è Già Registrato",
     "User is not activated": "L'utente non è Attivato",
     "signup": "Registrati",
-
+    "user doesn't exist": "L'utente Non Esiste",
     "wrongEmailOrPassword": "Email o passowrd errati",
     "login": "Accedi",
     "auth": "Autenticazione",
@@ -109,7 +118,6 @@
     "continue": "Continua",
     "firstname": "Nome",
     "lastname": "Cognome",
-    "close": "Chiudi",
     "cancel": "Cancella",
     "passwordMustMatch": "Le password devono coincidere",
     "passwordChanged": "La Password è stata cambiata",

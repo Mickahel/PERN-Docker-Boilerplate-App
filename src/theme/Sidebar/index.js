@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: props.sidebarOpenedEvent === "click" ? 'space-between' : "center",
         padding: theme.spacing(0, 1),
+        marginLeft:props.sidebarOpenedEvent === "click" ? 10 : 0,
         height: theme.mixins.toolbar.minHeight,
         //? necessary for content to be below app bar
         ...theme.mixins.toolbar,
@@ -107,7 +108,6 @@ function Sidebar(props) {
                 width={160}
                 src={process.env.PUBLIC_URL + '/img/logos/longLogo.svg' } />
                 {themeContext.sidebarOpen && <>
-
                     {(themeContext.sidebarOpenedEvent === "click" && !matches) && <IconButton onClick={handleDrawerCloseOnClick}>
                         <ChevronLeftIcon />
                     </IconButton>}

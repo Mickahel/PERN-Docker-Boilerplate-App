@@ -10,7 +10,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import config from 'configuration/config'
 import { Helmet } from "react-helmet";
-import { Trans, useTranslation} from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import ProfileButton from "theme/Header/ProfileButton";
 
 
@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
     },
     appBar: props => ({
         //zIndex: theme.zIndex.drawer + (props.sidebarOpen ? 0 : 1),
-        zIndex: theme.zIndex.drawer + 1,
-        padding: 0,
+        //zIndex: theme.zIndex.drawer + 1,
+        //padding: 0,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
             duration: (theme.transitions.duration.enteringScreen * 3.3),
@@ -83,16 +83,20 @@ function Header(props) {
     const classes = useStyles({ sidebarOpen: themeContext.sidebarOpen });
     if (!headerVisible) return null
     return <AppBar
-        position="fixed"
+            position="fixed"
         className={
-            classnames(classes.appBarBase, !matches && classes.appBar, !matches && { [classes.appBarShift]: themeContext.sidebarOpen })}
+            classnames(
+                classes.appBarBase,
+                !matches && classes.appBar,
+                !matches && { [classes.appBarShift]: themeContext.sidebarOpen })}
     >
         {title
             ? <Helmet title={`${config.name.short} - ${t(title)}`} />
             : <Helmet title={config.name.long} />}
 
         <Toolbar
-            {...!matches && { className: classnames(classes.toolbar, { [classes.toolbarShift]: themeContext.sidebarOpen }) }}>
+            {...!matches && { className: classnames(classes.toolbar, { [classes.toolbarShift]: themeContext.sidebarOpen }) }}
+            >
             {themeContext.showSidebarComponents(matches) && <IconButton
                 color="inherit"
                 onClick={handleDrawerOpenOnClick}
@@ -119,7 +123,7 @@ function Header(props) {
                     </Typography>
                 </span>
                 <ProfileButton />
-            </span>
+                    </span>
         </Toolbar>
     </AppBar>
 }

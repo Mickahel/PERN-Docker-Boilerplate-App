@@ -245,6 +245,19 @@ function useFetcher(props) {
     }
   }, [])
 
+  const sendFile =useCallback( async (options)=>{
+    const formData = new FormData()
+    if(options.file) formData.append(options.filename, options.file)
+    if(options?.data) Object.keys(options.data).forEach(key => formData.append(key, options.data[key]));
+    options  = {
+      ...options,
+      data: formData,
+      addHeadersForFiles:true
+      
+    }
+    return fetch(options)
+  
+  }, [])
 
 
   return {
@@ -252,7 +265,8 @@ function useFetcher(props) {
     data,
     error,
     fetch,
-    fetchAll
+    fetchAll,
+    sendFile
   };
 }
 

@@ -6,6 +6,7 @@
     "title": "Can we Send You Notifications?",
     "content": "The platform wants to send you notifications"
 },
+"close": "Close",
 "cookieConsentDrawer":{
   "text": "This platform uses Cookies to ensure the usability of it, if you want to know more, visit our ",
   "ok": "Ok, I Understood"
@@ -31,9 +32,18 @@
     "nextPage": "Next Page",
     "previousPage": "Previous Page"
   },
+  "feedback": {
+    "sendAFeedback": "Send A Feedback",
+    "send": "Send",
+    "text": "Write a feedback about the application",
+    "type": "Type",
+    "includeScreenshot":"Include screenshot of the page",
+    "thankYouForTheFeedback": "Thank you For the Feedback"
+  },
   "auth": {
     "alreadyHaveAnAccount":"Do You Already Have an Account?",
     "error": "An Error Has Occurred, Try Again",
+    "user doesn't exist": "User Doesn't Exist",
     "restorePassword": {
       "title": "Restore Password",
       "resetPasswordEmailSent": "Restore Password Email Sent"

@@ -15,6 +15,9 @@ const Endpoints = {
     },
     debug:{
         status:             "/v1/debug/status/:status"              // ? GET
+    },
+    feedback:{
+        sendNew:            "/v1/app/feedback/sendNew"              // ? POST
     }
 }
 

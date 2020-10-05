@@ -18,7 +18,8 @@ import { ThemeContext } from 'contexts/Providers/ThemeProvider'
 import Brightness3OutlinedIcon from '@material-ui/icons/Brightness3Outlined';
 import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
 import { UserContext } from 'contexts/Providers/UserProvider'
-import InstallPWAButton from 'components/InstallPWAButton'
+import InstallPWAButton from 'theme/Header/InstallPWAButton'
+import Feedback from 'theme/Header/Feedback'
 import useFetch from 'hooks/useFetch'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import config from 'configuration/config'
@@ -103,6 +104,7 @@ function ProfileButton(props) {
             </Typography>
           </span>
         </MenuItem>
+        <Feedback closeMenu={()=>setAnchorEl(false)}/>
         <InstallPWAButton />
 
         <Divider variant="middle" />
