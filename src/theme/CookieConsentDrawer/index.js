@@ -28,7 +28,7 @@ function CookieConsentDrawer(props) {
           {/*<div className="ml-3 mr-3">
                     <Button size="small"><Trans>cookieConsentDrawer.reject</Trans></Button>
                 </div>*/}
-          <div className="ml-6 mr-6">
+          <div className="ml-2 mr-2">
             <Button
               size="small"
               variant="contained"
