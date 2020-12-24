@@ -30,8 +30,8 @@ function ProfileBox(props) {
   const [disabledFields, setDisabledFields] = useState(true);
   const formikProfile = useFormik({
     initialValues: {
-      firstname: userContext.user.firstname,
-      lastname: userContext.user.lastname,
+      firstname: userContext.user?.firstname,
+      lastname: userContext.user?.lastname,
       email: userContext.user.email,
     },
     onSubmit: async (values) => {
@@ -46,7 +46,7 @@ function ProfileBox(props) {
           method: "PUT",
         });
         userContext.setUser(newInformations);
-      } catch (e) {}
+      } catch (e) { }
     },
   });
 

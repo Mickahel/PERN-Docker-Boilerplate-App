@@ -9,7 +9,7 @@ import Switch from "@material-ui/core/Switch";
 import { Trans } from "react-i18next";
 import useFetch from "hooks/useFetch";
 import Endpoints from "Endpoints";
-
+import _ from "lodash";
 const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(12),
@@ -37,7 +37,7 @@ function TopSide(props) {
         },
         method: "PUT",
       });
-    } catch (e) {}
+    } catch (e) { }
   };
   return (
     <div className="topSide flex justify-between">
@@ -52,12 +52,22 @@ function TopSide(props) {
           ></Avatar>
         </div>
         <div className="flex flex-col justify-center ml-3">
-          <Typography variant="h6" gutterBottom>
-            {`${userContext.user.firstname} ${userContext.user.lastname}`}
-          </Typography>
-          <Typography color="primary" variant="body1" gutterBottom>
-            {userContext.user.email}
-          </Typography>
+          {userContext?.user?.firstname || userContext?.user?.lastname
+            ?
+            <>
+              <Typography variant="h6" gutterBottom>
+                {userContext?.user?.firstname} {userContext?.user?.lastname}
+              </Typography>
+              <Typography color="primary" variant="body1" gutterBottom>
+                {userContext.user.email}
+              </Typography>
+            </>
+            :
+            <Typography variant="h6" gutterBottom>
+              {userContext.user.email}
+            </Typography>
+          }
+
         </div>
       </div>
       <div className="mt-5">
