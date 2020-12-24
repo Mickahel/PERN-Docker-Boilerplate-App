@@ -1,8 +1,8 @@
 $mobileWidth: 800px;
 $primaryColor: #f2fe;
 $secondaryColor: white;
-$itemMargin:10px;
-$standardMargin:20px;
+$itemMargin: 10px;
+$standardMargin: 20px;
 $standardBorderRadius: 10px;
 $errorColor: red;
 $infoColor: #00b1ec;
@@ -10,16 +10,14 @@ $confirmColor: rgb(86, 211, 253);
 $successColor: rgb(76, 175, 80);
 $warningColor: rgb(231, 197, 1);
 
-
 @mixin buttonSize($side) {
-    max-width: $side;
-    min-width: $side;
-    width: $side;
-    max-height: $side;
-    min-height: $side;
-    height: $side;
+  max-width: $side;
+  min-width: $side;
+  width: $side;
+  max-height: $side;
+  min-height: $side;
+  height: $side;
 }
 
-@media only screen and (max-width: $mobileWidth)  {
-
+@media only screen and (max-width: $mobileWidth) {
 }

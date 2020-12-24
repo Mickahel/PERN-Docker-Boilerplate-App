@@ -1,48 +1,49 @@
 @import "../configuration/variables.scss";
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
+
 #root {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
 }
 
 body,
 html {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
 }
 
 .MuiTextField-root {
-  margin: 10px !important;
+	margin: 10px !important;
 }
 
 .contentHeight {
-  margin-left: $standardMargin;
-  margin-right: $standardMargin;
-  margin-top: $standardMargin;
-  margin-bottom: $standardMargin;
-  > div:first-of-type {
-    height: 100%;
-    width: 100%;
-  }
+	margin-left: $standardMargin;
+	margin-right: $standardMargin;
+	margin-top: $standardMargin;
+	margin-bottom: $standardMargin;
+	> div:first-of-type {
+		height: 100%;
+		width: 100%;
+	}
 }
 .MuiCard-root {
-  border-radius: $standardBorderRadius !important;
+	border-radius: $standardBorderRadius !important;
 }
 button {
-  outline: 0px !important; // ? disables Tailwind outline
+	outline: 0px !important; // ? disables Tailwind outline
 }
 
 @media only screen and (max-width: $mobileWidth) {
-  .contentHeight {
-    //margin: 0 $standardMargin;
-    /*>div{
+	.contentHeight {
+		//margin: 0 $standardMargin;
+		/*>div{
             display: flex;
             flex-direction: column;
             align-items: center;
         }*/
-  }
+	}
 }

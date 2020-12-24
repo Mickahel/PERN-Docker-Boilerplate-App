@@ -23,16 +23,16 @@ import Endpoints from "Endpoints";
 function ChangePasswordBox(props) {
   const themeContext = useContext(ThemeContext);
   const userContext = useContext(UserContext);
-  const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(false);
+  const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(
+    false
+  );
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [disableChangeButton, setDisableChangeButton] = useState(true);
-  const { fetch, error} = useFetch();
+  const { fetch, error } = useFetch();
 
   const validationSchema = Yup.object({
     currentPassword: Yup.string().required(),
-    password: Yup.string()
-      .required()
-      .min(8),
+    password: Yup.string().required().min(8),
   });
 
   const changePasswordFormik = useFormik({
@@ -56,9 +56,10 @@ function ChangePasswordBox(props) {
           message: <Trans>profile.passwordChanged</Trans>,
         });
       } catch (e) {
-        if(e?.status < 500) themeContext.showErrorSnackbar({
-          message: <Trans>profile.passwordIsWrong</Trans>,
-        });
+        if (e?.status < 500)
+          themeContext.showErrorSnackbar({
+            message: <Trans>profile.passwordIsWrong</Trans>,
+          });
       }
     },
     validationSchema,
@@ -178,7 +179,7 @@ function ChangePasswordBox(props) {
         </form>
       </Dialog>
 
-      <Card id="changePassword" >
+      <Card id="changePassword">
         <CardHeader title={<Trans>profile.changePassword</Trans>} />
         <Divider />
         <CardContent className="flex flex-col">

@@ -1,8 +1,7 @@
-@import '../../configuration/variables.scss';
+@import "../../configuration/variables.scss";
 
 @media only screen and (max-width: $mobileWidth) {
-    #cookie-consent-buttons{
-        flex-direction: column;
-    }
+  #cookie-consent-buttons {
+    flex-direction: column;
+  }
 }
-  

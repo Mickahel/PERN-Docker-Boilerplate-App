@@ -1,9 +1,9 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody"
-import _ from 'lodash'  
+import TableBody from "@material-ui/core/TableBody";
+import _ from "lodash";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
@@ -11,31 +11,36 @@ import TableRow from "@material-ui/core/TableRow";
 import i18n from "i18n";
 import { Trans } from "react-i18next";
 import PropTypes from "prop-types";
-import classnames from 'classnames'
+import classnames from "classnames";
 import EnhancedTableHead from "./EnhancedTableHead";
-import Row from './Row'
+import Row from "./Row";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import "./style.scss";
 
 function createRows(rowsToParse, transformRowValues) {
-  if(!transformRowValues) return rowsToParse
-  let parsedRows = _.cloneDeep(rowsToParse)
-  parsedRows.map((row)=>{
-    Object.keys(transformRowValues).map((keyOfObjectToParse)=>{
-      console.log(row[keyOfObjectToParse])
-      row[keyOfObjectToParse].value = transformRowValues[keyOfObjectToParse](row[keyOfObjectToParse].value)
-    })
-  })
-  return parsedRows
+  if (!transformRowValues) return rowsToParse;
+  let parsedRows = _.cloneDeep(rowsToParse);
+  parsedRows.map((row) => {
+    Object.keys(transformRowValues).map((keyOfObjectToParse) => {
+      console.log(row[keyOfObjectToParse]);
+      row[keyOfObjectToParse].value = transformRowValues[keyOfObjectToParse](
+        row[keyOfObjectToParse].value
+      );
+    });
+  });
+  return parsedRows;
 }
 
 function descendingComparator(a, b, orderBy) {
-
   //console.log(a[orderBy]?.value,b[orderBy]?.value)
   //console.log(typeof a[orderBy]?.value, typeof  b[orderBy]?.value)
   //console.log(a[orderBy]?.value,b[orderBy]?.value)
-  let aValueComparator = isNaN(a[orderBy]?.value) ? a[orderBy]?.value : parseFloat(a[orderBy]?.value)
-  let bValueComparator = isNaN(b[orderBy]?.value) ? b[orderBy]?.value : parseFloat(b[orderBy]?.value)
+  let aValueComparator = isNaN(a[orderBy]?.value)
+    ? a[orderBy]?.value
+    : parseFloat(a[orderBy]?.value);
+  let bValueComparator = isNaN(b[orderBy]?.value)
+    ? b[orderBy]?.value
+    : parseFloat(b[orderBy]?.value);
   if (bValueComparator < aValueComparator) {
     return -1;
   }
@@ -61,8 +66,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-
-
 function createHeadCells(headCells) {
   const enrichedHeadCells = headCells.map((element) => {
     return {
@@ -73,21 +76,16 @@ function createHeadCells(headCells) {
   return [...enrichedHeadCells];
 }
 
-
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-
   },
   table: {
     //minWidth: 750,
   },
 
-
-  container:props=>({
-    maxHeight: props.maxHeight
+  container: (props) => ({
+    maxHeight: props.maxHeight,
   }),
 
   visuallyHidden: {
@@ -105,25 +103,22 @@ const useStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-        //color: theme.palette.primary.main,
-        backgroundColor:
-          lighten(theme.palette.primary.light, 0.85) + "!important",
-      }
+          //color: theme.palette.primary.main,
+          backgroundColor:
+            lighten(theme.palette.primary.light, 0.85) + "!important",
+        }
       : {
-        //color: theme.palette.text.primary,
-        backgroundColor:
-          lighten(theme.palette.primary.dark, 0.2) + "!important",
-      },
+          //color: theme.palette.text.primary,
+          backgroundColor:
+            lighten(theme.palette.primary.dark, 0.2) + "!important",
+        },
 }));
 
-
 function EnhancedTable(props) {
-
-
-  let { 
-    readOnly, 
-    showFilters, 
-    title, 
+  let {
+    readOnly,
+    showFilters,
+    title,
     collapsible,
     collapsibleHeadCells,
     collapsibleTitle,
@@ -131,42 +126,37 @@ function EnhancedTable(props) {
     showHeadCells,
     showSearchbar,
     maxHeight,
-    singlePage
+    singlePage,
   } = props;
 
-  const classes = useStyles({maxHeight});
+  const classes = useStyles({ maxHeight });
   const [order, setOrder] = useState("asc");
   // const [orderBy, setOrderBy] = React.useState('calories');
   const [orderBy, setOrderBy] = useState("");
   const [selected, setSelected] = useState([]);
   const [rows, setRows] = useState([]);
   const [page, setPage] = useState(0);
-  const [headCells, setHeadCells] =  useState(
-    createHeadCells(props.headCells)
-  );
+  const [headCells, setHeadCells] = useState(createHeadCells(props.headCells));
   const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage);
   const history = useHistory();
 
-
-
   const handleCheckboxFilterClick = (event, elementId) => {
-    let isAHeadCellVisible= false
-    let newHeadCells = []
+    let isAHeadCellVisible = false;
+    let newHeadCells = [];
     headCells.map((element) => {
-      let a  = {
+      let a = {
         ...element,
-        show: element.id == elementId ? !element.show : element.show 
-      }
-      newHeadCells.push(a)
-      if(a.show ==true) isAHeadCellVisible=true
+        show: element.id == elementId ? !element.show : element.show,
+      };
+      newHeadCells.push(a);
+      if (a.show == true) isAHeadCellVisible = true;
       /*let a = element
       if (element.id == elementId) a.show = !Boolean(element.show);
       if(element.show==true) isAHeadCellVisible=true
       newHeadCells.push(a);*/
-    
     });
     //console.log(headCells,isAHeadCellVisible,newHeadCells)
-    if(isAHeadCellVisible==true) setHeadCells(newHeadCells);
+    if (isAHeadCellVisible == true) setHeadCells(newHeadCells);
   };
 
   const handleSearch = (e) => {
@@ -178,7 +168,7 @@ function EnhancedTable(props) {
         if (key != "id" && key != "collapsible") {
           if (
             !(typeof row[key].value === "boolean") &&
-            (row[key].value +(row[key]?.symbol ? row[key].symbol : ""))
+            (row[key].value + (row[key]?.symbol ? row[key].symbol : ""))
               .toString()
               .toLowerCase()
               .includes(e.target.value.toLowerCase())
@@ -193,7 +183,7 @@ function EnhancedTable(props) {
     setRows(searchedRows);
   };
 
-  let plainRows = createRows(props.rows,props.transformRowValues);
+  let plainRows = createRows(props.rows, props.transformRowValues);
 
   useEffect(() => {
     setRows(createRows(props.rows, props.transformRowValues));
@@ -206,8 +196,6 @@ function EnhancedTable(props) {
   const handleEditClick = () => {
     console.log(selected);
   };
-
-
 
   const createRowsPerPageOptions = (rows) => {
     let rowsPerPageOptions = [];
@@ -235,7 +223,7 @@ function EnhancedTable(props) {
   };
 
   const handleClick = (event, name) => {
-    event.preventDefault()
+    event.preventDefault();
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -268,11 +256,14 @@ function EnhancedTable(props) {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-    const rowsToShow = ()=>{
-      let stableSortedRows =  stableSort(rows, getComparator(order, orderBy))
-      if(singlePage) return stableSortedRows
-      return stableSortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-    }
+  const rowsToShow = () => {
+    let stableSortedRows = stableSort(rows, getComparator(order, orderBy));
+    if (singlePage) return stableSortedRows;
+    return stableSortedRows.slice(
+      page * rowsPerPage,
+      page * rowsPerPage + rowsPerPage
+    );
+  };
   return (
     <div className={classnames(classes.root, "enhancedTable")}>
       <EnhancedTableToolbar
@@ -287,80 +278,84 @@ function EnhancedTable(props) {
         showSearchbar={showSearchbar}
         readOnly={readOnly}
       />
-      <TableContainer
-        className={props.maxHeight && classes.container}
-        >
-        <Table 
-          style={{ tableLayout: "auto" }} 
+      <TableContainer className={props.maxHeight && classes.container}>
+        <Table
+          style={{ tableLayout: "auto" }}
           className={classes.table}
-          stickyHeader= {stickyHeader}
-          >
-          {showHeadCells && <EnhancedTableHead
-            classes={classes}
-            numSelected={selected.length}
-            order={order}
-            orderBy={orderBy}
-            onSelectAllClick={handleSelectAllClick}
-            onRequestSort={handleRequestSort}
-            rowCount={rows.length}
-            headCells={headCells}
-            readOnly={readOnly}
-            collapsible={collapsible}
-          />}
+          stickyHeader={stickyHeader}
+        >
+          {showHeadCells && (
+            <EnhancedTableHead
+              classes={classes}
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={handleSelectAllClick}
+              onRequestSort={handleRequestSort}
+              rowCount={rows.length}
+              headCells={headCells}
+              readOnly={readOnly}
+              collapsible={collapsible}
+            />
+          )}
           <TableBody>
-            { rowsToShow()
-              .map((row, index) => {
-                const isItemSelected = isSelected(row.id);
-                const labelId = `enhanced-table-checkbox-${index}`;
-                return (
-                  <Row 
-                    labelId={labelId} 
-                    classes={classes} 
-                    readOnly={readOnly} 
-                    row={row} 
-                    index={index} 
-                    handleClick={handleClick} 
-                    headCells={headCells} 
-                    isItemSelected={isItemSelected} 
-                    collapsible={collapsible}
-                    key= {index}
-                    activeCells={headCells.length}
-                    collapsibleHeadCells={collapsibleHeadCells}
-                    collapsibleTitle={collapsibleTitle}
-                    />
-                );
-              })}
+            {rowsToShow().map((row, index) => {
+              const isItemSelected = isSelected(row.id);
+              const labelId = `enhanced-table-checkbox-${index}`;
+              return (
+                <Row
+                  labelId={labelId}
+                  classes={classes}
+                  readOnly={readOnly}
+                  row={row}
+                  index={index}
+                  handleClick={handleClick}
+                  headCells={headCells}
+                  isItemSelected={isItemSelected}
+                  collapsible={collapsible}
+                  key={index}
+                  activeCells={headCells.length}
+                  collapsibleHeadCells={collapsibleHeadCells}
+                  collapsibleTitle={collapsibleTitle}
+                />
+              );
+            })}
             {emptyRows > 0 && (
-              <TableRow style={{ height: 55.5 * emptyRows}}>
+              <TableRow style={{ height: 55.5 * emptyRows }}>
                 {collapsible && <TableCell />}
                 {headCells.map((element, index) => {
-                  if(element.show==true) return  <TableCell key = {index}/>})}
+                  if (element.show == true) return <TableCell key={index} />;
+                })}
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      {!singlePage &&       <TablePagination
-        backIconButtonText={i18n.t("enhancedTable.previousPage")}
-        nextIconButtonText={i18n.t("enhancedTable.nextPage")}
-        labelRowsPerPage={i18n.t("enhancedTable.rows")}
-        rowsPerPageOptions={createRowsPerPageOptions(rows)}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        backIconButtonProps={{
-          color:"primary"
-        }}
-        nextIconButtonProps={{
-          color:"primary"
-        }}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-        labelDisplayedRows={({from, to, count})=>{
-          return `${from}-${to} ${i18n.t("enhancedTable.of")} ${count !== -1 ? count : `${i18n.t("enhancedTable.moreThan")} ${to}`}`
-        }}
-      />}
+      {!singlePage && (
+        <TablePagination
+          backIconButtonText={i18n.t("enhancedTable.previousPage")}
+          nextIconButtonText={i18n.t("enhancedTable.nextPage")}
+          labelRowsPerPage={i18n.t("enhancedTable.rows")}
+          rowsPerPageOptions={createRowsPerPageOptions(rows)}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          backIconButtonProps={{
+            color: "primary",
+          }}
+          nextIconButtonProps={{
+            color: "primary",
+          }}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+          labelDisplayedRows={({ from, to, count }) => {
+            return `${from}-${to} ${i18n.t("enhancedTable.of")} ${
+              count !== -1 ? count : `${i18n.t("enhancedTable.moreThan")} ${to}`
+            }`;
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -374,7 +369,7 @@ EnhancedTable.propTypes = {
   showSearchbar: PropTypes.bool,
   rowsPerPage: PropTypes.number,
   singlePage: PropTypes.bool,
-  maxHeight: PropTypes.number
+  maxHeight: PropTypes.number,
 };
 EnhancedTable.defaultProps = {
   title: "",
@@ -383,7 +378,7 @@ EnhancedTable.defaultProps = {
   rowsPerPage: 5,
   showHeadCells: true,
   showSearchbar: true,
-  singlePage: false
+  singlePage: false,
 };
 
 export default EnhancedTable;

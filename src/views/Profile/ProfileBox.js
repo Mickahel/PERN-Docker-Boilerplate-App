@@ -13,8 +13,7 @@ import useFetch from "hooks/useFetch";
 import Endpoints from "Endpoints";
 import { useFormik } from "formik";
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   option: {
     fontSize: 15,
     "& > span": {
@@ -45,15 +44,11 @@ function ProfileBox(props) {
             email: values.email,
           },
           method: "PUT",
-        })
-        userContext.setUser(newInformations)
-      } catch (e) {
-
-      }
+        });
+        userContext.setUser(newInformations);
+      } catch (e) {}
     },
   });
-
-
 
   return (
     <Card id="personalInformation" className="flex-2">
@@ -61,7 +56,6 @@ function ProfileBox(props) {
         <CardHeader title={<Trans>profile.personalInformation</Trans>} />
 
         <CardContent>
-
           <div id="personalInformationData" className="flex flex-col">
             <TextField
               disabled={disabledFields}

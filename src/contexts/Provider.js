@@ -4,13 +4,10 @@ import React from "react";
 import ThemeProvider from "./Providers/ThemeProvider";
 import UserProvider from "./Providers/UserProvider";
 
-
 function Provider(props) {
   return (
     <ThemeProvider>
-        <UserProvider>
-          {props.children}
-        </UserProvider>
+      <UserProvider>{props.children}</UserProvider>
     </ThemeProvider>
   );
 }

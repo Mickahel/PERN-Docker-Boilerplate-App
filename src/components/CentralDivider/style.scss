@@ -1,15 +1,15 @@
-@import '../../configuration/variables.scss';
+@import "../../configuration/variables.scss";
 
-.centralDivider{
-    display: flex;
-    align-items: center;
-  }
-  
-  .borderDivider{
-    border-bottom: 2px solid $primaryColor;
-    width: 100%;
-  }
-  
-  .contentDivider {
-    padding: 0 10px 0 10px;
-  }
+.centralDivider {
+  display: flex;
+  align-items: center;
+}
+
+.borderDivider {
+  border-bottom: 2px solid $primaryColor;
+  width: 100%;
+}
+
+.contentDivider {
+  padding: 0 10px 0 10px;
+}

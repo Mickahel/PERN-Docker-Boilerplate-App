@@ -1,24 +1,22 @@
-@import '../../../configuration/variables.scss';
+@import "../../../configuration/variables.scss";
 
-
-
-
-#avatarButton{
-    text-transform: none !important;
-    font-weight: normal !important;
-    border-radius: 40px;
+#avatarButton {
+  text-transform: none !important;
+  font-weight: normal !important;
+  border-radius: 40px;
 }
 
-.dropIcon{
-    margin-left: 0px !important;
+.dropIcon {
+  margin-left: 0px !important;
 }
 
-.menuItem{
-    display: flex;
-    flex-direction: row;
-    justify-items: center;
+.menuItem {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
 }
 
-.menuProfileIcon{ //for icons in the menu
-    margin-right: 5px;
+.menuProfileIcon {
+  //for icons in the menu
+  margin-right: 5px;
 }

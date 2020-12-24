@@ -1,14 +1,12 @@
-import React from 'react';
-import { ErrorBoundary as EB} from "react-error-boundary";
-import Button from '@material-ui/core/Button';
+import React from "react";
+import { ErrorBoundary as EB } from "react-error-boundary";
+import Button from "@material-ui/core/Button";
 
 // TODO Refine
 
-
-function ErrorBoundary(props){
-
-
-      return <EB
+function ErrorBoundary(props) {
+  return (
+    <EB
       fallbackRender={({ error, resetErrorBoundary }) => (
         <div>
           There was an error!{" "}
@@ -17,8 +15,9 @@ function ErrorBoundary(props){
         </div>
       )}
     >
-    {props.children}
+      {props.children}
     </EB>
+  );
 }
 
-export default ErrorBoundary
+export default ErrorBoundary;

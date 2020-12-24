@@ -1,4 +1,4 @@
-import React, { useEffect, useContext,useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -16,14 +16,14 @@ import Table from "@material-ui/core/Table";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
-import {ThemeContext} from 'contexts/Providers/ThemeProvider'
-const useRowStyles = makeStyles(theme=>({
-  tableCell:{
+import { ThemeContext } from "contexts/Providers/ThemeProvider";
+const useRowStyles = makeStyles((theme) => ({
+  tableCell: {
     borderTop: "unset",
     borderBottom: "unset",
   },
-  rowColor:{
-    backgroundColor: theme.palette.type == "light" ? "#FBFBFB" : "#666666"
+  rowColor: {
+    backgroundColor: theme.palette.type == "light" ? "#FBFBFB" : "#666666",
   },
   root: {
     "& > *": {
@@ -40,8 +40,8 @@ const createTableCell = (element) => {
       element.value === true ? (
         <CheckCircleOutlinedIcon className="trueIcon" />
       ) : (
-          <CancelOutlinedIcon className="falseIcon" />
-        );
+        <CancelOutlinedIcon className="falseIcon" />
+      );
   } else value = element.value;
 
   let renderedElement = (
@@ -69,7 +69,6 @@ const createTableCell = (element) => {
 };
 
 function Row(props) {
-
   const {
     readOnly,
     classes,
@@ -83,15 +82,12 @@ function Row(props) {
     collapsible,
     collapsibleHeadCells,
     collapsibleTitle,
-    showVerticalBorders
+    showVerticalBorders,
   } = props;
 
-  const themeContext = useContext(ThemeContext)
+  const themeContext = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
-  const rowClasses = useRowStyles({showVerticalBorders});
-
-
-
+  const rowClasses = useRowStyles({ showVerticalBorders });
 
   return (
     <>
@@ -99,7 +95,10 @@ function Row(props) {
         classes={{
           selected: classes.highlight,
         }}
-        className={classnames(collapsible && rowClasses.root, index%2==0 && rowClasses.rowColor)}
+        className={classnames(
+          collapsible && rowClasses.root,
+          index % 2 == 0 && rowClasses.rowColor
+        )}
         hover
         role="checkbox"
         aria-checked={isItemSelected}
@@ -137,12 +136,13 @@ function Row(props) {
               <TableCell
                 key={row[element.id].value + index + element.id}
                 align={index == 0 ? "inherit" : "center"}
-                className={classnames((row[element.id].link && index != 0) && "iconPadding")}
+                className={classnames(
+                  row[element.id].link && index != 0 && "iconPadding"
+                )}
               >
                 {createTableCell(row[element.id])}
               </TableCell>
             )
-            
           );
         })}
       </TableRow>
@@ -162,32 +162,55 @@ function Row(props) {
                     <TableHead>
                       <TableRow>
                         {collapsibleHeadCells.map((element, index) => {
-                          return <TableCell
-                            key={index}
-                            align={index == 0 ? "left" : "center"}>
-                            <span className="font-semibold">
-                              {element.label}
-                            </span>
-                          </TableCell>
+                          return (
+                            <TableCell
+                              key={index}
+                              align={index == 0 ? "left" : "center"}
+                            >
+                              <span className="font-semibold">
+                                {element.label}
+                              </span>
+                            </TableCell>
+                          );
                         })}
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {collapsible && (
-                        row.collapsible.map((collapsibleRow, collapsibleIndex) => {
-                          return (
-                            <TableRow key={collapsibleIndex}>
-                              {collapsibleHeadCells.map((collapsibleHeadCell, collapsibleHeadcellIndex) => {
-                                return (<TableCell
-                                  key={collapsibleRow[collapsibleHeadCell.id].value + collapsibleIndex + collapsibleHeadcellIndex}
-                                  align={collapsibleHeadcellIndex == 0 ? "left" : "center"}
-                                >
-                                  {createTableCell(collapsibleRow[collapsibleHeadCell.id])}
-                                </TableCell>)
-                              })}
-                            </TableRow>)
-                        })
-                      )}
+                      {collapsible &&
+                        row.collapsible.map(
+                          (collapsibleRow, collapsibleIndex) => {
+                            return (
+                              <TableRow key={collapsibleIndex}>
+                                {collapsibleHeadCells.map(
+                                  (
+                                    collapsibleHeadCell,
+                                    collapsibleHeadcellIndex
+                                  ) => {
+                                    return (
+                                      <TableCell
+                                        key={
+                                          collapsibleRow[collapsibleHeadCell.id]
+                                            .value +
+                                          collapsibleIndex +
+                                          collapsibleHeadcellIndex
+                                        }
+                                        align={
+                                          collapsibleHeadcellIndex == 0
+                                            ? "left"
+                                            : "center"
+                                        }
+                                      >
+                                        {createTableCell(
+                                          collapsibleRow[collapsibleHeadCell.id]
+                                        )}
+                                      </TableCell>
+                                    );
+                                  }
+                                )}
+                              </TableRow>
+                            );
+                          }
+                        )}
                     </TableBody>
                   </Table>
                 </span>

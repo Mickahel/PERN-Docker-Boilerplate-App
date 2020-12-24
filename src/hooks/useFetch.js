@@ -4,8 +4,8 @@ import axios from "axios";
 import qs from "qs";
 import UrlPattern from "url-pattern";
 import { useHistory } from "react-router-dom";
-import { ThemeContext } from 'contexts/Providers/ThemeProvider'
-import Endpoints from 'Endpoints'
+import { ThemeContext } from "contexts/Providers/ThemeProvider";
+import Endpoints from "Endpoints";
 // ? https://www.npmjs.com/package/qs
 // ? https://www.npmjs.com/package/url-pattern
 
@@ -14,14 +14,13 @@ function useFetcher(props) {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(_.get(props, "initialLoading", true));
   const [data, setData] = useState();
-  const themeContext = useContext(ThemeContext)
-  const counter = React.useRef({})
+  const themeContext = useContext(ThemeContext);
+  const counter = React.useRef({});
 
   useEffect(() => {
     if (Array.isArray(props)) fetchAll(props);
     else if (typeof props == "object") fetch(props);
   }, []);
-
 
   // ? if there is a UrlParams
   const createUrl = useCallback((axiosOptions) => {
@@ -40,35 +39,39 @@ function useFetcher(props) {
       );
       queryString = axiosOptions.query
         ? qs.stringify(axiosOptions.query, {
-          addQueryPrefix: true,
-          arrayFormat: "repeat",
-        })
+            addQueryPrefix: true,
+            arrayFormat: "repeat",
+          })
         : "";
     }
 
     return uri + queryString;
   }, []);
 
-
   const createAxiosGateway = useCallback((options) => {
     const addHeaders = _.get(options, "addHeaders", true);
     const redirectToPage500 = _.get(options, "redirectToPage500", false);
     const showErrorSnackBar = _.get(options, "showErrorSnackBar", true);
-    const redirectToLogin = _.get(options, "redirectToLogin", true)
+    const redirectToLogin = _.get(options, "redirectToLogin", true);
     const addBaseUrl = _.get(options, "addBaseUrl", true);
     const addHeadersForFiles = _.get(options, "addHeadersForFiles", false);
-    const CORSHeaders = addHeaders == true ? {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Set-Cookie",
-      "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Credentials": "true",
-    } : {}
+    const CORSHeaders =
+      addHeaders == true
+        ? {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+              "X-Requested-With, Content-Type, Accept, Set-Cookie",
+            "Access-Control-Allow-Methods":
+              "GET, PUT, POST, DELETE, PATCH, OPTIONS",
+            "Access-Control-Allow-Credentials": "true",
+          }
+        : {};
 
     const headers = {
       accept: "application/json",
       "Content-Type": "application/json", //"application/x-www-form-urlencoded" "multipart/form-data or" "text/plain" "application/json"
       ...CORSHeaders,
-      ...(addHeadersForFiles &&  {"Content-Type": "multipart/form-data"})
+      ...(addHeadersForFiles && { "Content-Type": "multipart/form-data" }),
     };
 
     // ? Create custom axios instance
@@ -77,7 +80,7 @@ function useFetcher(props) {
       timeout: 30000,
       json: true,
       headers,
-      withCredentials: true
+      withCredentials: true,
     });
     // ? attach global headers
     if (addHeaders == false) {
@@ -104,47 +107,76 @@ function useFetcher(props) {
         return response;
       },
       (err) => {
-
-        if ((err?.response?.status === 401 || err?.response?.status === 403 || err?.response?.status === 404)) {
+        if (
+          err?.response?.status === 401 ||
+          err?.response?.status === 403 ||
+          err?.response?.status === 404
+        ) {
           //console.log("Unauthorized", err.response)
-          if (err.response.data.message == "User is not authorized" || err.response.data.message == "Token expired") {
+          if (
+            err.response.data.message == "User is not authorized" ||
+            err.response.data.message == "Token expired"
+          ) {
             const fetchToken = async () => {
               try {
                 await fetch({
                   method: "POST",
                   url: Endpoints.auth.token,
                   setData: false,
-                })
-                let apiFetched = await fetch(
-                  {
-                    ...err.config,
-                    sendRaw: true
-                  })
-                return apiFetched
+                });
+                let apiFetched = await fetch({
+                  ...err.config,
+                  sendRaw: true,
+                });
+                return apiFetched;
               } catch (e) {
-                if (redirectToLogin) history.push("/auth?returnUrl=" + history.location.pathname)
-                throw err
+                if (redirectToLogin)
+                  history.push("/auth?returnUrl=" + history.location.pathname);
+                throw err;
               }
-            }
-            return fetchToken()
-          }
-          else if (err.response.data.message == "User doesn\'t have right permission") { }
-          else if (err.response.data.message == "RefreshToken Not Found") {
-            if (history.location.pathname != "/" && !history.location.pathname.includes("/auth")) themeContext.showWarningSnackbar({ message: "apiErrors.loginAgain" })
-            throw err
+            };
+            return fetchToken();
+          } else if (
+            err.response.data.message == "User doesn't have right permission"
+          ) {
+          } else if (err.response.data.message == "RefreshToken Not Found") {
+            if (
+              history.location.pathname != "/" &&
+              !history.location.pathname.includes("/auth")
+            )
+              themeContext.showWarningSnackbar({
+                message: "apiErrors.loginAgain",
+              });
+            throw err;
           } else {
-            throw err
+            throw err;
           }
-        }
-        else if (counter.current[err.config.url + JSON.stringify(err.config.data)] >= 3) {
-          if ((err.response?.status == 500 || err.message.toString() == "Network Error") && redirectToPage500 === true) history.push("/error/500?returnUrl=" + history.location.pathname)
-          if ((err.response?.status == 500 || err.message.toString() == "Network Error") && redirectToPage500 === false && showErrorSnackBar === true) themeContext.showErrorSnackbar({ message: "somethingWentWrong" })
-          if (err.message.toString() == "Network Error" && redirectToPage500 == false) themeContext.showErrorSnackbar({ message: "apiErrors.networkError" })
-          throw err
-        }
-        else {
-
-          throw err
+        } else if (
+          counter.current[err.config.url + JSON.stringify(err.config.data)] >= 3
+        ) {
+          if (
+            (err.response?.status == 500 ||
+              err.message.toString() == "Network Error") &&
+            redirectToPage500 === true
+          )
+            history.push("/error/500?returnUrl=" + history.location.pathname);
+          if (
+            (err.response?.status == 500 ||
+              err.message.toString() == "Network Error") &&
+            redirectToPage500 === false &&
+            showErrorSnackBar === true
+          )
+            themeContext.showErrorSnackbar({ message: "somethingWentWrong" });
+          if (
+            err.message.toString() == "Network Error" &&
+            redirectToPage500 == false
+          )
+            themeContext.showErrorSnackbar({
+              message: "apiErrors.networkError",
+            });
+          throw err;
+        } else {
+          throw err;
         }
       }
     );
@@ -156,109 +188,117 @@ function useFetcher(props) {
     setLoading(true);
     let apiData;
     let apiErrors;
-    await Promise.all(options.map(async (singleRequest) => {
-      try {
-        singleRequest.setData = false
-        singleRequest.setError = false
-        singleRequest.setLoading = false
-        let resultFetch = await fetch(singleRequest)
-        if (!apiData) apiData = {}
-        apiData[singleRequest.name] = resultFetch
-      } catch (err) {
-        if (!apiErrors) apiErrors = {}
-        apiErrors[singleRequest.name] = err
-      }
-    }));
-    setData(apiData)
-    setError(apiErrors)
-    setLoading(false)
+    await Promise.all(
+      options.map(async (singleRequest) => {
+        try {
+          singleRequest.setData = false;
+          singleRequest.setError = false;
+          singleRequest.setLoading = false;
+          let resultFetch = await fetch(singleRequest);
+          if (!apiData) apiData = {};
+          apiData[singleRequest.name] = resultFetch;
+        } catch (err) {
+          if (!apiErrors) apiErrors = {};
+          apiErrors[singleRequest.name] = err;
+        }
+      })
+    );
+    setData(apiData);
+    setError(apiErrors);
+    setLoading(false);
     return {
       data: apiData,
-      error: apiErrors
-    }
+      error: apiErrors,
+    };
   }, []);
   const fetchPaginated = async (options) => {
-    options.paginated = false
-    options.setLoading = false
-    options.setData = false
-    options.setError = false
-    let status = "start"
-    let totalResult
-    let totalError
+    options.paginated = false;
+    options.setLoading = false;
+    options.setData = false;
+    options.setError = false;
+    let status = "start";
+    let totalResult;
+    let totalError;
     while (status != "stop") {
-
       try {
-        if (status != "start" && status != "stop") options.params = { ...options.params, ...status }
-        let result = await fetch(options)
-        if (!totalResult) totalResult = []
-        totalResult = totalResult.concat(result)
-        if (result.next) status = result.next
-        else status = "stop"
+        if (status != "start" && status != "stop")
+          options.params = { ...options.params, ...status };
+        let result = await fetch(options);
+        if (!totalResult) totalResult = [];
+        totalResult = totalResult.concat(result);
+        if (result.next) status = result.next;
+        else status = "stop";
       } catch (e) {
-        if (!totalError) totalError = {}
-        totalError[JSON.stringify(e.config.params)] = e
+        if (!totalError) totalError = {};
+        totalError[JSON.stringify(e.config.params)] = e;
       }
     }
-    setData(totalResult)
-    setError(totalError)
-    setLoading(false)
-    return totalResult
-  }
-
+    setData(totalResult);
+    setError(totalError);
+    setLoading(false);
+    return totalResult;
+  };
 
   const fetch = useCallback(async (options) => {
     if (options.setLoading != false) setLoading(true);
-    if (!_.get(counter.current, options.url + JSON.stringify(options.data), false)) counter.current[options.url + JSON.stringify(options.data)] = 0
-    const axiosGateway = createAxiosGateway(options)
+    if (
+      !_.get(counter.current, options.url + JSON.stringify(options.data), false)
+    )
+      counter.current[options.url + JSON.stringify(options.data)] = 0;
+    const axiosGateway = createAxiosGateway(options);
     let url = createUrl(options);
     try {
-      if (options.paginated == true) fetchPaginated(options)
+      if (options.paginated == true) fetchPaginated(options);
       else {
         let result = await axiosGateway({
           ...options,
           url,
-        })
+        });
         if (options.setData != false) {
-          setData(result.data)
-          setLoading(false)
+          setData(result.data);
+          setLoading(false);
         }
-        if (options.sendRaw == true) return result
-        else return result.data
+        if (options.sendRaw == true) return result;
+        else return result.data;
       }
     } catch (err) {
-      if (err?.response?.status === 500 || err.message.toString() == "Network Error") {
+      if (
+        err?.response?.status === 500 ||
+        err.message.toString() == "Network Error"
+      ) {
         if (counter.current[options.url + JSON.stringify(options.data)] < 3) {
-          counter.current[options.url + JSON.stringify(options.data)] = counter.current[options.url + JSON.stringify(options.data)] + 1
-          await new Promise(resolve => setTimeout(resolve, 500));
-          return fetch(err.config)
+          counter.current[options.url + JSON.stringify(options.data)] =
+            counter.current[options.url + JSON.stringify(options.data)] + 1;
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          return fetch(err.config);
         } else {
-          counter.current[options.url + JSON.stringify(options.data)] = 0
+          counter.current[options.url + JSON.stringify(options.data)] = 0;
           if (options.setLoading != false) setLoading(false);
-          if (options.setError != false) setError(err.response)
-          throw err.response
+          if (options.setError != false) setError(err.response);
+          throw err.response;
         }
       } else {
         if (options.setLoading != false) setLoading(false);
-        if (options.setError != false) setError(err.response)
-        throw err.response
+        if (options.setError != false) setError(err.response);
+        throw err.response;
       }
     }
-  }, [])
+  }, []);
 
-  const sendFile =useCallback( async (options)=>{
-    const formData = new FormData()
-    if(options.file) formData.append(options.filename, options.file)
-    if(options?.data) Object.keys(options.data).forEach(key => formData.append(key, options.data[key]));
-    options  = {
+  const sendFile = useCallback(async (options) => {
+    const formData = new FormData();
+    if (options.file) formData.append(options.filename, options.file);
+    if (options?.data)
+      Object.keys(options.data).forEach((key) =>
+        formData.append(key, options.data[key])
+      );
+    options = {
       ...options,
       data: formData,
-      addHeadersForFiles:true
-      
-    }
-    return fetch(options)
-  
-  }, [])
-
+      addHeadersForFiles: true,
+    };
+    return fetch(options);
+  }, []);
 
   return {
     loading,
@@ -266,7 +306,7 @@ function useFetcher(props) {
     error,
     fetch,
     fetchAll,
-    sendFile
+    sendFile,
   };
 }
 

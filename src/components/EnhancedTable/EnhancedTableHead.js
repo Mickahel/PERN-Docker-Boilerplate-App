@@ -1,35 +1,28 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import Checkbox from "@material-ui/core/Checkbox";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
-import HelpOutlinedIcon from '@material-ui/icons/HelpOutlined';
+import HelpOutlinedIcon from "@material-ui/icons/HelpOutlined";
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import classnames from 'classnames'
-import {ThemeContext} from 'contexts/Providers/ThemeProvider'
-import { makeStyles } from '@material-ui/core/styles';
+import classnames from "classnames";
+import { ThemeContext } from "contexts/Providers/ThemeProvider";
+import { makeStyles } from "@material-ui/core/styles";
 
-
-
-
-
-
-const useStyles = makeStyles(theme => ({
-    topTableCell:{
+const useStyles = makeStyles((theme) => ({
+  topTableCell: {
     borderTop: "unset",
-    borderBottom: "unset"
-  }
+    borderBottom: "unset",
+  },
 }));
-
-
 
 function EnhancedTableHead(props) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const themeContext = useContext(ThemeContext)
+  const themeContext = useContext(ThemeContext);
   const [popoverHelpText, setPopoverHelpText] = useState(null);
   const headClasses = useStyles();
   const {
@@ -42,7 +35,7 @@ function EnhancedTableHead(props) {
     onRequestSort,
     headCells,
     readOnly,
-    collapsible
+    collapsible,
   } = props;
 
   const createSortHandler = (property) => (event) => {
@@ -60,7 +53,11 @@ function EnhancedTableHead(props) {
 
   return (
     <TableHead>
-      <TableRow className={classnames(themeContext.muiType === "light" ?"lightHeader" :"darkHeader" )}>
+      <TableRow
+        className={classnames(
+          themeContext.muiType === "light" ? "lightHeader" : "darkHeader"
+        )}
+      >
         {!readOnly && (
           <TableCell padding="checkbox">
             <Checkbox
@@ -80,15 +77,24 @@ function EnhancedTableHead(props) {
                 key={headCell.id + index}
                 align={index === 0 ? "left" : "center"}
                 sortDirection={orderBy === headCell.id ? order : false}
-                classes={{root:headClasses.topTableCell}}
+                classes={{ root: headClasses.topTableCell }}
               >
-                <span className={classnames(index!= 0 && (headCell.helpText ? "headRowWithHelperText" :  "headRowWithoutHelperText"))}>
+                <span
+                  className={classnames(
+                    index != 0 &&
+                      (headCell.helpText
+                        ? "headRowWithHelperText"
+                        : "headRowWithoutHelperText")
+                  )}
+                >
                   <TableSortLabel
                     active={orderBy === headCell.id}
                     direction={orderBy === headCell.id ? order : "asc"}
                     onClick={createSortHandler(headCell.id)}
-                  > 
-                    <Typography color="textSecondary"variant="body1">{headCell.label}</Typography>
+                  >
+                    <Typography color="textSecondary" variant="body1">
+                      {headCell.label}
+                    </Typography>
                     {orderBy === headCell.id ? (
                       <span className={classes.visuallyHidden}>
                         {order === "desc"
@@ -98,31 +104,36 @@ function EnhancedTableHead(props) {
                     ) : null}
                   </TableSortLabel>
 
-                  {headCell.helpText && <><Popover
-                    open={Boolean(anchorEl)}
-                    anchorEl={anchorEl}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "center",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "center",
-                    }}
-                  >
-                    <Typography className="p-3">{popoverHelpText}</Typography>
-                  </Popover>
-                    <IconButton
-                      onClick={(event) => {
-                        handleClick(event, headCell.helpText);
-                      }}
-                    >
-                     <HelpOutlinedIcon color="disabled" fontSize="small" />
-                    </IconButton></>}
+                  {headCell.helpText && (
+                    <>
+                      <Popover
+                        open={Boolean(anchorEl)}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "center",
+                        }}
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "center",
+                        }}
+                      >
+                        <Typography className="p-3">
+                          {popoverHelpText}
+                        </Typography>
+                      </Popover>
+                      <IconButton
+                        onClick={(event) => {
+                          handleClick(event, headCell.helpText);
+                        }}
+                      >
+                        <HelpOutlinedIcon color="disabled" fontSize="small" />
+                      </IconButton>
+                    </>
+                  )}
                 </span>
               </TableCell>
-
             )
         )}
       </TableRow>

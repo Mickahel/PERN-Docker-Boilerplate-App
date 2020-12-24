@@ -1,32 +1,30 @@
 .MuiTextField-root {
-    width: 300px !important;
-  }
+  width: 300px !important;
+}
 
-
-#ResetPassword{
+#ResetPassword {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  #ResetPasswordForm {
     display: flex;
-    justify-content: center;
-    height: 100%;
-    align-items: center;
-    #ResetPasswordForm{
-        display: flex;
-        flex-direction: column;
-        #formInputs{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #submitInput{
-            display: flex;
-            justify-content: center;
-            margin: 10px;
-        }
-
-        #auxiliaryLinks{
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-        }
+    flex-direction: column;
+    #formInputs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #submitInput {
+      display: flex;
+      justify-content: center;
+      margin: 10px;
     }
 
+    #auxiliaryLinks {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+  }
 }

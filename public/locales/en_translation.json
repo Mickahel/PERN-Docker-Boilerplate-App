@@ -1,140 +1,140 @@
 {
-  "installApp": "Install App",
-  "error": "An Error Has Occurred, Try Again",
-  "yes":"Yes",
-  "notificationHandler": {
-    "title": "Can we Send You Notifications?",
-    "content": "The platform wants to send you notifications"
-},
-"close": "Close",
-"cookieConsentDrawer":{
-  "text": "This platform uses Cookies to ensure the usability of it, if you want to know more, visit our ",
-  "ok": "Ok, I Understood"
-},
-  "theme": {
-    "darkTheme": "Dark Theme",
-    "lightTheme": "Light Theme"
-  },
-  "profileButton": {
-    "welcome": "Welcome",
-    "profile": "Profile",
-    "changeTheme": "Change Theme"
-  },
-  "dashboard": {
-    "dashboard": "Dashboard"
-  },
-  "enhancedTable": {
-    "rows": "Rows",
-    "moreThan": "More than",
-    "of": "of",
-    "search": "Search",
-    "filtersList": "Filters List",
-    "nextPage": "Next Page",
-    "previousPage": "Previous Page"
-  },
-  "feedback": {
-    "sendAFeedback": "Send A Feedback",
-    "send": "Send",
-    "text": "Write a feedback about the application",
-    "type": "Type",
-    "includeScreenshot":"Include screenshot of the page",
-    "thankYouForTheFeedback": "Thank you For the Feedback"
-  },
-  "auth": {
-    "alreadyHaveAnAccount":"Do You Already Have an Account?",
-    "error": "An Error Has Occurred, Try Again",
-    "user doesn't exist": "User Doesn't Exist",
-    "restorePassword": {
-      "title": "Restore Password",
-      "resetPasswordEmailSent": "Restore Password Email Sent"
-    },
-    "resetPassword": {
-      "title":"Reset your Password",
-      "resettedSuccessfully": "Restore Password Email Sent",
-      "insertNewPassword":"Insert New Password",
-      "insertNewPasswordAgain":"Insert New Password Again",
-      "goToApp":"Login to the App",
-      "resettedPasswordText":"Resetted Password Successfully"
-    },
-    "User not found": "User Not Found",
-    "signedupSuccessfully": "You Signed Up successfully, you will receive an activation email, check your inbox to activate your account",
-    "User is already registered": "User is Already Registered",
-    "User is not activated": "User is Not Activated",
-    "signup": "Signup",
-    "logout": "logout",
-    "wrongEmailOrPassword": "Wrong Email or Password",
-    "auth": "Authentication",
-    "login": "Login",
-    "loginWithFacebook": "Facebook",
-    "loginWithGoogle": "Google",
-    "activateAccount": "Activate Account",
-    "loginWithThirdParty": "Or Login with a 3rd Party Service",
-    "signupWithThirdParty": "Or Signup with a 3rd Party Service",
-    "loginSuccess": "Onboarding",
-    "signUp": "Sign Up",
-    "confirmPassword": "Confirm Password",
-    "forgotPassword": "Forgot Password?",
-    "insertInformation": "Insert Information",
-    "activation": {
-      "activatedText": "Your account has been activated",
-      "User not found": "User to activate not found",
-      "retry": "Retry",
-      "goToApp": "Login to the App",
-      "title": "Activate your Account",
-      "activatingText": "We are activating your account"
-    }
-  },
+	"installApp": "Install App",
+	"error": "An Error Has Occurred, Try Again",
+	"yes": "Yes",
+	"notificationHandler": {
+		"title": "Can we Send You Notifications?",
+		"content": "The platform wants to send you notifications"
+	},
+	"close": "Close",
+	"cookieConsentDrawer": {
+		"text": "This site uses a technical cookie to allow correct navigation. By confirming you accept its use. To find out more and read how to disable its use, see the ",
+		"ok": "Ok"
+	},
+	"theme": {
+		"darkTheme": "Dark Theme",
+		"lightTheme": "Light Theme"
+	},
+	"profileButton": {
+		"welcome": "Welcome",
+		"profile": "Profile",
+		"changeTheme": "Change Theme"
+	},
+	"dashboard": {
+		"dashboard": "Dashboard"
+	},
+	"enhancedTable": {
+		"rows": "Rows",
+		"moreThan": "More than",
+		"of": "of",
+		"search": "Search",
+		"filtersList": "Filters List",
+		"nextPage": "Next Page",
+		"previousPage": "Previous Page"
+	},
+	"feedback": {
+		"sendAFeedback": "Send A Feedback",
+		"send": "Send",
+		"text": "Write a feedback about the application",
+		"type": "Type",
+		"includeScreenshot": "Include screenshot of the page",
+		"thankYouForTheFeedback": "Thank you For the Feedback"
+	},
+	"auth": {
+		"alreadyHaveAnAccount": "Do You Already Have an Account?",
+		"error": "An Error Has Occurred, Try Again",
+		"user doesn't exist": "User Doesn't Exist",
+		"restorePassword": {
+			"title": "Restore Password",
+			"resetPasswordEmailSent": "Restore Password Email Sent"
+		},
+		"resetPassword": {
+			"title": "Reset your Password",
+			"resettedSuccessfully": "Restore Password Email Sent",
+			"insertNewPassword": "Insert New Password",
+			"insertNewPasswordAgain": "Insert New Password Again",
+			"goToApp": "Login to the App",
+			"resettedPasswordText": "Resetted Password Successfully"
+		},
+		"User not found": "User Not Found",
+		"signedupSuccessfully": "You Signed Up successfully, you will receive an activation email, check your inbox to activate your account",
+		"User is already registered": "User is Already Registered",
+		"User is not activated": "User is Not Activated",
+		"signup": "Signup",
+		"logout": "logout",
+		"wrongEmailOrPassword": "Wrong Email or Password",
+		"auth": "Authentication",
+		"login": "Login",
+		"loginWithFacebook": "Facebook",
+		"loginWithGoogle": "Google",
+		"activateAccount": "Activate Account",
+		"loginWithThirdParty": "Or Login with a 3rd Party Service",
+		"signupWithThirdParty": "Or Signup with a 3rd Party Service",
+		"loginSuccess": "Onboarding",
+		"signUp": "Sign Up",
+		"confirmPassword": "Confirm Password",
+		"forgotPassword": "Forgot Password?",
+		"insertInformation": "Insert Information",
+		"activation": {
+			"activatedText": "Your account has been activated",
+			"User not found": "User to activate not found",
+			"retry": "Retry",
+			"goToApp": "Login to the App",
+			"title": "Activate your Account",
+			"activatingText": "We are activating your account"
+		}
+	},
 
-  "yup": {
-    "invalidField": "Invalid Field",
-    "required": "Required Field",
-    "email": "The field {{email}} should be an email",
-    "min": "Password Must Be At Least {{num}} Characters",
-    "RefEqualTo": "{{path}} must be the same as {{reference}}",
-    "equalTo": "Fields Must Be The Same"
-  },
-  "placeholder": {
-    "backToHomepage": "Back to Dashboard",
-    "cannotFindPage": "Ooops! You seem lost!",
-    "notFound": "Page Not Found",
-    "errorInternalServer": "Oh No! The server is Down",
-    "youAreNotAuthorized": "You Are not Authorized!"
-  },
-  "profile": {
-    "passwordChanged": "Password Has Been Changed",
-    "passwordIsWrong": "Current Password is Wrong",
-    "upload": "Choose File",
-    "uploadImageText": "JPG, GIF or PNG",
-    "profile": "Profile",
-    "type": "Type",
-    "preferredLanguageText": "Selecting this will change the language of your dashboard",
-    "changePassword": "Change Password",
-    "changePasswordText": "You should change your password every month to avoid security issues.",
-    "language": "Language",
-    "delete": "Delete",
-    "changeYourPassword": "Change Your Password",
-    "currentPassword": "Current Password",
-    "back": "Back",
-    "change": "Change",
-    "newPassword": "New Password",
-    "firstname": "Firstname",
-    "cancel": "Cancel",
-    "changePersonalInformation": "Change Personal Information",
-    "lastname": "Lastname",
-    "personalInformation": "Personal Information"
-  },
-  "apiErrors": {
-    "networkError": "Network Error",
-    "loginAgain": "Login Again"
-  },
-  "newUpdateAlert": {
-    "title": "New Update!",
-    "message": "A new Update has been release"
-  },
-  "publicAppBar": {
-    "goToApp": "Go To App"
-  },
-  "tos":{
-    "termsOfService": "Terms of Service"
-  }
+	"yup": {
+		"invalidField": "Invalid Field",
+		"required": "Required Field",
+		"email": "The field {{email}} should be an email",
+		"min": "Password Must Be At Least {{num}} Characters",
+		"RefEqualTo": "{{path}} must be the same as {{reference}}",
+		"equalTo": "Fields Must Be The Same"
+	},
+	"placeholder": {
+		"backToHomepage": "Back to Dashboard",
+		"cannotFindPage": "Ooops! You seem lost!",
+		"notFound": "Page Not Found",
+		"errorInternalServer": "Oh No! The server is Down",
+		"youAreNotAuthorized": "You Are not Authorized!"
+	},
+	"profile": {
+		"passwordChanged": "Password Has Been Changed",
+		"passwordIsWrong": "Current Password is Wrong",
+		"upload": "Choose File",
+		"uploadImageText": "JPG, GIF or PNG",
+		"profile": "Profile",
+		"type": "Type",
+		"preferredLanguageText": "Selecting this will change the language of your dashboard",
+		"changePassword": "Change Password",
+		"changePasswordText": "You should change your password every month to avoid security issues.",
+		"language": "Language",
+		"delete": "Delete",
+		"changeYourPassword": "Change Your Password",
+		"currentPassword": "Current Password",
+		"back": "Back",
+		"change": "Change",
+		"newPassword": "New Password",
+		"firstname": "Firstname",
+		"cancel": "Cancel",
+		"changePersonalInformation": "Change Personal Information",
+		"lastname": "Lastname",
+		"personalInformation": "Personal Information"
+	},
+	"apiErrors": {
+		"networkError": "Network Error",
+		"loginAgain": "Login Again"
+	},
+	"newUpdateAlert": {
+		"title": "New Update!",
+		"message": "A new Update has been release"
+	},
+	"publicAppBar": {
+		"goToApp": "Go To App"
+	},
+	"tos": {
+		"termsOfService": "Terms of Service"
+	}
 }

@@ -1,13 +1,11 @@
-import React, { useEffect} from 'react'
-import { useHistory } from 'react-router-dom'
-function Home(props){
-
-    const history = useHistory();
-    useEffect(()=>{
-        history.push('/dashboard')
-    },[])
-    return <></>
-    
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+function Home(props) {
+  const history = useHistory();
+  useEffect(() => {
+    history.push("/dashboard");
+  }, []);
+  return <></>;
 }
 
-export default Home
+export default Home;
