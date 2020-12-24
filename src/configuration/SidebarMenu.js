@@ -16,7 +16,7 @@ const SidebarMenu = [
   },
   {
     type: "item",
-    id: "helpers",
+    id: "Helpers",
     to: "/helpers",
     icon: <CallToActionOutlinedIcon />,
     exact: true,

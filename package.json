@@ -2,6 +2,7 @@
 	"name": "client",
 	"version": "0.1.0",
 	"dependencies": {
+		"@craco/craco": "^6.0.0",
 		"@date-io/moment": "^2.10.6",
 		"@firebase/messaging": "^0.7.3",
 		"@material-ui/core": "^4.11.2",
@@ -9,6 +10,8 @@
 		"@material-ui/lab": "^4.0.0-alpha.57",
 		"@material-ui/pickers": "4.0.0-alpha.8",
 		"@material-ui/styles": "^4.11.2",
+		"@tailwindcss/postcss7-compat": "^2.0.2",
+		"autoprefixer": "9",
 		"axios": "^0.21.0",
 		"classnames": "^2.2.6",
 		"firebase": "^8.1.2",
@@ -24,6 +27,7 @@
 		"mobile-detect": "^1.4.4",
 		"moment": "^2.29.1",
 		"node-sass": "4.14.1",
+		"postcss": "7",
 		"prop-types": "^15.7.2",
 		"qs": "^6.9.4",
 		"react": "17.0.1",
@@ -40,6 +44,7 @@
 		"react-scripts": "4.0.1",
 		"react-sidebar": "^3.0.2",
 		"react-social-login-buttons": "^3.1.0",
+		"tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
 		"url-pattern": "^1.0.3",
 		"web-vitals": "^0.2.4",
 		"workbox-background-sync": "^5.1.4",
@@ -57,13 +62,14 @@
 		"yup": "^0.32.1"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"build-sw": "node ./src/sw-build.js",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
+		"OLDstart": "react-scripts start",
+		"OLDbuild": "react-scripts build",
+		"OLDtest": "react-scripts test",
+		"start": "craco start",
+		"build": "craco build",
+		"test": "craco test",
 		"eject": "react-scripts eject",
-		"build-tailwind": "yarn tailwind build ./src/css/tailwind-input.css -o ./src/css/tailwind.css",
-		"install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && pnpm install && npm start"
+		"install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && pnpm install && pnpm start"
 	},
 	"eslintConfig": {
 		"extends": "react-app"

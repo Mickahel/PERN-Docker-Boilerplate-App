@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import RoundLoader from "./components/RoundLoader";
 import "./sass/main.scss";
+import './index.css';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 

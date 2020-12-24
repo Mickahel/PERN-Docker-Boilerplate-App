@@ -7,7 +7,6 @@ import Routes from "routes";
 import MUIThemeHandler from "./components/MUIThemeHandler";
 import { LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
-import "./css/tailwind.css";
 import "./i18n";
 //import './i18n/i18nextConfig';
 import SnackBar from "components/SnackBar";
