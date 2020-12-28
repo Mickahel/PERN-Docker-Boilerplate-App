@@ -4,7 +4,8 @@
 	"yes": "Yes",
 	"notificationHandler": {
 		"title": "Can we Send You Notifications?",
-		"content": "The platform wants to send you notifications"
+		"content": "The platform wants to send you notifications",
+		"notificationsAreDisabledOrBlocked": "It seems your notifications are blocked and you have to activate them by your browser"
 	},
 	"close": "Close",
 	"cookieConsentDrawer": {
@@ -101,6 +102,8 @@
 		"youAreNotAuthorized": "You Are not Authorized!"
 	},
 	"profile": {
+		"noNotifications": "You have not activated push notifications",
+		"activateNow": "Activate them now",
 		"passwordChanged": "Password Has Been Changed",
 		"passwordIsWrong": "Current Password is Wrong",
 		"upload": "Choose File",

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import i18n from "i18n";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -14,7 +14,6 @@ import StandardDialog from "components/StandardDialog";
 import moment from "moment";
 import ErrorBoundary from "components/ErrorBoundary";
 import yupConfig from "auxiliaries/yupConfig";
-
 // ?  Moment translations
 import "moment/locale/it";
 //? -----------------------mobile detenction
@@ -24,6 +23,7 @@ let locale = window.navigator.userLanguage || window.navigator.language;
 window.md = md;
 
 function App() {
+
   moment.locale(localStorage.getItem("i18nextLng").split("-")[0] || locale); //? it is required to select default locale manually
   yupConfig();
   return (

@@ -10,6 +10,10 @@ import { Trans } from "react-i18next";
 import useFetch from "hooks/useFetch";
 import Endpoints from "Endpoints";
 import _ from "lodash";
+import Button from "@material-ui/core/Button";
+import { Card, CardContent, CardActions, CardHeader } from "@material-ui/core";
+
+
 const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(12),
@@ -81,6 +85,22 @@ function TopSide(props) {
           }
           label={<Trans>theme.{themeContext.muiType}Theme</Trans>}
         />
+        {themeContext.notificationsEnabled != "granted" &&
+          <Card>
+            <CardContent className="flex flex-col">
+              <Trans>profile.noNotifications</Trans>
+            </CardContent>
+            <CardActions>
+              <Button
+                onClick={() => { themeContext.setNotificationRequestDialogVisible(true) }}
+
+                color="primary"
+              >
+                <Trans>profile.activateNow</Trans>
+              </Button>
+            </CardActions>
+          </Card>
+        }
       </div>
     </div>
   );

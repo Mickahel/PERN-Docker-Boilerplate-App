@@ -70,3 +70,138 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+importScripts('https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.1/firebase-messaging.js');
+
+// ? https://stackoverflow.com/questions/42964547/uncaught-firebaseerror-messaging-this-method-is-available-in-a-window-context
+// ? https://stackoverflow.com/questions/46043818/get-firebase-web-notification-even-close-chrome
+// ? https://developer.mozilla.org/en-US/docs/Web/API/WindowClient/focus
+firebase.initializeApp({
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,//"pern-boilerplate.firebaseapp.com",
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSANGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
+});
+
+
+self.addEventListener('notificationclick', function (event) {
+
+})
+
+
+
+const messaging = firebase.messaging();
+//* https://stackoverflow.com/questions/40277900/how-to-get-push-message-events-like-click-close-show-with-firebase-cloud-messagi
+/*messaging.onBackgroundMessage(async (payload) => {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  // Customize notification here
+  self.registration.showNotification("Background" + payload.notification.title, payload.notification)
+})*/
+//self.skipWaiting();
+
+// Quest serve SOLO se voglio mendare solo dati (tipo chat)
+// messaging.setBackgroundMessageHandler (function(payload) {
+
+//   console.log('[firebase-messaging-sw.js] Received background message ', payload);
+
+//    /*const data = payload.data;
+//    const notificationTitle = data.title;*/
+//    const notificationOptions = {
+//       title: "aSDasdasd",
+//       body: "Asdasdasd",
+
+//       body: data.body
+//    };
+
+//     return self.registration.showNotification ("AAAAAAAAAAAAAAAAAAA",  notificationOptions);
+//   });
+
+// self.addEventListener('message', function (event) {
+//   console.debug("[SERVICE WORKER] message", event);
+//   const notification = e.notification;
+//   const data = notification.data || {};
+
+//   var options = {
+//     ...notification,
+//     data,
+//   };
+//   event.waitUntil(
+//     self.registration.showNotification(body.notification.title, options)
+//   );
+
+// })
+
+
+
+//self.addEventListener('notificationclose', function (e) {
+//  //console.debug("[SERVICE WORKER] Closed notification", e);
+//  //var notification = e.notification;
+//  //var data = notification.data || {};
+//  console.log("[SERVICE WORKER] notificationclose: ", e)
+//});
+////
+//self.addEventListener("notificationclick", function (e) {
+//  console.log("[SERVICE WORKER] Clicked notification: ", e);
+//  var notification = e.notification;
+//  var data = notification.data || {};
+//  let url = data.url
+//
+//  e.waitUntil(
+//    clients.matchAll({ type: 'window' }).then(windowClients => {
+//      // Check if there is already a window/tab open with the target URL
+//      for (var i = 0; i < windowClients.length; i++) {
+//        var client = windowClients[i];
+//        // If so, just focus it.
+//        if (client.url === url && 'focus' in client) {
+//          return client.focus();
+//        } else if (client.url.startsWith() && 'navigate' in client) {
+//          return client.navigate(url);
+//        }
+//      }
+//      // If not, then open the target URL in a new window/tab.
+//      if (clients.openWindow) {
+//        return clients.openWindow(url);
+//      }
+//    })
+//  );
+//
+//  //let action = e.action; --> AZIONI
+//  notification.close();
+//});
+//
+/*self.addEventListener('push', function(e) {
+    //self.registration.hideNotification();
+    //console.log(self.registration)
+    /*
+    try{
+      let body = null
+      if(e.data){
+          body = e.data.json()
+      }else{
+        return;
+      }
+
+      console.log("[FIREBASE PUSH NOTIFICATIONS] Arrivata notifica", body)
+
+      var options = {
+        body: body.notification.body,
+        icon: body.notification.icon,
+        data: body,
+        vibrate: [100, 50, 100],
+        actions: [
+          {action: 'explore', title: 'View',},
+          {action: 'close', title: 'Close'},
+        ]
+      };
+      e.waitUntil(
+        self.registration.showNotification(body.notification.title, options)
+      );
+    }catch(exception){
+      console.error("[FIREBASE PUSH NOTIFICATIONS]", exception)
+    }
+    return null;
+  });*/
+  //firebase.messaging()

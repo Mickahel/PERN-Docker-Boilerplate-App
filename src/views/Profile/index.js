@@ -20,6 +20,7 @@ import TabPanel from "components/TabPanel";
 import UploadProfileImageBox from "./UploadProfileImageBox";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
 
+
 const useStyles = makeStyles((theme) => ({
   rootTabs: {
     marginLeft: 10,

@@ -15,6 +15,7 @@ import "../sass/main.scss";
 import RoundLoader from "components/RoundLoader";
 import { useHistory } from "react-router-dom";
 import useFetch from "hooks/useFetch";
+import NotificationsHandler from 'theme/NotificationsHandler'
 const ErrorNotFound = lazy(() => import("views/Placeholders/ErrorNotFound"));
 const Home = lazy(() => import("views/Home"));
 const Dashboard = lazy(() => import("views/Dashboard"));
@@ -57,7 +58,8 @@ function App(props) {
   if (loading) return <RoundLoader />;
   return (
     <Theme>
-      <Suspense fallback={<RoundLoader agent="suspense in app" />}>
+      <Suspense fallback={<RoundLoader />}>
+        <NotificationsHandler />
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/helpers" component={Helpers} />

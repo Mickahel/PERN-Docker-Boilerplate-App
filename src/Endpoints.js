@@ -19,6 +19,9 @@ const Endpoints = {
   feedback: {
     sendNew: "/v1/app/feedback/sendNew", // ? POST
   },
+  pushNotification: {
+    sendToken: "/v1/app/pushNotification/:token" // ? POST
+  }
 };
 
 export default Endpoints;

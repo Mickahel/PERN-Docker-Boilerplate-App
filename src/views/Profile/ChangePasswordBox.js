@@ -83,7 +83,6 @@ function ChangePasswordBox(props) {
         <DialogTitle id="form-dialog-title">
           <Trans>profile.changePassword</Trans>
         </DialogTitle>
-        <Divider />
         <form onSubmit={changePasswordFormik.handleSubmit}>
           <DialogContent>
             <DialogContentText>
@@ -119,8 +118,8 @@ function ChangePasswordBox(props) {
                       {passwordVisible ? (
                         <VisibilityOutlinedIcon />
                       ) : (
-                        <VisibilityOffOutlinedIcon />
-                      )}
+                          <VisibilityOffOutlinedIcon />
+                        )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -155,8 +154,8 @@ function ChangePasswordBox(props) {
                       {passwordVisible ? (
                         <VisibilityOutlinedIcon />
                       ) : (
-                        <VisibilityOffOutlinedIcon />
-                      )}
+                          <VisibilityOffOutlinedIcon />
+                        )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -181,7 +180,6 @@ function ChangePasswordBox(props) {
 
       <Card id="changePassword">
         <CardHeader title={<Trans>profile.changePassword</Trans>} />
-        <Divider />
         <CardContent className="flex flex-col">
           <div>
             <Trans>profile.changePasswordText</Trans>

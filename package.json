@@ -69,7 +69,7 @@
 		"build": "craco build",
 		"test": "craco test",
 		"eject": "react-scripts eject",
-		"install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && pnpm install && pnpm start"
+		"install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && pnpm install"
 	},
 	"eslintConfig": {
 		"extends": "react-app"

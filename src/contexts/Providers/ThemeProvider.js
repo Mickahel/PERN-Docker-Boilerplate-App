@@ -21,6 +21,14 @@ class ThemeProvider extends Component {
     },
   };
 
+  setNotificationRequestDialogVisible = value => this.setState({ notificationRequestDialogVisible: value })
+  setNotificationsEnabled = value => this.setState({ notificationsEnabled: value })
+  updateNotificationsEnabled = value => this.setState({ notificationsEnabled: window.Notification ? window.Notification.permission : "blocked" })
+  checkNotificationsEnabed = () => {
+    if (!window.Notification) return "granted"
+
+    return window.Notification.permission // iOS se non trovo le notifiche allora dico che sono abilitate
+  }
   showSidebarComponents = (matches) => {
     if (!config.theme.sidebar.enabled) return false;
     else if (config.theme.bottomNavigation.enabled && matches) return false;
@@ -70,9 +78,6 @@ class ThemeProvider extends Component {
         open: false,
       },
     });
-
-  setNotificationRequestDialogVisible = (value) =>
-    this.setState({ notificationRequestDialogVisible: value });
 
   showSnackbar = (type) => (options) =>
     this.setState({
@@ -149,6 +154,12 @@ class ThemeProvider extends Component {
     showWarningSnackbar: this.showSnackbar("warning"),
     showSnackbar: this.showSnackbar("info"),
     hideSnackbar: this.hideSnackbar,
+
+    notificationRequestDialogVisible: false,
+    notificationsEnabled: this.checkNotificationsEnabed(),
+    setNotificationRequestDialogVisible: this.setNotificationRequestDialogVisible,
+    setNotificationsEnabled: this.setNotificationsEnabled,
+    updateNotificationsEnabled: this.updateNotificationsEnabled,
   };
 
   render() {

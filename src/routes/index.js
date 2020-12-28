@@ -16,6 +16,9 @@ const ErrorNotAuthorized = lazy(() =>
 const ErrorNotFound = lazy(() => import("views/Placeholders/ErrorNotFound"));
 const PrivacyPolicy = lazy(() => import("views/TOS/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("views/TOS/TermsOfService"));
+
+
+
 function App(props) {
   const themeContext = useContext(ThemeContext);
 
@@ -26,29 +29,26 @@ function App(props) {
 
   const onBeforeInstallPrompt = (e) => {
     if (!e) return;
-
     e.preventDefault();
     themeContext.setInstallEvent(e);
   };
 
   const onAppUpdate = () => {
     let format = "YYYY-MM-DD HH:mm:ss";
-    /*if(localStorage.updateDialogLastShown){
+    if (localStorage.updateDialogLastShown) {
       let date = moment(localStorage.updateDialogLastShown, format)
-      if(moment().diff(date, "minute")<1) return
-    }*/
-
-    //localStorage.updateDialogLastShown = moment().format(format)
-    const channel = new BroadcastChannel("service-worker-channel");
+      if (moment().diff(date, "minute") < 1) return
+    }
+    localStorage.updateDialogLastShown = moment().format(format)
     themeContext.showInfoDialog({
       title: i18n.t("newUpdateAlert.title"),
       message: i18n.t("newUpdateAlert.message"),
       onClose: () => {
-        channel.postMessage({ skipWaiting: true });
-        window.location.reload(true);
+        window.location.reload();
       },
     });
   };
+
 
   return (
     <span>

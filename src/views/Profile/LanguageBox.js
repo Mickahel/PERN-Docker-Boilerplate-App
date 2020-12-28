@@ -29,7 +29,7 @@ function LanguageBox(props) {
             },
             method: "PUT",
           });
-        } catch (e) {}
+        } catch (e) { }
       }
     });
   };
@@ -38,7 +38,6 @@ function LanguageBox(props) {
     <div className="languageBox">
       <Card>
         <CardHeader title={<Trans>profile.language</Trans>} />
-        <Divider />
         <CardContent className="flex flex-col">
           <div>
             <Trans>profile.preferredLanguageText</Trans>

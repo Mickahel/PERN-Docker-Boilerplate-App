@@ -18,12 +18,7 @@ const useStyles = makeStyles((theme) => ({
 function RoundLoader(props) {
   const { size, className } = props;
   const classes = useStyles();
-  /*useEffect(()=>{
-      console.log("mounted", props.agent)
-      return () => {
-        console.log("unmounted", props.agent) ;
-      };
-    },[])*/
+
   return (
     <div
       className={classnames(

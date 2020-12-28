@@ -4,7 +4,8 @@
 	"yes": "Si",
 	"notificationHandler": {
 		"title": "Possiamo invarti delle notifiche?",
-		"content": "La piattaforma inviarti delle notifiche"
+		"content": "La piattaforma vuole inviarti delle notifiche",
+		"notificationsAreDisabledOrBlocked": "Sembra che le tue notifiche siano bloccate e devi attivarle dal tuo browser"
 	},
 	"close": "Chiudi",
 	"cookieConsentDrawer": {
@@ -101,6 +102,8 @@
 		"youAreNotAuthorized": "Non sei Autorizzato!"
 	},
 	"profile": {
+		"noNotifications": "Non hai attivato le notifiche push",
+		"activateNow": "Attivale ora",
 		"passwordIsWrong": "La Password Attuale non è Corretta",
 		"upload": "Scegli File",
 		"uploadImageText": "JPG, GIF o PNG",
