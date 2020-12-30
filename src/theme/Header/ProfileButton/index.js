@@ -53,7 +53,7 @@ function ProfileButton(props) {
         >
           <Avatar
             className={classes.small}
-            src={
+            src={userContext.user.profileImageUrl &&
               process.env.REACT_APP_API_PUBLIC_URL +
               userContext.user.profileImageUrl
             }
@@ -70,8 +70,8 @@ function ProfileButton(props) {
           {anchorEl ? (
             <ArrowDropUpOutlinedIcon fontSize="small" className="dropIcon" />
           ) : (
-            <ArrowDropDownOutlinedIcon fontSize="small" className="dropIcon" />
-          )}
+              <ArrowDropDownOutlinedIcon fontSize="small" className="dropIcon" />
+            )}
         </Button>
       </Tooltip>
 
@@ -120,12 +120,12 @@ function ProfileButton(props) {
                 fontSize="small"
               />
             ) : (
-              <Brightness3OutlinedIcon
-                className="menuProfileIcon"
-                color="action"
-                fontSize="small"
-              />
-            )}
+                <Brightness3OutlinedIcon
+                  className="menuProfileIcon"
+                  color="action"
+                  fontSize="small"
+                />
+              )}
             <Typography color="textSecondary" variant="body2">
               <Trans>profileButton.changeTheme</Trans>
             </Typography>
@@ -143,7 +143,7 @@ function ProfileButton(props) {
                 method: "DELETE",
               });
               history.push("/auth/login");
-            } catch (e) {}
+            } catch (e) { }
           }}
           dense={true}
         >

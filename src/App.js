@@ -5,8 +5,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Provider from "./contexts/Provider";
 import Routes from "routes";
 import MUIThemeHandler from "./components/MUIThemeHandler";
-import { LocalizationProvider } from "@material-ui/pickers";
-import MomentUtils from "@material-ui/pickers/adapter/moment";
+//import { LocalizationProvider } from "@material-ui/pickers";
+//import MomentUtils from "@material-ui/pickers/adapter/moment";
 import "./i18n";
 //import './i18n/i18nextConfig';
 import SnackBar from "components/SnackBar";
@@ -28,21 +28,22 @@ function App() {
   yupConfig();
   return (
     <ErrorBoundary>
-      <LocalizationProvider
+      {/* <LocalizationProvider
         dateLibInstance={moment}
         dateAdapter={MomentUtils}
         locale={i18n.language.split("-")[0]}
-      >
-        <Provider>
-          <Router>
-            <MUIThemeHandler>
-              <Routes />
-              <SnackBar />
-              <StandardDialog />
-            </MUIThemeHandler>
-          </Router>
-        </Provider>
-      </LocalizationProvider>
+     >*/}
+      <Provider>
+        <Router>
+          <MUIThemeHandler>
+            <Routes />
+            <SnackBar />
+            <StandardDialog />
+          </MUIThemeHandler>
+        </Router>
+      </Provider>
+      {/*</LocalizationProvider>
+      */}
     </ErrorBoundary>
   );
 }

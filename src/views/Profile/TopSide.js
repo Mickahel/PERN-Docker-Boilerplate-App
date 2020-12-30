@@ -49,7 +49,7 @@ function TopSide(props) {
         <div>
           <Avatar
             className={classes.large}
-            src={
+            src={userContext.user.profileImageUrl &&
               process.env.REACT_APP_API_PUBLIC_URL +
               userContext.user.profileImageUrl
             }

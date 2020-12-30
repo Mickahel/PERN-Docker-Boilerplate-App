@@ -1,37 +1,23 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "contexts/Providers/UserProvider";
 import { Card, CardContent, CardHeader } from "@material-ui/core";
 import { Trans } from "react-i18next";
-import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import { makeStyles } from "@material-ui/core/styles";
 import "./style.scss";
 import useFetch from "hooks/useFetch";
 import Endpoints from "Endpoints";
 import { useFormik } from "formik";
 
-const useStyles = makeStyles((theme) => ({
-  option: {
-    fontSize: 15,
-    "& > span": {
-      marginRight: 10,
-      fontSize: 18,
-    },
-  },
-}));
-
 function ProfileBox(props) {
   const userContext = useContext(UserContext);
-  const classes = useStyles();
-  const { fetch, data } = useFetch();
+  const { fetch } = useFetch();
   const [disabledFields, setDisabledFields] = useState(true);
   const formikProfile = useFormik({
     initialValues: {
-      firstname: userContext.user?.firstname,
-      lastname: userContext.user?.lastname,
+      firstname: userContext.user.firstname,
+      lastname: userContext.user.lastname,
       email: userContext.user.email,
     },
     onSubmit: async (values) => {
@@ -63,7 +49,7 @@ function ProfileBox(props) {
               label={<Trans>profile.firstname</Trans>}
               variant="filled"
               onChange={formikProfile.handleChange}
-              value={formikProfile.values.firstname}
+              value={formikProfile.values?.firstname}
             />
 
             <TextField
@@ -72,7 +58,7 @@ function ProfileBox(props) {
               label={<Trans>profile.lastname</Trans>}
               variant="filled"
               onChange={formikProfile.handleChange}
-              value={formikProfile.values.lastname}
+              value={formikProfile.values?.lastname}
             />
             <TextField
               disabled={disabledFields}

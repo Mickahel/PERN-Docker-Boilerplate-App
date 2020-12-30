@@ -194,7 +194,7 @@ function Feedback(props) {
               onChange={feedbackForm.handleChange}
               disabled={feedbackForm.isSubmitting}
               className="flex flex-1"
-              name="feedback"
+              name="description"
               variant="filled"
               multiline={true}
               rows={5}
