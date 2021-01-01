@@ -36,7 +36,7 @@ function Signup(props) {
   const { fetch } = useFetch();
   const validationSchema = Yup.object({
     email: Yup.string().email().required(),
-    password: Yup.string().required(),
+    password: Yup.string().required().min(8),
   });
 
   const signupFormik = useFormik({
