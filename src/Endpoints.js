@@ -17,7 +17,7 @@ const Endpoints = {
     status: "/v1/debug/status/:status", // ? GET
   },
   feedback: {
-    sendNew: "/v1/app/feedback/sendNew", // ? POST
+    sendNew: "/v1/app/feedback/create", // ? POST
   },
   pushNotification: {
     sendToken: "/v1/app/pushNotification/:token" // ? POST

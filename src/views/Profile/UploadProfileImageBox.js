@@ -27,7 +27,7 @@ function UploadProfileImageBox(props) {
   const userContext = useContext(UserContext);
   const themeContext = useContext(ThemeContext);
   const classes = useStyles();
-  const { fetch, sendFile } = useFetch();
+  const { fetch } = useFetch();
 
   const handleUploadClick = (event) => {
     if (event?.target?.files[0]) {
@@ -36,12 +36,13 @@ function UploadProfileImageBox(props) {
       let url = reader.readAsDataURL(file);
 
       reader.onloadend = async function (e) {
-        let result = await sendFile({
+        let result = await fetch({
           url: Endpoints.user.editProfile,
           method: "PUT",
           file,
           filename: "profileImageUrl",
         });
+
         userContext.setUser(result);
       }.bind(this);
     }

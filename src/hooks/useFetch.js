@@ -39,9 +39,9 @@ function useFetcher(props) {
       );
       queryString = axiosOptions.query
         ? qs.stringify(axiosOptions.query, {
-            addQueryPrefix: true,
-            arrayFormat: "repeat",
-          })
+          addQueryPrefix: true,
+          arrayFormat: "repeat",
+        })
         : "";
     }
 
@@ -58,13 +58,13 @@ function useFetcher(props) {
     const CORSHeaders =
       addHeaders == true
         ? {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers":
-              "X-Requested-With, Content-Type, Accept, Set-Cookie",
-            "Access-Control-Allow-Methods":
-              "GET, PUT, POST, DELETE, PATCH, OPTIONS",
-            "Access-Control-Allow-Credentials": "true",
-          }
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers":
+            "X-Requested-With, Content-Type, Accept, Set-Cookie",
+          "Access-Control-Allow-Methods":
+            "GET, PUT, POST, DELETE, PATCH, OPTIONS",
+          "Access-Control-Allow-Credentials": "true",
+        }
         : {};
 
     const headers = {
@@ -107,12 +107,12 @@ function useFetcher(props) {
         return response;
       },
       (err) => {
+        console.log(err.response)
         if (
           err?.response?.status === 401 ||
           err?.response?.status === 403 ||
           err?.response?.status === 404
         ) {
-          //console.log("Unauthorized", err.response)
           if (
             err.response.data.message == "User is not authorized" ||
             err.response.data.message == "Token expired"
@@ -166,14 +166,13 @@ function useFetcher(props) {
             redirectToPage500 === false &&
             showErrorSnackBar === true
           )
+
             themeContext.showErrorSnackbar({ message: "somethingWentWrong" });
           if (
             err.message.toString() == "Network Error" &&
             redirectToPage500 == false
           )
-            themeContext.showErrorSnackbar({
-              message: "apiErrors.networkError",
-            });
+            themeContext.showErrorSnackbar({ message: "apiErrors.networkError" });
           throw err;
         } else {
           throw err;
@@ -211,6 +210,7 @@ function useFetcher(props) {
       error: apiErrors,
     };
   }, []);
+
   const fetchPaginated = async (options) => {
     options.paginated = false;
     options.setLoading = false;
@@ -241,10 +241,22 @@ function useFetcher(props) {
 
   const fetch = useCallback(async (options) => {
     if (options.setLoading != false) setLoading(true);
-    if (
-      !_.get(counter.current, options.url + JSON.stringify(options.data), false)
-    )
-      counter.current[options.url + JSON.stringify(options.data)] = 0;
+    if (!_.get(counter.current, options.url + JSON.stringify(options.data), false)) counter.current[options.url + JSON.stringify(options.data)] = 0;
+
+    if (!(options?.data instanceof FormData)) {
+      const formData = new FormData();
+      if (options.file) {
+        formData.append(options.filename, options.file);
+        options.addHeadersForFiles = true
+      }
+      if (options?.data) Object.keys(options.data).forEach((key) => formData.append(key, options.data[key]));
+      options.data = formData
+    }
+    /*  options = {
+        ...options,
+        data: formData,
+      };*/
+
     const axiosGateway = createAxiosGateway(options);
     let url = createUrl(options);
     try {
@@ -270,9 +282,13 @@ function useFetcher(props) {
           counter.current[options.url + JSON.stringify(options.data)] =
             counter.current[options.url + JSON.stringify(options.data)] + 1;
           await new Promise((resolve) => setTimeout(resolve, 500));
+          console.log(err.config)
           return fetch(err.config);
         } else {
           counter.current[options.url + JSON.stringify(options.data)] = 0;
+          /*if (err.message.toString() == "Network Error") {
+            console.log("Network Error")
+          }*/
           if (options.setLoading != false) setLoading(false);
           if (options.setError != false) setError(err.response);
           throw err.response;
@@ -285,28 +301,12 @@ function useFetcher(props) {
     }
   }, []);
 
-  const sendFile = useCallback(async (options) => {
-    const formData = new FormData();
-    if (options.file) formData.append(options.filename, options.file);
-    if (options?.data)
-      Object.keys(options.data).forEach((key) =>
-        formData.append(key, options.data[key])
-      );
-    options = {
-      ...options,
-      data: formData,
-      addHeadersForFiles: true,
-    };
-    return fetch(options);
-  }, []);
-
   return {
     loading,
     data,
     error,
     fetch,
-    fetchAll,
-    sendFile,
+    fetchAll
   };
 }
 

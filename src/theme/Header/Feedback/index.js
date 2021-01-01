@@ -30,7 +30,7 @@ import { useHistory } from "react-router-dom";
 function Feedback(props) {
   const [open, setOpen] = useState(false);
   const history = useHistory();
-  const { sendFile } = useFetch();
+  const { fetch } = useFetch();
   const themeContext = useContext(ThemeContext);
   const [t, i18n] = useTranslation();
   const openFeedbackPopover = () => {
@@ -48,21 +48,20 @@ function Feedback(props) {
   };
   const feedbackForm = useFormik({
     initialValues: {
-      type: "Bug",
+      type: "BUG",
       includeScreenshot: true,
     },
     onSubmit: async (values, formikBag) => {
-      if (_.isEmpty(values.feedback) && !values.includeScreenshot) {
-        closeFeedbackPopover();
-        formikBag.setSubmitting(false);
-        return;
-      }
-
-      //Submitting
+      /*      if (_.isEmpty(values.feedback) && !values.includeScreenshot) {
+              closeFeedbackPopover();
+              formikBag.setSubmitting(false);
+              return;
+            }
+      */
+      // ? Submitting
       try {
-        //themeContext.showWaitDialog()
         let file = null;
-        if (values.includeScreenshot) {
+        if (values.includeScreenshot == true) {
           let screen = await html2canvas(document.getElementById("root"));
           const blob = canvasToBlob(screen);
           file = new File([blob], "image.png", {
@@ -71,16 +70,18 @@ function Feedback(props) {
           });
         }
 
-        await sendFile({
+        await fetch({
           url: Endpoints.feedback.sendNew,
           method: "POST",
           data: {
-            ...values,
-            path: history.location.pathname,
+            description: values.description,
+            type: values.type,
+            path: window.location,
           },
           file,
           filename: "screenshot",
         });
+
         themeContext.showSuccessSnackbar({
           message: "feedback.thankYouForTheFeedback",
         });
@@ -183,8 +184,8 @@ function Feedback(props) {
                       }}
                       value={feedbackForm.values.type}
                     >
-                      <MenuItem value={"Feature"}>Feature</MenuItem>
-                      <MenuItem value={"Bug"}>Bug</MenuItem>
+                      <MenuItem value={"FEATURE"}>Feature</MenuItem>
+                      <MenuItem value={"BUG"}>Bug</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -210,7 +211,7 @@ function Feedback(props) {
               <Trans>close</Trans>
             </Button>
             <Button
-              disabled={feedbackForm.isSubmitting}
+              disabled={feedbackForm.isSubmitting || !feedbackForm.values.description}
               type="submit"
               variant="contained"
               color="primary"

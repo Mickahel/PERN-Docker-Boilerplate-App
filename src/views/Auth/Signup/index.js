@@ -55,7 +55,7 @@ function Signup(props) {
       } catch (err) {
         if (err?.status < 500)
           themeContext.showErrorSnackbar({
-            message: "auth." + err.data.message,
+            message: err.data.message,
           });
       }
     },
@@ -153,8 +153,8 @@ function Signup(props) {
                           {showPassword ? (
                             <VisibilityOutlinedIcon />
                           ) : (
-                            <VisibilityOffOutlinedIcon />
-                          )}
+                              <VisibilityOffOutlinedIcon />
+                            )}
                         </IconButton>
                       </InputAdornment>
                     ),

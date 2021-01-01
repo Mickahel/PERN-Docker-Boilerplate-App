@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { withTranslation } from "react-i18next";
 import i18n from "i18n";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -8,7 +8,6 @@ import MUIThemeHandler from "./components/MUIThemeHandler";
 //import { LocalizationProvider } from "@material-ui/pickers";
 //import MomentUtils from "@material-ui/pickers/adapter/moment";
 import "./i18n";
-//import './i18n/i18nextConfig';
 import SnackBar from "components/SnackBar";
 import StandardDialog from "components/StandardDialog";
 import moment from "moment";

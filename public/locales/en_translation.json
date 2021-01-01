@@ -2,6 +2,8 @@
 	"installApp": "Install App",
 	"error": "An Error Has Occurred, Try Again",
 	"yes": "Yes",
+	"somethingWentWrong": "Something Went Wrong",
+	"Validation Error": "Error sending data",
 	"notificationHandler": {
 		"title": "Can we Send You Notifications?",
 		"content": "The platform wants to send you notifications",
@@ -95,6 +97,7 @@
 		"equalTo": "Fields Must Be The Same"
 	},
 	"placeholder": {
+		"errorNoInternet": "No Internet",
 		"backToHomepage": "Back to Dashboard",
 		"cannotFindPage": "Ooops! You seem lost!",
 		"notFound": "Page Not Found",

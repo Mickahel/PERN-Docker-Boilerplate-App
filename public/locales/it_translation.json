@@ -2,6 +2,8 @@
 	"installApp": "Installa L'App",
 	"error": "Un errore è accaduto, Prova di nuovo",
 	"yes": "Si",
+	"somethingWentWrong": "Qualcosa è andato storto",
+	"Validation Error": "Errore nell'invio dei dati",
 	"notificationHandler": {
 		"title": "Possiamo invarti delle notifiche?",
 		"content": "La piattaforma vuole inviarti delle notifiche",
@@ -95,6 +97,7 @@
 		"equalTo": "I Campi Devono Essere Uguali"
 	},
 	"placeholder": {
+		"errorNoInternet": "Error No Internet",
 		"backToHomepage": "Torna indietro",
 		"cannotFindPage": "Ooops! Ti sei perso!",
 		"notFound": "Pagina Non Trovata",
