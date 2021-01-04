@@ -79,6 +79,7 @@
 		"forgotPassword": "Forgot Password?",
 		"insertInformation": "Insert Information",
 		"activation": {
+			"Validation Error": "Error sending data",
 			"activatedText": "Your account has been activated",
 			"User not found": "User to activate not found",
 			"retry": "Retry",

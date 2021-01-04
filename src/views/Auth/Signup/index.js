@@ -24,20 +24,51 @@ import {
   GoogleLoginButton,
 } from "react-social-login-buttons";
 import Divider from "@material-ui/core/Divider";
+import RoundLoader from "components/RoundLoader"
 
 function Signup(props) {
   let [disableButton, setDisableButton] = useState(true);
   let [showPassword, setShowPassword] = useState(false);
   let [isSignupSucceded, setIsSignupSucceded] = useState(false);
+  let [loadingRedirect, setLoadingRedirect] = useState(false)
   const [t, i18n] = useTranslation();
   const themeContext = useContext(ThemeContext);
   const userContext = useContext(UserContext);
   const history = useHistory();
   const { fetch } = useFetch();
+  const { loading, fetch: fetchUser } = useFetch();
   const validationSchema = Yup.object({
     email: Yup.string().email().required(),
     password: Yup.string().required().min(8),
   });
+
+  const isUserLogged = useCallback(async () => {
+    try {
+      const data = await fetchUser({
+        method: "GET",
+        url: Endpoints.user.profile,
+        redirectToLogin: false,
+      });
+      userContext.setUser(data);
+      history.push("/");
+    } catch (e) {
+      //console.log("error", e)
+    }
+  }, []);
+
+  useEffect(() => {
+    isUserLogged();
+  }, []);
+
+
+
+  const socialLogin = type => event => {
+    setLoadingRedirect(true)
+    const usp = new URLSearchParams(props.location.search)
+    const returnUrl = usp.get('returnUrl')
+    //Cookies.set('returnUrl', returnUrl);
+    window.location.href = process.env.REACT_APP_API_URL + "/v1/auth/login/" + type + "?returnUrl=" + returnUrl
+  }
 
   const signupFormik = useFormik({
     initialValues: {
@@ -73,9 +104,7 @@ function Signup(props) {
     event.preventDefault();
   };
 
-  function handleClick() {
-    alert("Hello!");
-  }
+  if (loading || loadingRedirect == true) return <RoundLoader />;
   return (
     <div id="signup">
       <Helmet title={`${config.name.short} - ${t("auth.signup")}`} />
@@ -186,14 +215,14 @@ function Signup(props) {
               <FacebookLoginButton
                 iconSize="15px"
                 align="center"
-                onClick={handleClick}
+                onClick={socialLogin('facebook')}
               >
                 <Trans>auth.loginWithFacebook</Trans>
               </FacebookLoginButton>
               <GoogleLoginButton
                 iconSize="15px"
                 align="center"
-                onClick={handleClick}
+                onClick={socialLogin('google')}
               >
                 <Trans>auth.loginWithGoogle</Trans>
               </GoogleLoginButton>

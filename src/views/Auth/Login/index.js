@@ -30,15 +30,25 @@ function Login(props) {
   let [disableButton, setDisableButton] = useState(true);
   let [showPassword, setShowPassword] = useState(false);
   const [t, i18n] = useTranslation();
+  let [loadingRedirect, setLoadingRedirect] = useState(false)
   const themeContext = useContext(ThemeContext);
   const userContext = useContext(UserContext);
   const history = useHistory();
   const { fetch } = useFetch();
-  const { loading, fetch: fetcheUser } = useFetch();
+  const { loading, fetch: fetchUser } = useFetch();
   const validationSchema = Yup.object({
     email: Yup.string().email().required(),
     password: Yup.string().required(),
   });
+
+  const socialLogin = type => event => {
+    setLoadingRedirect(true)
+    const usp = new URLSearchParams(props.location.search)
+    const returnUrl = usp.get('returnUrl')
+    //Cookies.set('returnUrl', returnUrl);
+    window.location.href = process.env.REACT_APP_API_URL + "/v1/auth/login/" + type + "?returnUrl=" + returnUrl
+  }
+
 
   useEffect(() => {
     isUserLogged();
@@ -46,7 +56,7 @@ function Login(props) {
 
   const isUserLogged = useCallback(async () => {
     try {
-      const data = await fetcheUser({
+      const data = await fetchUser({
         method: "GET",
         url: Endpoints.user.profile,
         redirectToLogin: false,
@@ -104,11 +114,8 @@ function Login(props) {
     event.preventDefault();
   };
 
-  function handleClick() {
-    alert("Hello!");
-  }
 
-  if (loading) return <RoundLoader />;
+  if (loading || loadingRedirect == true) return <RoundLoader />;
   return (
     <div id="login">
       <Helmet title={`${config.name.short} - ${t("auth.login")}`} />
@@ -183,8 +190,8 @@ function Login(props) {
                       {showPassword ? (
                         <VisibilityOutlinedIcon />
                       ) : (
-                        <VisibilityOffOutlinedIcon />
-                      )}
+                          <VisibilityOffOutlinedIcon />
+                        )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -215,14 +222,14 @@ function Login(props) {
           <FacebookLoginButton
             iconSize="15px"
             align="center"
-            onClick={handleClick}
+            onClick={socialLogin('facebook')}
           >
             <Trans>auth.loginWithFacebook</Trans>
           </FacebookLoginButton>
           <GoogleLoginButton
             iconSize="15px"
             align="center"
-            onClick={handleClick}
+            onClick={socialLogin('google')}
           >
             <Trans>auth.loginWithGoogle</Trans>
           </GoogleLoginButton>

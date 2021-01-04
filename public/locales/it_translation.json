@@ -79,6 +79,7 @@
 		"forgotPassword": "Password Dimenticata?",
 		"insertInformation": "Inserisci le Informazioni",
 		"activation": {
+			"Validation Error": "Errore nell'invio dei dati",
 			"activatedText": "Il tuo account è stato attivato",
 			"User not found": "Utente da attivare non trovato",
 			"retry": "Riprova",
