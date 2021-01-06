@@ -1,13 +1,12 @@
-import React, { useContext, useCallback, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "contexts/Providers/ThemeProvider";
 import { UserContext } from "contexts/Providers/UserProvider";
 import "./style.scss";
 import LanguageBox from "./LanguageBox";
 import ProfileBox from "./ProfileBox";
+import DisableUserBox from "./DisableUserBox";
 import ChangePasswordBox from "./ChangePasswordBox";
 import useFetch from "hooks/useFetch";
-import Endpoints from "Endpoints";
-import RoundLoader from "components/RoundLoader";
 import _ from "lodash";
 import TopSide from "./TopSide";
 import { makeStyles } from "@material-ui/core/styles";
@@ -71,7 +70,15 @@ function Profile(props) {
               className={classes.tab}
               label={
                 <Typography variant="h6">
-                  <Trans>profile.profile</Trans>{" "}
+                  <Trans>profile.profile</Trans>
+                </Typography>
+              }
+            />
+            <Tab
+              className={classes.tab}
+              label={
+                <Typography variant="h6">
+                  <Trans>Account</Trans>
                 </Typography>
               }
             />
@@ -87,6 +94,15 @@ function Profile(props) {
           <div className="rightBox flex flex-col w-3/6">
             <UploadProfileImageBox />
             <LanguageBox />
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <div className=" profileTab flex">
+          <div className="leftBox flex flex-col w-3/6">
+            <DisableUserBox />
+          </div>
+          <div className="rightBox flex flex-col w-3/6">
           </div>
         </div>
       </TabPanel>

@@ -23,6 +23,7 @@ import Feedback from "theme/Header/Feedback";
 import useFetch from "hooks/useFetch";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import config from "configuration/config";
+import Endpoints from "Endpoints";
 
 const useStyles = makeStyles((theme) => ({
   small: {
@@ -139,10 +140,11 @@ function ProfileButton(props) {
           onClick={async () => {
             try {
               await fetch({
-                url: "/v1/auth/logout",
+                url: Endpoints.auth.logout,
                 method: "DELETE",
               });
               history.push("/auth/login");
+              userContext.setUser(undefined);
             } catch (e) { }
           }}
           dense={true}

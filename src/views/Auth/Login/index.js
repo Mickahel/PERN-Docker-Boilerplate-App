@@ -25,6 +25,7 @@ import {
 } from "react-social-login-buttons";
 import Divider from "@material-ui/core/Divider";
 import RoundLoader from "components/RoundLoader";
+import _ from "lodash";
 
 function Login(props) {
   let [disableButton, setDisableButton] = useState(true);
@@ -45,13 +46,17 @@ function Login(props) {
     setLoadingRedirect(true)
     const usp = new URLSearchParams(props.location.search)
     const returnUrl = usp.get('returnUrl')
-    //Cookies.set('returnUrl', returnUrl);
-    window.location.href = process.env.REACT_APP_API_URL + "/v1/auth/login/" + type + "?returnUrl=" + returnUrl
+    if (!_.isEmpty(returnUrl)) localStorage.returnUrl = returnUrl
+    window.location.href = process.env.REACT_APP_API_URL + "/v1/auth/login/" + type
   }
 
 
   useEffect(() => {
     isUserLogged();
+    if (props.showSocialLoginError) {
+      themeContext.showErrorSnackbar({ message: "auth.errorOnSocialLogin" })
+      localStorage.removeItem("returnUrl")
+    }
   }, []);
 
   const isUserLogged = useCallback(async () => {

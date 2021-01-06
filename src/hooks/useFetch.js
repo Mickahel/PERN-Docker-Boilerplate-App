@@ -107,7 +107,7 @@ function useFetcher(props) {
         return response;
       },
       (err) => {
-        console.log(err.response)
+        //console.log(err.response)
         if (
           err?.response?.status === 401 ||
           err?.response?.status === 403 ||
@@ -282,7 +282,7 @@ function useFetcher(props) {
           counter.current[options.url + JSON.stringify(options.data)] =
             counter.current[options.url + JSON.stringify(options.data)] + 1;
           await new Promise((resolve) => setTimeout(resolve, 500));
-          console.log(err.config)
+          //console.log(err.config)
           return fetch(err.config);
         } else {
           counter.current[options.url + JSON.stringify(options.data)] = 0;

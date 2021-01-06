@@ -191,8 +191,7 @@ function StandardDialog(props) {
               </DialogTitle>
               <DialogContent className="content">
                 <DialogContentText className="content-text">
-                  {" "}
-                  {message}{" "}
+                  {message}
                 </DialogContentText>
                 {type === "confirm" && (
                   <div className="flex justify-center pl-2 pr-2">

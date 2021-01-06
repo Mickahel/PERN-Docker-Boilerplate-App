@@ -9,7 +9,7 @@ function ErrorBoundary(props) {
     <EB
       fallbackRender={({ error, resetErrorBoundary }) => (
         <div>
-          There was an error!{" "}
+          There was an error!
           <Button onClick={() => resetErrorBoundary()}>Try again</Button>
           <pre style={{ whiteSpace: "normal" }}>{error.message}</pre>
         </div>

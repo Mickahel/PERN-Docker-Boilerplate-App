@@ -67,7 +67,7 @@ function TopSide(props) {
               </Typography>
             </>
             :
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="subtitle2" gutterBottom>
               {userContext.user.email}
             </Typography>
           }

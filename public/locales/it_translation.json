@@ -44,6 +44,7 @@
 		"previousPage": "Pagina Precedente"
 	},
 	"auth": {
+		"errorOnSocialLogin": "Errore durante l'accesso social",
 		"logout": "Esci",
 		"alreadyHaveAnAccount": "Hai già un Account?",
 		"error": "Un errore è accaduto, Prova di nuovo",
@@ -106,8 +107,11 @@
 		"youAreNotAuthorized": "Non sei Autorizzato!"
 	},
 	"profile": {
+		"disable": "Disabilita",
+		"disableAccount": "Disabilita Account",
 		"noNotifications": "Non hai attivato le notifiche push",
 		"activateNow": "Attivale ora",
+		"passwordInsertedIsWrong": "La Password inserita non è Corretta",
 		"passwordIsWrong": "La Password Attuale non è Corretta",
 		"upload": "Scegli File",
 		"uploadImageText": "JPG, GIF o PNG",
@@ -132,7 +136,7 @@
 	},
 	"apiErrors": {
 		"networkError": "Errore di Connessione",
-		"loginAgain": "Accedi di nuovo"
+		"loginAgain": "Accedi alla Piattaforma"
 	},
 	"newUpdateAlert": {
 		"title": "Nuovo aggiornamento!",

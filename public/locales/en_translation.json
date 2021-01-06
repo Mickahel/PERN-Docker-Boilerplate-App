@@ -44,6 +44,7 @@
 		"thankYouForTheFeedback": "Thank you For the Feedback"
 	},
 	"auth": {
+		"errorOnSocialLogin": "Error on Social Login",
 		"alreadyHaveAnAccount": "Do You Already Have an Account?",
 		"error": "An Error Has Occurred, Try Again",
 		"user doesn't exist": "User Doesn't Exist",
@@ -106,9 +107,12 @@
 		"youAreNotAuthorized": "You Are not Authorized!"
 	},
 	"profile": {
+		"disable": "Disable",
+		"disableAccount": "Disable Account",
 		"noNotifications": "You have not activated push notifications",
 		"activateNow": "Activate them now",
 		"passwordChanged": "Password Has Been Changed",
+		"passwordInsertedIsWrong": "Password Inserted is Wrong",
 		"passwordIsWrong": "Current Password is Wrong",
 		"upload": "Choose File",
 		"uploadImageText": "JPG, GIF or PNG",
@@ -132,7 +136,7 @@
 	},
 	"apiErrors": {
 		"networkError": "Network Error",
-		"loginAgain": "Login Again"
+		"loginAgain": "Login in the Platform"
 	},
 	"newUpdateAlert": {
 		"title": "New Update!",

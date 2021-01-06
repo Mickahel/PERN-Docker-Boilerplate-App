@@ -142,7 +142,7 @@ function Signup(props) {
                     Boolean(signupFormik.errors.email)
                   }
                   id="email"
-                  label={"Email"}
+                  label="Email"
                   variant="filled"
                   onChange={signupFormik.handleChange}
                   onBlur={signupFormik.handleBlur}

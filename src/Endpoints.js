@@ -12,6 +12,7 @@ const Endpoints = {
   user: {
     profile: "/v1/app/user/info", // ? GET
     editProfile: "/v1/app/user/edit", // ? GET
+    disableAccount: "v1/app/user/disable" // ? DELETE
   },
   debug: {
     status: "/v1/debug/status/:status", // ? GET

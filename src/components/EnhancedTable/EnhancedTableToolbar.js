@@ -24,13 +24,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          //color: theme.palette.primary.main,
-          backgroundColor: lighten(theme.palette.primary.light, 0.85),
-        }
+        //color: theme.palette.primary.main,
+        backgroundColor: lighten(theme.palette.primary.light, 0.85),
+      }
       : {
-          //color: theme.palette.text.primary,
-          backgroundColor: theme.palette.primary.dark,
-        },
+        //color: theme.palette.text.primary,
+        backgroundColor: theme.palette.primary.dark,
+      },
   title: {
     flex: "1 1 100%",
   },
@@ -73,26 +73,26 @@ const EnhancedTableToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
-          {numSelected}{" "}
+          {numSelected}
           {numSelected === 1 ? (
             <Trans>enhancedTable.elementSelected</Trans>
           ) : (
-            <Trans>enhancedTable.elementsSelected</Trans>
-          )}
+              <Trans>enhancedTable.elementsSelected</Trans>
+            )}
         </Typography>
       ) : (
-        <>
-          {showSearchbar && (
-            <TextField
-              size="small"
-              onChange={(e) => {
-                handleSearch(e);
-              }}
-              label={<Trans>enhancedTable.search</Trans>}
-            />
-          )}
-        </>
-      )}
+          <>
+            {showSearchbar && (
+              <TextField
+                size="small"
+                onChange={(e) => {
+                  handleSearch(e);
+                }}
+                label={<Trans>enhancedTable.search</Trans>}
+              />
+            )}
+          </>
+        )}
 
       {numSelected === 0 && showFilters && (
         <>
