@@ -8,9 +8,9 @@
 	"shortcuts": [
 		{
 			"name": "Dashboard",
-			"short_name": "DashB",
+			"short_name": "Board",
 			"description": "Summary of the Platform",
-			"url": "/app/dashboard",
+			"url": "/dashboard",
 			"icons": [
 				{ "src": "img/icons/dashboardIcon-144.png", "sizes": "144x144" }
 			]

@@ -51,7 +51,7 @@ function NavVerticalItem(props) {
       className={classnames(classes.listItem)}
       onClick={(event) => {
         if (item.to) history.push(item.to);
-        else if (item.redirectUrl) window.open(item.redirectUrl); //TODO cambiare
+        else if (item.redirectUrl) window.open(item.redirectUrl);
         if (matches || themeContext.sidebarOpenedEvent === "click")
           navBarCloseMobile();
       }}

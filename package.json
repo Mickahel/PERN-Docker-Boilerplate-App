@@ -56,13 +56,10 @@
 		"yup": "^0.32.1"
 	},
 	"scripts": {
-		"OLDstart": "react-scripts start",
-		"OLDbuild": "react-scripts build",
-		"OLDtest": "react-scripts test",
+		"deployWithPM2": "pnpm run build&&pm2 start ecosystem.config.js",
 		"start": "craco start",
 		"build": "craco build",
 		"test": "craco test",
-		"eject": "react-scripts eject",
 		"install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && pnpm install"
 	},
 	"eslintConfig": {
