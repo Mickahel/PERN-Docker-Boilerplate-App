@@ -127,7 +127,8 @@ function EnhancedTable(props) {
     showSearchbar,
     maxHeight,
     singlePage,
-    dense
+    dense,
+    buttons
   } = props;
 
   const classes = useStyles({ maxHeight });
@@ -190,13 +191,7 @@ function EnhancedTable(props) {
     setRows(createRows(props.rows, props.transformRowValues));
   }, []);
 
-  const handleDeleteClick = () => {
-    console.log(selected);
-  };
 
-  const handleEditClick = () => {
-    console.log(selected);
-  };
 
   const createRowsPerPageOptions = (rows) => {
     let rowsPerPageOptions = [];
@@ -217,6 +212,7 @@ function EnhancedTable(props) {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.id);
       //console.log(newSelecteds)
+
       setSelected(newSelecteds);
       return;
     }
@@ -240,6 +236,7 @@ function EnhancedTable(props) {
         selected.slice(selectedIndex + 1)
       );
     }
+
     setSelected(newSelected);
   };
 
@@ -269,9 +266,9 @@ function EnhancedTable(props) {
     <div className={classnames(classes.root, "enhancedTable")}>
       <EnhancedTableToolbar
         numSelected={selected.length}
+        buttons={buttons}
         title={title}
-        handleEditClick={handleEditClick}
-        handleDeleteClick={handleDeleteClick}
+        selected={selected}
         handleSearch={handleSearch}
         headCells={headCells}
         handleCheckboxFilterClick={handleCheckboxFilterClick}
@@ -297,7 +294,7 @@ function EnhancedTable(props) {
               headCells={headCells}
               readOnly={readOnly}
               collapsible={collapsible}
-              dense = {dense}
+              dense={dense}
             />
           )}
           <TableBody>
@@ -319,15 +316,17 @@ function EnhancedTable(props) {
                   activeCells={headCells.length}
                   collapsibleHeadCells={collapsibleHeadCells}
                   collapsibleTitle={collapsibleTitle}
-                  dense = {dense}
+                  dense={dense}
                 />
               );
             })}
             {emptyRows > 0 && (
-              <TableRow style={{ height: 55.5 * emptyRows }}>
-                {collapsible && <TableCell />}
+
+              <TableRow style={{ height: (dense == true ? 25 : 55.5) * emptyRows }}>
+                {!readOnly && <TableCell padding={dense ? "none" : "default"} />}
+                {collapsible && <TableCell padding={dense ? "none" : "default"} />}
                 {headCells.map((element, index) => {
-                  if (element.show == true) return <TableCell key={index} />;
+                  if (element.show == true) return <TableCell key={index} padding={dense ? "none" : "default"} />;
                 })}
               </TableRow>
             )}
@@ -366,6 +365,7 @@ EnhancedTable.propTypes = {
   title: PropTypes.string,
   headCells: PropTypes.array.isRequired,
   rows: PropTypes.array.isRequired,
+  buttons: PropTypes.array,
   readOnly: PropTypes.bool,
   showFilters: PropTypes.bool,
   showSearchbar: PropTypes.bool,
@@ -382,7 +382,8 @@ EnhancedTable.defaultProps = {
   showHeadCells: true,
   showSearchbar: true,
   singlePage: false,
-  dense: false
+  dense: false,
+  buttons: []
 };
 
 export default EnhancedTable;

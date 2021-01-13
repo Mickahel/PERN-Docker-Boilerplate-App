@@ -139,11 +139,12 @@ function Row(props) {
           return (
             element.show && (
               <TableCell
-              padding={dense ? "none" : "default" }
+                padding={dense ? "none" : "default"}
                 key={row[element.id].value + index + element.id}
                 align={index == 0 ? "inherit" : "center"}
                 className={classnames(
-                  row[element.id].link && index != 0 && "iconPadding"
+                  row[element.id].link && index != 0 && "iconPadding",
+                  (dense == true && index == 0 && readOnly == true) && "denseReadOnlyFirstItem"
                 )}
               >
                 {createTableCell(row[element.id])}

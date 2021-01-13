@@ -41,7 +41,9 @@
 		"search": "Cerca",
 		"filtersList": "Lista Filtri",
 		"nextPage": "Pagina Successiva",
-		"previousPage": "Pagina Precedente"
+		"previousPage": "Pagina Precedente",
+		"elementSelected": "Elemento Selezionato",
+		"elementsSelected": "Elementi Selezionati"
 	},
 	"auth": {
 		"errorOnSocialLogin": "Errore durante l'accesso social",

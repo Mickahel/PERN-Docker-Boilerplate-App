@@ -75,12 +75,15 @@ function EnhancedTableHead(props) {
           (headCell, index) =>
             headCell.show && (
               <TableCell
-                padding={dense ? "none": "default"}
+                padding={dense ? "none" : "default"}
                 size="small"
                 key={headCell.id + index}
                 align={index === 0 ? "left" : "center"}
                 sortDirection={orderBy === headCell.id ? order : false}
                 classes={{ root: headClasses.topTableCell }}
+                className={classnames(
+                  (dense == true && index == 0 && readOnly == true) && "denseReadOnlyFirstItem"
+                )}
               >
                 <span
                   className={classnames(

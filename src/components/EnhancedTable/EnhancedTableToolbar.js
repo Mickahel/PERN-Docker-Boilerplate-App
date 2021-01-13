@@ -39,14 +39,14 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
   const {
     numSelected,
-    handleEditClick,
-    handleDeleteClick,
+    selected,
     handleSearch,
     headCells,
     handleCheckboxFilterClick,
     showFilters,
     showSearchbar,
     readOnly,
+    buttons
   } = props;
   let setMinHeight = !(showFilters || showSearchbar || readOnly);
   const classes = useToolbarStyles(setMinHeight);
@@ -73,7 +73,7 @@ const EnhancedTableToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
-          {numSelected}
+          {numSelected} {" "}
           {numSelected === 1 ? (
             <Trans>enhancedTable.elementSelected</Trans>
           ) : (
@@ -127,28 +127,25 @@ const EnhancedTableToolbar = (props) => {
           </Menu>
         </>
       )}
-      {numSelected > 0 && (
-        <Tooltip title={<Trans>enhancedTable.delete</Trans>}>
-          <IconButton onClick={handleDeleteClick} aria-label="delete">
-            <DeleteOutlineOutlinedIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-      {numSelected === 1 && (
-        <Tooltip title={<Trans>enhancedTable.edit</Trans>}>
-          <IconButton onClick={handleEditClick} aria-label="edit">
-            <EditOutlinedIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
+      {
+        buttons.map(button => {
+          let icon = <Tooltip key={button.helperText + "tt"} title={<Trans>{button.helperText}</Trans>}>
+            <IconButton
+              key={button.helperText + "ic"}
+              onClick={() => { button.onClick(selected) }}>
+              {button.icon}
+            </IconButton>
+          </Tooltip>
+          if ((button.activateOnSingleSelection == true && numSelected === 1) || (button.activateOnMultipleSelection == true && numSelected > 1)) return icon
+        })
+      }
+    </Toolbar >
   );
 };
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
-  handleEditClick: PropTypes.func.isRequired,
-  handleDeleteClick: PropTypes.func.isRequired,
+  selected: PropTypes.array,
   handleSearch: PropTypes.func.isRequired,
   headCells: PropTypes.array.isRequired,
   handleCheckboxFilterClick: PropTypes.func.isRequired,

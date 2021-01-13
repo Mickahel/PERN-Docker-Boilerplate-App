@@ -15,7 +15,7 @@ const FloatingActionButton = (props) => {
   const realDisabled = disabled || loading
   const history = useHistory();
 
-  handleOnClick = () => {
+  const handleOnClick = () => {
     const { onClick, href } = props
     if (typeof onClick === 'function') onClick()
     else if (href) history.push(href);

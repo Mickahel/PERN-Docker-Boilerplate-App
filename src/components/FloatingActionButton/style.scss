@@ -1,0 +1,28 @@
+@import '../../configuration/variables.scss';
+
+
+.fabButton{
+    margin: 0;
+    right: 33px;
+    bottom: 33px;
+    position: fixed;
+    z-index: 500;
+
+    #checkOutlinedIcon{
+        color: white ;
+    }
+    .progress{
+        color: green !important;
+        position: absolute;
+        top: -5.5px ;
+        left: -5.83px;
+    }
+
+    .success{
+        background-color: $successColor;
+        &:hover{
+            background-color: darken($successColor, 10%) !important;
+        }
+    }
+
+}

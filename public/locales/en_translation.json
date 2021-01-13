@@ -33,7 +33,9 @@
 		"search": "Search",
 		"filtersList": "Filters List",
 		"nextPage": "Next Page",
-		"previousPage": "Previous Page"
+		"previousPage": "Previous Page",
+		"elementSelected": "Element Selected",
+		"elementsSelected": "Elements Selected"
 	},
 	"feedback": {
 		"sendAFeedback": "Send A Feedback",
