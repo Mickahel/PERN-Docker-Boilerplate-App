@@ -36,6 +36,7 @@ function EnhancedTableHead(props) {
     headCells,
     readOnly,
     collapsible,
+    dense
   } = props;
 
   const createSortHandler = (property) => (event) => {
@@ -74,6 +75,8 @@ function EnhancedTableHead(props) {
           (headCell, index) =>
             headCell.show && (
               <TableCell
+                padding={dense ? "none": "default"}
+                size="small"
                 key={headCell.id + index}
                 align={index === 0 ? "left" : "center"}
                 sortDirection={orderBy === headCell.id ? order : false}
@@ -82,9 +85,9 @@ function EnhancedTableHead(props) {
                 <span
                   className={classnames(
                     index != 0 &&
-                      (headCell.helpText
-                        ? "headRowWithHelperText"
-                        : "headRowWithoutHelperText")
+                    (headCell.helpText
+                      ? "headRowWithHelperText"
+                      : "headRowWithoutHelperText")
                   )}
                 >
                   <TableSortLabel
@@ -107,6 +110,7 @@ function EnhancedTableHead(props) {
                   {headCell.helpText && (
                     <>
                       <Popover
+                        elevation={1}
                         open={Boolean(anchorEl)}
                         anchorEl={anchorEl}
                         onClose={handleClose}

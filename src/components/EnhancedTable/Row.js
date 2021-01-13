@@ -17,6 +17,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import { ThemeContext } from "contexts/Providers/ThemeProvider";
+import _ from "lodash"
 const useRowStyles = makeStyles((theme) => ({
   tableCell: {
     borderTop: "unset",
@@ -40,15 +41,18 @@ const createTableCell = (element) => {
       element.value === true ? (
         <CheckCircleOutlinedIcon className="trueIcon" />
       ) : (
-        <CancelOutlinedIcon className="falseIcon" />
-      );
+          <CancelOutlinedIcon className="falseIcon" />
+        );
   } else value = element.value;
 
   let renderedElement = (
     <span className="singleCell">
       <span className="singleCellText">
-        {value}
-        {element.symbol}
+        {element.component
+          ? element.component(`${value} ${_.get("symbol", element, "")}`)
+          : <>{value}
+            {element.symbol}</>}
+
       </span>
 
       {element.link && (
@@ -83,6 +87,7 @@ function Row(props) {
     collapsibleHeadCells,
     collapsibleTitle,
     showVerticalBorders,
+    dense
   } = props;
 
   const themeContext = useContext(ThemeContext);
@@ -134,6 +139,7 @@ function Row(props) {
           return (
             element.show && (
               <TableCell
+              padding={dense ? "none" : "default" }
                 key={row[element.id].value + index + element.id}
                 align={index == 0 ? "inherit" : "center"}
                 className={classnames(

@@ -103,15 +103,15 @@ const useStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          //color: theme.palette.primary.main,
-          backgroundColor:
-            lighten(theme.palette.primary.light, 0.85) + "!important",
-        }
+        //color: theme.palette.primary.main,
+        backgroundColor:
+          lighten(theme.palette.primary.light, 0.85) + "!important",
+      }
       : {
-          //color: theme.palette.text.primary,
-          backgroundColor:
-            lighten(theme.palette.primary.dark, 0.2) + "!important",
-        },
+        //color: theme.palette.text.primary,
+        backgroundColor:
+          lighten(theme.palette.primary.dark, 0.2) + "!important",
+      },
 }));
 
 function EnhancedTable(props) {
@@ -127,6 +127,7 @@ function EnhancedTable(props) {
     showSearchbar,
     maxHeight,
     singlePage,
+    dense
   } = props;
 
   const classes = useStyles({ maxHeight });
@@ -296,6 +297,7 @@ function EnhancedTable(props) {
               headCells={headCells}
               readOnly={readOnly}
               collapsible={collapsible}
+              dense = {dense}
             />
           )}
           <TableBody>
@@ -317,6 +319,7 @@ function EnhancedTable(props) {
                   activeCells={headCells.length}
                   collapsibleHeadCells={collapsibleHeadCells}
                   collapsibleTitle={collapsibleTitle}
+                  dense = {dense}
                 />
               );
             })}
@@ -350,9 +353,8 @@ function EnhancedTable(props) {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
           labelDisplayedRows={({ from, to, count }) => {
-            return `${from}-${to} ${i18n.t("enhancedTable.of")} ${
-              count !== -1 ? count : `${i18n.t("enhancedTable.moreThan")} ${to}`
-            }`;
+            return `${from}-${to} ${i18n.t("enhancedTable.of")} ${count !== -1 ? count : `${i18n.t("enhancedTable.moreThan")} ${to}`
+              }`;
           }}
         />
       )}
@@ -370,6 +372,7 @@ EnhancedTable.propTypes = {
   rowsPerPage: PropTypes.number,
   singlePage: PropTypes.bool,
   maxHeight: PropTypes.number,
+  dense: PropTypes.bool
 };
 EnhancedTable.defaultProps = {
   title: "",
@@ -379,6 +382,7 @@ EnhancedTable.defaultProps = {
   showHeadCells: true,
   showSearchbar: true,
   singlePage: false,
+  dense: false
 };
 
 export default EnhancedTable;
