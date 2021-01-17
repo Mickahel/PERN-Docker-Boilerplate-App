@@ -21,6 +21,13 @@
 		padding-left: 10px;
 	}
 
+	.denseReadOnlyLastItem {
+		padding-right: 10px;
+	}
+	.singleCell {
+		align-items: baseline;
+		display: inline-flex;
+	}
 	.singleCellIcon {
 		.MuiSvgIcon-root {
 			//margin-top: -2px !important;

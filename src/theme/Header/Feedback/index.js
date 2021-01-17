@@ -26,12 +26,13 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import { useHistory } from "react-router-dom";
-
+import { UserContext } from "contexts/Providers/UserProvider";
 function Feedback(props) {
   const [open, setOpen] = useState(false);
   const history = useHistory();
   const { fetch } = useFetch();
   const themeContext = useContext(ThemeContext);
+  const userContext = useContext(UserContext);
   const [t, i18n] = useTranslation();
   const openFeedbackPopover = () => {
     props.closeMenu();
@@ -77,6 +78,7 @@ function Feedback(props) {
             description: values.description,
             type: values.type,
             path: window.location,
+            createdBy: userContext.user.id
           },
           file,
           filename: "screenshot",

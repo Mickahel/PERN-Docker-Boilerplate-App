@@ -16,19 +16,10 @@ import EnhancedTableHead from "./EnhancedTableHead";
 import Row from "./Row";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import "./style.scss";
-
-function createRows(rowsToParse, transformRowValues) {
-  if (!transformRowValues) return rowsToParse;
-  let parsedRows = _.cloneDeep(rowsToParse);
-  parsedRows.map((row) => {
-    Object.keys(transformRowValues).map((keyOfObjectToParse) => {
-      console.log(row[keyOfObjectToParse]);
-      row[keyOfObjectToParse].value = transformRowValues[keyOfObjectToParse](
-        row[keyOfObjectToParse].value
-      );
-    });
-  });
-  return parsedRows;
+import TextField from "@material-ui/core/TextField";
+import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined';
+function createRows(rowsToParse) {
+  return rowsToParse
 }
 
 function descendingComparator(a, b, orderBy) {
@@ -70,6 +61,7 @@ function createHeadCells(headCells) {
   const enrichedHeadCells = headCells.map((element) => {
     return {
       ...element,
+      label: <Trans>{element.label}</Trans>,
       show: true,
     };
   });
@@ -128,7 +120,9 @@ function EnhancedTable(props) {
     maxHeight,
     singlePage,
     dense,
-    buttons
+    buttons,
+    collapsibleType,
+    collapsibleHeadIconsAndDescription
   } = props;
 
   const classes = useStyles({ maxHeight });
@@ -185,21 +179,22 @@ function EnhancedTable(props) {
     setRows(searchedRows);
   };
 
-  let plainRows = createRows(props.rows, props.transformRowValues);
+  let plainRows = createRows(props.rows);
 
   useEffect(() => {
-    setRows(createRows(props.rows, props.transformRowValues));
+    setRows(createRows(props.rows));
   }, []);
 
 
 
   const createRowsPerPageOptions = (rows) => {
     let rowsPerPageOptions = [];
+    rowsPerPageOptions.push(props.rowsPerPage)
     if (rows.length >= 5) rowsPerPageOptions.push(5);
     if (rows.length >= 10) rowsPerPageOptions.push(10);
     if (rows.length >= 25) rowsPerPageOptions.push(25);
 
-    return rowsPerPageOptions;
+    return [...new Set(rowsPerPageOptions)].sort((a, b) => a - b);
   };
 
   const handleRequestSort = (event, property) => {
@@ -211,8 +206,6 @@ function EnhancedTable(props) {
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.id);
-      //console.log(newSelecteds)
-
       setSelected(newSelecteds);
       return;
     }
@@ -303,6 +296,8 @@ function EnhancedTable(props) {
               const labelId = `enhanced-table-checkbox-${index}`;
               return (
                 <Row
+                  collapsibleType={collapsibleType}
+                  collapsibleHeadIconsAndDescription={collapsibleHeadIconsAndDescription}
                   labelId={labelId}
                   classes={classes}
                   readOnly={readOnly}
@@ -333,8 +328,10 @@ function EnhancedTable(props) {
           </TableBody>
         </Table>
       </TableContainer>
-      {!singlePage && (
-        <TablePagination
+      {!singlePage && (<>
+        {/*<div className="pages"><MenuBookOutlinedIcon fontSize="small"/> 
+        <TextField type="number" size="small" id="filled-basic" label={<Trans>enhancedTable.page</Trans>} variant="filled" /></div>
+        */}<TablePagination
           backIconButtonText={i18n.t("enhancedTable.previousPage")}
           nextIconButtonText={i18n.t("enhancedTable.nextPage")}
           labelRowsPerPage={i18n.t("enhancedTable.rows")}
@@ -355,7 +352,7 @@ function EnhancedTable(props) {
             return `${from}-${to} ${i18n.t("enhancedTable.of")} ${count !== -1 ? count : `${i18n.t("enhancedTable.moreThan")} ${to}`
               }`;
           }}
-        />
+        /></>
       )}
     </div>
   );
@@ -372,7 +369,12 @@ EnhancedTable.propTypes = {
   rowsPerPage: PropTypes.number,
   singlePage: PropTypes.bool,
   maxHeight: PropTypes.number,
-  dense: PropTypes.bool
+  dense: PropTypes.bool,
+  collapsible: PropTypes.bool,
+  collapsibleTitle: PropTypes.string,
+  collapsibleHeadCells: PropTypes.array,
+  collapsibleHeadIconsAndDescription: PropTypes.array,
+  collapsibleType: PropTypes.oneOf(["TABLE", "INFORMATION"])
 };
 EnhancedTable.defaultProps = {
   title: "",
@@ -383,6 +385,8 @@ EnhancedTable.defaultProps = {
   showSearchbar: true,
   singlePage: false,
   dense: false,
+  collapsible: false,
+  collapsibleType: "TABLE",
   buttons: []
 };
 

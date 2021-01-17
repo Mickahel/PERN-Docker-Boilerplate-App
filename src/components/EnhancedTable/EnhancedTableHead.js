@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import classnames from "classnames";
 import { ThemeContext } from "contexts/Providers/ThemeProvider";
 import { makeStyles } from "@material-ui/core/styles";
+import { Trans } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   topTableCell: {
@@ -45,7 +46,7 @@ function EnhancedTableHead(props) {
 
   const handleClick = (event, helperText) => {
     setAnchorEl(event.currentTarget);
-    setPopoverHelpText(helperText);
+    setPopoverHelpText(<Trans>{helperText}</Trans>);
   };
 
   const handleClose = () => {
@@ -60,7 +61,7 @@ function EnhancedTableHead(props) {
         )}
       >
         {!readOnly && (
-          <TableCell padding="checkbox">
+          <TableCell classes={{ root: headClasses.topTableCell }} padding="checkbox">
             <Checkbox
               color="primary"
               indeterminate={numSelected > 0 && numSelected < rowCount}

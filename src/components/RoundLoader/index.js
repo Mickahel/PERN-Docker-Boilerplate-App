@@ -1,70 +1,47 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Tooltip from '@material-ui/core/Tooltip'
-import Fab from '@material-ui/core/Fab'
-import './style.scss'
-import { Trans } from 'react-i18next'
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import { useHistory } from "react-router-dom";
+import React from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import "./style.scss";
+import { makeStyles } from "@material-ui/core/styles";
+import config from "configuration/config";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    color: config.theme.roundLoader.color || config.palette.primaryColor,
+  },
+  bgColor: {
+    backgroundColor: theme.palette.type === "light" ? "#fafafa" : "#303030",
+  },
+}));
 
-const FloatingActionButton = (props) => {
-  const { color, icon, type, loading, success, disabled, tooltip, variant, className } = props
-  const realDisabled = disabled || loading
-  const history = useHistory();
-
-  handleOnClick = () => {
-    const { onClick, href } = props
-    if (typeof onClick === 'function') onClick()
-    else if (href) history.push(href);
-  }
-
-  const button = <Fab variant={variant} color={color} type={type} onClick={handleOnClick} disabled={realDisabled} className={success ? 'success' : ''}>
-    {success ? <CheckOutlinedIcon id="checkOutlinedIcon" /> : icon}
-  </Fab>
+function RoundLoader(props) {
+  const { size, className } = props;
+  const classes = useStyles();
 
   return (
-    <div className={'fabButton ' + className} >
-      { tooltip && !realDisabled ?
-        <Tooltip classes={{ tooltip: "tooltip" }} title={<Trans>{tooltip}</Trans>} placement="top">{button}</Tooltip>
-        :
-        button
-      }
-      { loading && <CircularProgress size={68} className='progress' />}
-    </div >
-  )
+    <div
+      className={classnames(
+        className,
+        classes.bgColor,
+        " flex flex-1 items-center justify-center w-full h-full"
+      )}
+    >
+      <CircularProgress
+        size={size}
+        className={classnames(classes.root, "circularProgressLoader")}
+      />
+    </div>
+  );
 }
 
-
-
-FloatingActionButton.propTypes = {
-  color: PropTypes.string,
-  classes: PropTypes.object.isRequired,
-  disabled: PropTypes.bool,
-  href: PropTypes.string,
-  loading: PropTypes.bool,
-  onClick: PropTypes.func,
-  success: PropTypes.bool,
-  tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  type: PropTypes.string,
-  variant: PropTypes.string,
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+RoundLoader.propTypes = {
+  className: PropTypes.string,
+  size: PropTypes.number,
 };
 
-FloatingActionButton.defaultProps = {
-  color: 'primary',
-  classes: {},
-  disabled: false,
-  href: "",
-  loading: false,
-  success: false,
-  tooltip: "",
-  type: "submit",
-  icon: <AddOutlinedIcon />,
-  variant: "round",
-}
+RoundLoader.defaultProps = {
+  className: "",
+};
 
-
-export default FloatingActionButton
+export default RoundLoader;

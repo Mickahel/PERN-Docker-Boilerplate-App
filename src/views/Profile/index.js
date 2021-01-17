@@ -6,6 +6,7 @@ import LanguageBox from "./LanguageBox";
 import ProfileBox from "./ProfileBox";
 import DisableUserBox from "./DisableUserBox";
 import ChangePasswordBox from "./ChangePasswordBox";
+import DoNotRememberPassword from "./DoNotRememberPassword";
 import useFetch from "hooks/useFetch";
 import _ from "lodash";
 import TopSide from "./TopSide";
@@ -94,6 +95,7 @@ function Profile(props) {
           <div className="rightBox flex flex-col w-3/6">
             <UploadProfileImageBox />
             <LanguageBox />
+            <DoNotRememberPassword />
           </div>
         </div>
       </TabPanel>

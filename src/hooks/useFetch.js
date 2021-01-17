@@ -173,6 +173,7 @@ function useFetcher(props) {
             redirectToPage500 == false
           )
             themeContext.showErrorSnackbar({ message: "apiErrors.networkError" });
+          if (err.response?.status == 400) themeContext.showSuccessSnackbar({ message: "validationError" })
           throw err;
         } else {
           throw err;

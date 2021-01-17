@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Card, CardContent, CardHeader, Button } from "@material-ui/core";
 import { Trans } from "react-i18next";
-import Divider from "@material-ui/core/Divider";
 import "./style.scss";
 import CardActions from "@material-ui/core/CardActions";
 import { ThemeContext } from "contexts/Providers/ThemeProvider";
@@ -18,11 +17,9 @@ import * as Yup from "yup";
 import TextField from "@material-ui/core/TextField";
 import { useFormik } from "formik";
 import useFetch from "hooks/useFetch";
-import { UserContext } from "contexts/Providers/UserProvider";
 import Endpoints from "Endpoints";
 function ChangePasswordBox(props) {
   const themeContext = useContext(ThemeContext);
-  const userContext = useContext(UserContext);
   const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(
     false
   );

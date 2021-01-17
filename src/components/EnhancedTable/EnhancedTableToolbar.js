@@ -25,9 +25,11 @@ const useToolbarStyles = makeStyles((theme) => ({
     theme.palette.type === "light"
       ? {
         //color: theme.palette.primary.main,
+        height: "68px !important",
         backgroundColor: lighten(theme.palette.primary.light, 0.85),
       }
       : {
+        height: "68px !important",
         //color: theme.palette.text.primary,
         backgroundColor: theme.palette.primary.dark,
       },
@@ -85,6 +87,7 @@ const EnhancedTableToolbar = (props) => {
             {showSearchbar && (
               <TextField
                 size="small"
+                variant="filled"
                 onChange={(e) => {
                   handleSearch(e);
                 }}
@@ -129,9 +132,9 @@ const EnhancedTableToolbar = (props) => {
       )}
       {
         buttons.map(button => {
-          let icon = <Tooltip key={button.helperText + "tt"} title={<Trans>{button.helperText}</Trans>}>
+          let icon = <Tooltip key={button.tooltip + "tt"} title={<Trans>{button.tooltip}</Trans>}>
             <IconButton
-              key={button.helperText + "ic"}
+              key={button.tooltip + "ic"}
               onClick={() => { button.onClick(selected) }}>
               {button.icon}
             </IconButton>

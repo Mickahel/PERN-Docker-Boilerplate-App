@@ -1,47 +1,45 @@
 @import "../../configuration/variables.scss";
 
 .singleInfo {
-  display: flex;
-  align-items: baseline;
-}
-
-#changePassword {
-  margin-top: $itemMargin;
+	display: flex;
+	align-items: baseline;
 }
 
 .rightBox {
-  margin-left: $itemMargin;
+	margin-left: $itemMargin;
 }
 
 .leftBox {
-  margin-right: $itemMargin;
+	margin-right: $itemMargin;
 }
 #personalInformation,
-.UploadProfileImage {
-  margin-bottom: $itemMargin;
+.UploadProfileImage,
+.languageBox {
+	margin-bottom: $itemMargin;
 }
 .languageBox,
-.themeBox {
-  margin-top: $itemMargin;
+.doNotRememberPasswordBox,
+#changePassword {
+	margin-top: $itemMargin;
 }
 
 @media only screen and (max-width: $mobileWidth) {
-  .topSide {
-    flex-direction: column;
-  }
-  .profileTab {
-    flex-direction: column !important;
-    .leftBox,
-    .rightBox {
-      width: 100%;
-      margin-left: 0px;
-      margin-right: 0px;
-    }
-    .UploadProfileImage {
-      margin-top: $itemMargin;
-    }
-    #changePassword {
-      margin-bottom: $itemMargin;
-    }
-  }
+	.topSide {
+		flex-direction: column;
+	}
+	.profileTab {
+		flex-direction: column !important;
+		.leftBox,
+		.rightBox {
+			width: 100%;
+			margin-left: 0px;
+			margin-right: 0px;
+		}
+		.UploadProfileImage {
+			margin-top: $itemMargin;
+		}
+		#changePassword {
+			margin-bottom: $itemMargin;
+		}
+	}
 }

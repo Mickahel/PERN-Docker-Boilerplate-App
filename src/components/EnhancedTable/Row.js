@@ -18,6 +18,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import { ThemeContext } from "contexts/Providers/ThemeProvider";
 import _ from "lodash"
+import { Trans } from "react-i18next";
 const useRowStyles = makeStyles((theme) => ({
   tableCell: {
     borderTop: "unset",
@@ -34,29 +35,50 @@ const useRowStyles = makeStyles((theme) => ({
   },
 }));
 
+
+const renderValueForCell = (element) => {
+  if (typeof element.value === "boolean") return element.value === true ? (
+    <CheckCircleOutlinedIcon className="trueIcon" />
+  ) : (
+      <CancelOutlinedIcon className="falseIcon" />
+    );
+
+  if (!isNaN(parseFloat(element.value))) {
+
+    if (element.maxCharacters && element.value.length > element.maxCharacters) {
+      const charactersBeforeDot = element.value.split(".")[0].length
+      return parseFloat(element.value).toFixed(
+        element.maxCharacters - charactersBeforeDot > 100 ? 100 : element.maxCharacters - charactersBeforeDot
+      )
+    }
+    return element.value
+  }
+  if (typeof element.value === "string") {
+    if (element.maxCharacters && element.value.length > element.maxCharacters) return element.value.slice(0, element.maxCharacters) + "[...]"
+    return element.value
+  }
+
+}
 const createTableCell = (element) => {
-  let value;
-  if (typeof element.value === "boolean") {
-    value =
-      element.value === true ? (
-        <CheckCircleOutlinedIcon className="trueIcon" />
-      ) : (
-          <CancelOutlinedIcon className="falseIcon" />
-        );
-  } else value = element.value;
 
   let renderedElement = (
-    <span className="singleCell">
-      <span className="singleCellText">
+    <div className="singleCell"  >
+      <span className="singleCellText" style={element.onClick && { cursor: "pointer" }} onClick={() => {
+        if (element.onClick) return element.onClick()
+        return
+      }}>
         {element.component
-          ? element.component(`${value} ${_.get("symbol", element, "")}`)
-          : <>{value}
+          ?
+          typeof element.component === 'function'
+            ? element.component(`${renderValueForCell(element)} ${_.get("symbol", element, "")}`)
+            : element.component
+          : <>{renderValueForCell(element)}
             {element.symbol}</>}
 
       </span>
-
       {element.link && (
         <span className="singleCellIcon">
+
           <IconButton
             onClick={() => {
               window.open(element.link);
@@ -67,7 +89,7 @@ const createTableCell = (element) => {
           </IconButton>
         </span>
       )}
-    </span>
+    </div>
   );
   return renderedElement;
 };
@@ -84,7 +106,9 @@ function Row(props) {
     headCells,
     labelId,
     collapsible,
+    collapsibleType,
     collapsibleHeadCells,
+    collapsibleHeadIconsAndDescription,
     collapsibleTitle,
     showVerticalBorders,
     dense
@@ -135,6 +159,9 @@ function Row(props) {
             </IconButton>
           </TableCell>
         )}
+
+
+
         {headCells.map((element, index) => {
           return (
             element.show && (
@@ -144,7 +171,8 @@ function Row(props) {
                 align={index == 0 ? "inherit" : "center"}
                 className={classnames(
                   row[element.id].link && index != 0 && "iconPadding",
-                  (dense == true && index == 0 && readOnly == true) && "denseReadOnlyFirstItem"
+                  (dense == true && index == 0 && readOnly == true) && "denseReadOnlyFirstItem",
+                  (dense == true && index == headCells.length - 1 && readOnly == true) && "denseReadOnlyLastItem"
                 )}
               >
                 {createTableCell(row[element.id])}
@@ -153,7 +181,8 @@ function Row(props) {
           );
         })}
       </TableRow>
-      {collapsible && (
+
+      {(collapsible && collapsibleType == "INFORMATION") && (
         <TableRow>
           <TableCell
             style={{ paddingTop: 0, paddingBottom: 0 }}
@@ -162,7 +191,40 @@ function Row(props) {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box margin={1}>
                 <Typography variant="h6" gutterBottom>
-                  <span className="font-semibold">{collapsibleTitle}</span>
+                  <span className="font-semibold"><Trans>{collapsibleTitle}</Trans></span>
+                </Typography>
+                {collapsibleHeadIconsAndDescription.map(element => {
+                  return (
+                    <div key={element.id} className="mb-3">
+                      <div className="flex mb-1">
+                        {element.icon}
+                        <Typography variant="body1">
+                          <Trans>{element.label}</Trans>
+                        </Typography>
+                      </div>
+
+                      <div className="ml-2 mr-2">{createTableCell(row.collapsible[element.id])}</div>
+
+                    </div>
+                  )
+
+                })}
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      )}
+
+      {(collapsible && collapsibleType == "TABLE") && (
+        <TableRow>
+          <TableCell
+            style={{ paddingTop: 0, paddingBottom: 0 }}
+            colSpan={activeCells + (readOnly ? 1 : 2)}
+          >
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box margin={1}>
+                <Typography variant="h6" gutterBottom>
+                  <span className="font-semibold"><Trans>{collapsibleTitle}</Trans></span>
                 </Typography>
                 <span className="collapsibleTable">
                   <Table size="small">
@@ -175,7 +237,7 @@ function Row(props) {
                               align={index == 0 ? "left" : "center"}
                             >
                               <span className="font-semibold">
-                                {element.label}
+                                <Trans>{element.label}</Trans>
                               </span>
                             </TableCell>
                           );
@@ -183,6 +245,7 @@ function Row(props) {
                       </TableRow>
                     </TableHead>
                     <TableBody>
+
                       {collapsible &&
                         row.collapsible.map(
                           (collapsibleRow, collapsibleIndex) => {
