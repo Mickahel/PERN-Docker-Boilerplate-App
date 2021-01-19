@@ -21,7 +21,7 @@ const FloatingActionButton = (props) => {
     else if (href) history.push(href);
   }
 
-  const button = <Fab variant={variant} color={color} type={type} onClick={handleOnClick} disabled={realDisabled} className={success ? 'success' : ''}>
+  const button = <Fab variant={variant} color={color} type={type ? type : "button"} onClick={handleOnClick} disabled={realDisabled} className={success ? 'success' : ''}>
     {success ? <CheckOutlinedIcon id="checkOutlinedIcon" /> : icon}
   </Fab>
 

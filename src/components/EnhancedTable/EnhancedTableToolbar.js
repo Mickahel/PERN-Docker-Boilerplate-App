@@ -8,8 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Trans } from "react-i18next";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";

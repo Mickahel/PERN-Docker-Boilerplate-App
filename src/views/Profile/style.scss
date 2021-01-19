@@ -5,21 +5,15 @@
 	align-items: baseline;
 }
 
-.rightBox {
-	margin-left: $itemMargin;
-}
-
-.leftBox {
-	margin-right: $itemMargin;
-}
-#personalInformation,
-.UploadProfileImage,
-.languageBox {
+#personalInformationBox,
+#UploadProfileImageBox,
+#languageBox {
 	margin-bottom: $itemMargin;
 }
-.languageBox,
-.doNotRememberPasswordBox,
-#changePassword {
+#languageBox,
+#soNotRememberPasswordBox,
+#changePasswordBox,
+#doNotRememberPasswordBox {
 	margin-top: $itemMargin;
 }
 
@@ -35,10 +29,10 @@
 			margin-left: 0px;
 			margin-right: 0px;
 		}
-		.UploadProfileImage {
+		#UploadProfileImageBox {
 			margin-top: $itemMargin;
 		}
-		#changePassword {
+		#changePasswordBox {
 			margin-bottom: $itemMargin;
 		}
 	}

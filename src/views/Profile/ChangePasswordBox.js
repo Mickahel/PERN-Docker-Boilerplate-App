@@ -175,7 +175,7 @@ function ChangePasswordBox(props) {
         </form>
       </Dialog>
 
-      <Card id="changePassword">
+      <Card id="changePasswordBox">
         <CardHeader title={<Trans>profile.changePassword</Trans>} />
         <CardContent className="flex flex-col">
           <div>

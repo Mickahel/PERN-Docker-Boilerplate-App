@@ -37,7 +37,7 @@ function ProfileBox(props) {
   });
 
   return (
-    <Card id="personalInformation" className="flex-2">
+    <Card id="personalInformationBox">
       <form onSubmit={formikProfile.handleSubmit}>
         <CardHeader title={<Trans>profile.personalInformation</Trans>} />
 
@@ -91,7 +91,6 @@ function ProfileBox(props) {
                 onClick={() => {
                   formikProfile.handleSubmit();
                   //formikProfile.resetForm()
-
                   setDisabledFields(true);
                 }}
               >

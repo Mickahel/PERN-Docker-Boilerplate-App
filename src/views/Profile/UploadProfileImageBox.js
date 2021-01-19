@@ -48,64 +48,63 @@ function UploadProfileImageBox(props) {
     }
   };
   return (
-    <div className="UploadProfileImage">
-      <Card>
-        <CardContent>
-          <div className="flex flex-col items-center">
-            <div className="flex relative">
-              <Avatar
-                className={classes.large}
-                src={userContext.user.profileImageUrl &&
-                  process.env.REACT_APP_API_PUBLIC_URL +
-                  userContext.user.profileImageUrl
-                }
-              ></Avatar>
-              <div className=" ml-24 absolute">
-                {userContext.user.profileImageUrl && (
-                  <IconButton
-                    onClick={async () => {
-                      let result = await fetch({
-                        url: Endpoints.user.editProfile,
-                        method: "PUT",
-                        data: {
-                          removeProfileImageUrl: true,
-                        },
-                      });
-                      userContext.setUser(result);
-                    }}
-                  >
-                    <DeleteOutlineOutlinedIcon color="primary" />
-                  </IconButton>
-                )}
-              </div>
-            </div>
-            <div className="mt-4 mb-2 flex justify-center">
-              <Button color="primary" variant="outlined" component="label">
-                <input
-                  accept="image/*"
-                  className={classes.input}
-                  id="profileImageUrl"
-                  name="profileImageUrl"
-                  type="file"
-                  onChange={(e) => {
-                    handleUploadClick(e);
+    <Card id="UploadProfileImageBox">
+      <CardHeader title={<Trans>profile.profileImage</Trans>} />
+      <CardContent>
+        <div className="flex flex-col items-center">
+          <div className="flex relative">
+            <Avatar
+              className={classes.large}
+              src={userContext.user.profileImageUrl &&
+                process.env.REACT_APP_API_PUBLIC_URL +
+                userContext.user.profileImageUrl
+              }
+            ></Avatar>
+            <div className=" ml-24 absolute">
+              {userContext.user.profileImageUrl && (
+                <IconButton
+                  onClick={async () => {
+                    let result = await fetch({
+                      url: Endpoints.user.editProfile,
+                      method: "PUT",
+                      data: {
+                        removeProfileImageUrl: true,
+                      },
+                    });
+                    userContext.setUser(result);
                   }}
-                  onClick={(event) => {
-                    event.target.value = null;
-                  }}
-                />
-                <Trans>profile.upload</Trans>
-              </Button>
-            </div>
-            <div className="mt-2 mb-2 flex justify-center">
-              <Typography color="textSecondary" variant="body1">
-                <Trans>profile.uploadImageText</Trans>
-              </Typography>
+                >
+                  <DeleteOutlineOutlinedIcon color="primary" />
+                </IconButton>
+              )}
             </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+          <div className="mt-4 mb-2 flex justify-center">
+            <Button color="primary" variant="outlined" component="label">
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="profileImageUrl"
+                name="profileImageUrl"
+                type="file"
+                onChange={(e) => {
+                  handleUploadClick(e);
+                }}
+                onClick={(event) => {
+                  event.target.value = null;
+                }}
+              />
+              <Trans>profile.upload</Trans>
+            </Button>
+          </div>
+          <div className="mt-2 mb-2 flex justify-center">
+            <Typography color="textSecondary" variant="body1">
+              <Trans>profile.uploadImageText</Trans>
+            </Typography>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 

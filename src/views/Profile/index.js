@@ -4,7 +4,7 @@ import { UserContext } from "contexts/Providers/UserProvider";
 import "./style.scss";
 import LanguageBox from "./LanguageBox";
 import ProfileBox from "./ProfileBox";
-import DisableUserBox from "./DisableUserBox";
+import DisableUserBox from "./DisableAccountBox";
 import ChangePasswordBox from "./ChangePasswordBox";
 import DoNotRememberPassword from "./DoNotRememberPassword";
 import useFetch from "hooks/useFetch";
@@ -100,7 +100,7 @@ function Profile(props) {
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className=" profileTab flex">
+        <div className="accountTab flex">
           <div className="leftBox flex flex-col w-3/6">
             <DisableUserBox />
           </div>

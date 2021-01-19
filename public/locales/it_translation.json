@@ -108,6 +108,7 @@
 		"youAreNotAuthorized": "Non sei Autorizzato!"
 	},
 	"profile": {
+		"profileImage": "Immagine Profilo",
 		"remindPassword": "Ricorda Password",
 		"dontRememberPassword": "Non ricordi la tua password?",
 		"dontRememberPasswordText": "Verrà inviata un'email per ricordare la tua password",

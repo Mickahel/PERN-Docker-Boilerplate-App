@@ -63,7 +63,7 @@ let isUrlInChildren = (parent, url) => {
       return true;
     if (
       parent.children[i].to === url ||
-      (!parent.children[i].exact && url.includes(parent.children[i].to))
+      ((!parent.children[i].exact || !parent.children[i].exact == false) && url.includes(parent.children[i].to))
     )
       return true;
   }
@@ -114,8 +114,8 @@ function NavVerticalCollapse(props) {
                 {open ? (
                   <ExpandLessOutlinedIcon fontSize="small" />
                 ) : (
-                  <ExpandMoreOutlinedIcon fontSize="small" />
-                )}
+                    <ExpandMoreOutlinedIcon fontSize="small" />
+                  )}
               </span>
             </span>
           </span>
@@ -142,8 +142,8 @@ function NavVerticalCollapse(props) {
           {open ? (
             <ExpandLessOutlinedIcon color="action" />
           ) : (
-            <ExpandMoreOutlinedIcon color="action" />
-          )}
+              <ExpandMoreOutlinedIcon color="action" />
+            )}
         </Icon>
       </ListItem>
 

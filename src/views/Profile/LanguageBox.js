@@ -35,27 +35,25 @@ function LanguageBox(props) {
   };
 
   return (
-    <div className="languageBox">
-      <Card>
-        <CardHeader title={<Trans>profile.language</Trans>} />
-        <CardContent className="flex flex-col">
-          <div>
-            <Trans>profile.preferredLanguageText</Trans>
-          </div>
-          <div className="mt-3 flex justify-center">
-            <Select
-              variant="outlined"
-              id="languageSelect"
-              value={localStorage.getItem("i18nextLng")}
-              onChange={changeLanguage}
-            >
-              <MenuItem value={"it-IT"}>Italiano</MenuItem>
-              <MenuItem value={"en-EN"}>English</MenuItem>
-            </Select>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+    <Card id="languageBox">
+      <CardHeader title={<Trans>profile.language</Trans>} />
+      <CardContent className="flex flex-col">
+        <div>
+          <Trans>profile.preferredLanguageText</Trans>
+        </div>
+        <div className="mt-3 flex justify-center">
+          <Select
+            variant="outlined"
+            id="languageSelect"
+            value={localStorage.getItem("i18nextLng")}
+            onChange={changeLanguage}
+          >
+            <MenuItem value={"it-IT"}>Italiano</MenuItem>
+            <MenuItem value={"en-EN"}>English</MenuItem>
+          </Select>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 

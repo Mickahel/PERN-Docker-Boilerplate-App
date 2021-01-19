@@ -108,6 +108,7 @@
 		"youAreNotAuthorized": "You Are not Authorized!"
 	},
 	"profile": {
+		"profileImage": "Profile Image",
 		"remindPassword": "Remind Password",
 		"dontRememberPassword": "Don't you remember your password?",
 		"dontRememberPasswordText": "An email will be sent to remember your password",

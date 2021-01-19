@@ -3,9 +3,9 @@ import { Route, Switch } from "react-router-dom";
 import RoutingApp from "./App";
 import { ThemeContext } from "contexts/Providers/ThemeProvider";
 import RoutingAuth from "./Auth";
-import moment from "moment";
 import i18n from "i18n";
 import CookieConsentDrawer from "theme/CookieConsentDrawer";
+import { DateTime } from "luxon";
 
 const ErrorInternalServer = lazy(() =>
   import("views/Placeholders/ErrorInternalServer")
@@ -34,12 +34,12 @@ function App(props) {
   };
 
   const onAppUpdate = () => {
-    let format = "YYYY-MM-DD HH:mm:ss";
+    let format = "yyyy-LL-dd hh:mm:ss";
     if (localStorage.updateDialogLastShown) {
-      let date = moment(localStorage.updateDialogLastShown, format)
-      if (moment().diff(date, "minute") < 1) return
+      let date = DateTime.fromFormat(localStorage.updateDialogLastShown, format)
+      if (DateTime.local().diff(date, "minute").toObject().minutes < 1) return
     }
-    localStorage.updateDialogLastShown = moment().format(format)
+    localStorage.updateDialogLastShown = DateTime.local().toFormat(format)
     themeContext.showInfoDialog({
       title: i18n.t("newUpdateAlert.title"),
       message: i18n.t("newUpdateAlert.message"),
@@ -48,7 +48,6 @@ function App(props) {
       },
     });
   };
-
 
   return (
     <span>

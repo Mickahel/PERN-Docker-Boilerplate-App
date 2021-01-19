@@ -17,7 +17,7 @@ import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 
-function DisableUserBox(props) {
+function DisableAccountBox(props) {
     const userContext = useContext(UserContext);
     const { fetch } = useFetch();
     const [disabledFields, setDisabledFields] = useState(true);
@@ -65,12 +65,12 @@ function DisableUserBox(props) {
     });
 
     return (
-        <Card id="disableAccount" className="flex-2">
+        <Card id="disableAccount">
             <form onSubmit={formikDisableUser.handleSubmit}>
                 <CardHeader title={<Trans>profile.disableAccount</Trans>} />
 
                 <CardContent>
-                    <div id="disableAccountData" className="flex flex-col">
+                    <div className="flex flex-col">
                         <TextField
                             error={
                                 formikDisableUser.touched.password &&
@@ -113,16 +113,14 @@ function DisableUserBox(props) {
                     <Button
                         disabled={disabledFields}
                         color="primary"
-                        onClick={() => {
-                            formikDisableUser.handleSubmit();
-                        }}
+                        type="submit"
                     >
                         <Trans>profile.disable</Trans>
                     </Button>
                 </CardActions>
             </form>
-        </Card>
+        </Card >
     );
 }
 
-export default DisableUserBox;
+export default DisableAccountBox;

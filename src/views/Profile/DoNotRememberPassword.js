@@ -13,37 +13,33 @@ function ChangePasswordBox(props) {
     const { fetch } = useFetch();
 
     return (
-        <>
-            <div className="doNotRememberPasswordBox">
-                <Card >
-                    <CardHeader title={<Trans>profile.dontRememberPassword</Trans>} />
-                    <CardContent className="flex flex-col">
-                        <div>
-                            <Trans>profile.dontRememberPasswordText</Trans>
-                        </div>
-                    </CardContent>
-                    <CardActions>
-                        <Button
-                            color="primary"
-                            onClick={async () => {
-                                try {
-                                    await fetch({
-                                        url: Endpoints.auth.lostPasswordEmail,
-                                        data: { email: userContext.user.email },
-                                        method: "POST"
-                                    })
-                                    themeContext.showSuccessSnackbar({ message: "profile.emailSent" })
-                                } catch (e) {
+        <Card id="doNotRememberPasswordBox" >
+            <CardHeader title={<Trans>profile.dontRememberPassword</Trans>} />
+            <CardContent className="flex flex-col">
+                <div>
+                    <Trans>profile.dontRememberPasswordText</Trans>
+                </div>
+            </CardContent>
+            <CardActions>
+                <Button
+                    color="primary"
+                    onClick={async () => {
+                        try {
+                            await fetch({
+                                url: Endpoints.auth.lostPasswordEmail,
+                                data: { email: userContext.user.email },
+                                method: "POST"
+                            })
+                            themeContext.showSuccessSnackbar({ message: "profile.emailSent" })
+                        } catch (e) {
 
-                                }
-                            }}
-                        >
-                            <Trans>profile.remindPassword</Trans>
-                        </Button>
-                    </CardActions>
-                </Card>
-            </div>
-        </>
+                        }
+                    }}
+                >
+                    <Trans>profile.remindPassword</Trans>
+                </Button>
+            </CardActions>
+        </Card>
     );
 }
 
