@@ -241,7 +241,7 @@ function useFetcher(props) {
   };
 
   const fetch = useCallback(async (options) => {
-    if (options.setLoading != false) setLoading(true);
+    if (options.setLoading == true) setLoading(true);
     if (!_.get(counter.current, options.url + JSON.stringify(options.data), false)) counter.current[options.url + JSON.stringify(options.data)] = 0;
 
     if (!(options?.data instanceof FormData)) {
@@ -304,6 +304,7 @@ function useFetcher(props) {
 
   return {
     loading,
+    setLoading,
     data,
     error,
     fetch,

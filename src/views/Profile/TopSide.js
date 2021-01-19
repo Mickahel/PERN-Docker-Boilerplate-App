@@ -46,7 +46,7 @@ function TopSide(props) {
   return (
     <div className="topSide flex justify-between">
       <div className="flex">
-        <div>
+        <div className="items-center flex">
           <Avatar
             className={classes.large}
             src={userContext.user.profileImageUrl &&
