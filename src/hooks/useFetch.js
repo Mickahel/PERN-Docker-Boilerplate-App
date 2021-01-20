@@ -136,10 +136,10 @@ function useFetcher(props) {
               }
             };
             return fetchToken();
-          } else if (
-            err.response.data.message == "User doesn't have right permission"
-          ) {
-          } else if (err.response.data.message == "RefreshToken Not Found") {
+          }
+          else if (err.response.data.message == "User doesn't have right permission") themeContext.showErrorSnackbar({ message: "userDoesntHaveRightPermission" })
+          else if (err.response.data.message == "You don't have the permission due to your user role") themeContext.showErrorSnackbar({ message: "youDontHaveThePermissionDueToYourUserRole" })
+          else if (err.response.data.message == "RefreshToken Not Found") {
             if (
               history.location.pathname != "/" &&
               !history.location.pathname.includes("/auth")
@@ -154,28 +154,13 @@ function useFetcher(props) {
         } else if (
           counter.current[err.config.url + JSON.stringify(err.config.data)] >= 3
         ) {
-          if (
-            (err.response?.status == 500 ||
-              err.message.toString() == "Network Error") &&
-            redirectToPage500 === true
-          )
-            history.push("/error/500?returnUrl=" + history.location.pathname);
-          if (
-            (err.response?.status == 500 ||
-              err.message.toString() == "Network Error") &&
-            redirectToPage500 === false &&
-            showErrorSnackBar === true
-          )
+          if ((err.response?.status == 500 || err.message.toString() == "Network Error") && redirectToPage500 === true) history.push("/error/500?returnUrl=" + history.location.pathname);
+          if ((err.response?.status == 500 || err.message.toString() == "Network Error") && redirectToPage500 === false && showErrorSnackBar === true) themeContext.showErrorSnackbar({ message: "somethingWentWrong" });
+          if (err.message.toString() == "Network Error" && redirectToPage500 == false) themeContext.showErrorSnackbar({ message: "apiErrors.networkError" });
 
-            themeContext.showErrorSnackbar({ message: "somethingWentWrong" });
-          if (
-            err.message.toString() == "Network Error" &&
-            redirectToPage500 == false
-          )
-            themeContext.showErrorSnackbar({ message: "apiErrors.networkError" });
-          if (err.response?.status == 400) themeContext.showSuccessSnackbar({ message: "validationError" })
           throw err;
         } else {
+          if (err.response?.status == 400) themeContext.showErrorSnackbar({ message: "validationError" })
           throw err;
         }
       }
@@ -244,15 +229,15 @@ function useFetcher(props) {
     if (options.setLoading == true) setLoading(true);
     if (!_.get(counter.current, options.url + JSON.stringify(options.data), false)) counter.current[options.url + JSON.stringify(options.data)] = 0;
 
-    if (!(options?.data instanceof FormData)) {
+    if (!(options?.data instanceof FormData) && options.file) {
+      console.log("dentro")
       const formData = new FormData();
-      if (options.file) {
-        formData.append(options.filename, options.file);
-        options.addHeadersForFiles = true
-      }
+      formData.append(options.filename, options.file);
+      options.addHeadersForFiles = true
       if (options?.data) Object.keys(options.data).forEach((key) => formData.append(key, options.data[key]));
       options.data = formData
     }
+
     /*  options = {
         ...options,
         data: formData,
