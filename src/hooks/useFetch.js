@@ -137,8 +137,8 @@ function useFetcher(props) {
             };
             return fetchToken();
           }
-          else if (err.response.data.message == "User doesn't have right permission") themeContext.showErrorSnackbar({ message: "userDoesntHaveRightPermission" })
-          else if (err.response.data.message == "You don't have the permission due to your user role") themeContext.showErrorSnackbar({ message: "youDontHaveThePermissionDueToYourUserRole" })
+          else if (err.response.data.message == "User doesn't have right permission") themeContext.showErrorSnackbar({ message: "apiErrors.userDoesntHaveRightPermission" })
+          else if (err.response.data.message == "You don't have the permission due to your user role") themeContext.showErrorSnackbar({ message: "apiErrors.youDontHaveThePermissionDueToYourUserRole" })
           else if (err.response.data.message == "RefreshToken Not Found") {
             if (
               history.location.pathname != "/" &&
@@ -230,7 +230,6 @@ function useFetcher(props) {
     if (!_.get(counter.current, options.url + JSON.stringify(options.data), false)) counter.current[options.url + JSON.stringify(options.data)] = 0;
 
     if (!(options?.data instanceof FormData) && options.file) {
-      console.log("dentro")
       const formData = new FormData();
       formData.append(options.filename, options.file);
       options.addHeadersForFiles = true
@@ -273,7 +272,7 @@ function useFetcher(props) {
         } else {
           counter.current[options.url + JSON.stringify(options.data)] = 0;
           /*if (err.message.toString() == "Network Error") {
-            console.log("Network Error")
+
           }*/
           if (options.setLoading != false) setLoading(false);
           if (options.setError != false) setError(err.response);

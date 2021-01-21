@@ -11,12 +11,10 @@ export async function installApp(installer) {
       alert("I can't Install the App");
       return true;
     }
-    //console.log('Sono in installApp')
     installer.prompt();
     // Wait for the user to respond to the prompt
     let choiceResult = await installer.userChoice;
     if (choiceResult.outcome === "accepted") {
-      //console.log('PWA setup accepted');
       // hide our user interface that shows our A2HS button
       return false;
     } else {

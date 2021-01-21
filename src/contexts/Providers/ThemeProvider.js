@@ -40,7 +40,6 @@ class ThemeProvider extends Component {
   toggleMuiType = () => {
     let { muiType } = this.state;
     localStorage.setItem("theme", muiType === "light" ? "dark" : "light");
-    //console.log(muiType === 'light' ? "dark" : "light")
     this.setState({ muiType: muiType === "light" ? "dark" : "light" });
   };
 

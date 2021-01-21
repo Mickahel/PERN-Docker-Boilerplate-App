@@ -50,7 +50,6 @@ function App(props) {
         history.push("auth/login?returnUrl=" + history.location.pathname);
         //themeContext.showWarningSnackbar({ message: "loginAgain" })
       }
-      //console.log("BBB",history.location.pathname)
       //history.push("auth?returnUrl=" + history.location.pathname)
     }
   }, []);

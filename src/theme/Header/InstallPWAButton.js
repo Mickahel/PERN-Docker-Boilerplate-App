@@ -11,8 +11,7 @@ function InstallPWAButton(props) {
   let [showButton, setShowButton] = useState(true);
 
   const themeContext = useContext(ThemeContext);
-  //console.log('PWAInstalledChecker()', PWAInstalledChecker())
-  //console.log('themeContext.installEvent',themeContext.installEvent)
+
   if (showButton && !PWAInstalledChecker() && themeContext.installEvent) {
     return (
       <div id="install-app">

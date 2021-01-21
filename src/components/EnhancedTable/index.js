@@ -23,9 +23,6 @@ function createRows(rowsToParse) {
 }
 
 function descendingComparator(a, b, orderBy) {
-  //console.log(a[orderBy]?.value,b[orderBy]?.value)
-  //console.log(typeof a[orderBy]?.value, typeof  b[orderBy]?.value)
-  //console.log(a[orderBy]?.value,b[orderBy]?.value)
   let aValueComparator = isNaN(a[orderBy]?.value)
     ? a[orderBy]?.value
     : parseFloat(a[orderBy]?.value);
@@ -151,7 +148,6 @@ function EnhancedTable(props) {
       if(element.show==true) isAHeadCellVisible=true
       newHeadCells.push(a);*/
     });
-    //console.log(headCells,isAHeadCellVisible,newHeadCells)
     if (isAHeadCellVisible == true) setHeadCells(newHeadCells);
   };
 
@@ -181,10 +177,9 @@ function EnhancedTable(props) {
 
   let plainRows = createRows(props.rows);
 
-  useEffect(() => {
-    setRows(createRows(props.rows));
-  }, []);
+  //useEffect(() => setRows(createRows(props.rows)), []);
 
+  useEffect(() => setRows(createRows(props.rows)), [props.rows])
 
 
   const createRowsPerPageOptions = (rows) => {

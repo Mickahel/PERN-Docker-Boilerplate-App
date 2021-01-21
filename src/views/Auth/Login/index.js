@@ -69,7 +69,6 @@ function Login(props) {
       userContext.setUser(data);
       history.push("/");
     } catch (e) {
-      //console.log("error", e)
     }
   }, []);
 

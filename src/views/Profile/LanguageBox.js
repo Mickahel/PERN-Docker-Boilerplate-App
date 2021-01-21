@@ -14,7 +14,6 @@ function LanguageBox(props) {
   const themeContext = useContext(ThemeContext);
   const { fetch, data } = useFetch();
   const changeLanguage = (e) => {
-    console.log(e.target.value);
     i18next.changeLanguage(e.target.value, async (err, t) => {
       if (err)
         themeContext.showErrorSnackbar({

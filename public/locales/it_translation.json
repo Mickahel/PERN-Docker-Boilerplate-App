@@ -141,6 +141,8 @@
 		"changePersonalInformation": "Modifica Informazioni Personali"
 	},
 	"apiErrors": {
+		"userDoesntHaveRightPermission": "Non Hai l'Autorizzazione Adatta",
+		"youDontHaveThePermissionDueToYourUserRole": "Non Hai l'Autorizzazione a Causa del Tuo Ruolo Utente",
 		"networkError": "Errore di Connessione",
 		"loginAgain": "Accedi alla Piattaforma"
 	},

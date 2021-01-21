@@ -131,11 +131,15 @@ const EnhancedTableToolbar = (props) => {
       {
         buttons.map(button => {
           let icon = <Tooltip key={button.tooltip + "tt"} title={<Trans>{button.tooltip}</Trans>}>
-            <IconButton
-              key={button.tooltip + "ic"}
-              onClick={() => { button.onClick(selected) }}>
-              {button.icon}
-            </IconButton>
+            <span>
+              <IconButton
+                key={button.tooltip + "ic"}
+                onClick={() => { button.onClick(selected.length > 1 ? selected : selected[0]) }}
+                disabled={button.disabled && selected.length > 0 ? button.disabled(selected.length > 1 ? selected : selected[0]) : false}
+              >
+                {button.icon}
+              </IconButton>
+            </span>
           </Tooltip>
           if ((button.activateOnSingleSelection == true && numSelected === 1) || (button.activateOnMultipleSelection == true && numSelected > 1)) return icon
         })

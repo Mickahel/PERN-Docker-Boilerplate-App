@@ -141,6 +141,8 @@
 		"personalInformation": "Personal Information"
 	},
 	"apiErrors": {
+		"userDoesntHaveRightPermission": "You Don't Have the Right Permission",
+		"youDontHaveThePermissionDueToYourUserRole": "You Don't Have The Permission Due to Your User Role",
 		"networkError": "Network Error",
 		"loginAgain": "Login in the Platform"
 	},
