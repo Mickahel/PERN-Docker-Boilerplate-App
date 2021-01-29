@@ -209,13 +209,13 @@ function Feedback(props) {
             <Button
               disabled={feedbackForm.isSubmitting}
               onClick={closeFeedbackPopover}
+              color="primary"
             >
               <Trans>close</Trans>
             </Button>
             <Button
               disabled={feedbackForm.isSubmitting || !feedbackForm.values.description}
               type="submit"
-              variant="contained"
               color="primary"
             >
               <Trans>feedback.send</Trans>

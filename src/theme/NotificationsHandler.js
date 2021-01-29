@@ -39,14 +39,14 @@ function NotificationsHandler(props) {
           `${process.env.PUBLIC_URL}/service-worker.js`,
           {
             onUpdate: (registration) => {
-              console.log("onUpdate")
+              //console.log("onUpdate")
               let appUpdateEvent = new Event('app-update');
               window.dispatchEvent(appUpdateEvent);
 
               registration.waiting.postMessage({ type: 'SKIP_WAITING' })
             },
             onSuccess: function (registration) {
-              console.log("onSuccess")
+              //console.log("onSuccess")
               let appUpdateEvent = new Event('app-update');
               window.dispatchEvent(appUpdateEvent);
             }

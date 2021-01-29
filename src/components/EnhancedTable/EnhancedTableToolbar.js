@@ -46,7 +46,8 @@ const EnhancedTableToolbar = (props) => {
     showFilters,
     showSearchbar,
     readOnly,
-    buttons
+    buttons,
+    title
   } = props;
   let setMinHeight = !(showFilters || showSearchbar || readOnly);
   const classes = useToolbarStyles(setMinHeight);
@@ -81,68 +82,77 @@ const EnhancedTableToolbar = (props) => {
             )}
         </Typography>
       ) : (
-          <>
-            {showSearchbar && (
-              <TextField
-                size="small"
-                variant="filled"
-                onChange={(e) => {
-                  handleSearch(e);
-                }}
-                label={<Trans>enhancedTable.search</Trans>}
-              />
-            )}
-          </>
+          <div className="flex w-full justify-between">
+            <div className="flex items-center">
+              {title && (
+                <Typography variant="h5">
+                  {title}
+                </Typography>
+              )}
+            </div>
+
+            <div className="flex align-center">
+              {showSearchbar && (
+                <TextField
+                  size="small"
+                  variant="filled"
+                  onChange={(e) => {
+                    handleSearch(e);
+                  }}
+                  label={<Trans>enhancedTable.search</Trans>}
+                />
+              )}
+              {showFilters && (
+                <>
+                  <div className="self-center">
+                    <Tooltip title={<Trans>enhancedTable.filtersList</Trans>}>
+                      <IconButton onClick={handleFilterClick} aria-label="filter list">
+                        <FilterListIcon fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                  <Menu
+                    anchorEl={anchorEl}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleFilterClose}
+                  >
+                    {headCells.map((element, index) => {
+                      return (
+                        <MenuItem
+                          key={"check" + element.id + index}
+                          onClick={(e) => handleCheckboxFilterClick(e, element.id)}
+                        >
+                          <Checkbox color="primary" checked={element.show} />
+                          {element.label}
+                        </MenuItem>
+                      );
+                    })}
+                  </Menu>
+                </>
+              )}
+            </div>
+          </div>
         )}
 
-      {numSelected === 0 && showFilters && (
-        <>
-          <Tooltip title={<Trans>enhancedTable.filtersList</Trans>}>
-            <IconButton onClick={handleFilterClick} aria-label="filter list">
-              <FilterListIcon fontSize="small" />
+      {buttons.map(button => {
+        let icon = <Tooltip key={button.tooltip + "tt"} title={<Trans>{button.tooltip}</Trans>}>
+          <span>
+            <IconButton
+              key={button.tooltip + "ic"}
+              onClick={() => { button.onClick(selected.length > 1 ? selected : selected[0]) }}
+              disabled={button.disabled && selected.length > 0 ? button.disabled(selected.length > 1 ? selected : selected[0]) : false}
+            >
+              {button.icon}
             </IconButton>
-          </Tooltip>
-
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleFilterClose}
-          >
-            {headCells.map((element, index) => {
-              return (
-                <MenuItem
-                  key={"check" + element.id + index}
-                  onClick={(e) => handleCheckboxFilterClick(e, element.id)}
-                >
-                  <Checkbox color="primary" checked={element.show} />
-                  {element.label}
-                </MenuItem>
-              );
-            })}
-          </Menu>
-        </>
-      )}
-      {
-        buttons.map(button => {
-          let icon = <Tooltip key={button.tooltip + "tt"} title={<Trans>{button.tooltip}</Trans>}>
-            <span>
-              <IconButton
-                key={button.tooltip + "ic"}
-                onClick={() => { button.onClick(selected.length > 1 ? selected : selected[0]) }}
-                disabled={button.disabled && selected.length > 0 ? button.disabled(selected.length > 1 ? selected : selected[0]) : false}
-              >
-                {button.icon}
-              </IconButton>
-            </span>
-          </Tooltip>
-          if ((button.activateOnSingleSelection == true && numSelected === 1) || (button.activateOnMultipleSelection == true && numSelected > 1)) return icon
-        })
+          </span>
+        </Tooltip>
+        if ((button.activateOnSingleSelection == true && numSelected === 1) || (button.activateOnMultipleSelection == true && numSelected > 1)) return icon
+      })
       }
     </Toolbar >
   );

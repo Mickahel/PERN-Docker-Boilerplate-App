@@ -233,10 +233,13 @@ function useFetcher(props) {
       const formData = new FormData();
       formData.append(options.filename, options.file);
       options.addHeadersForFiles = true
-      if (options?.data) Object.keys(options.data).forEach((key) => formData.append(key, options.data[key]));
+      if (options?.data) Object.keys(options.data).forEach((key) => {
+
+        if (Array.isArray(options.data[key])) options.data[key].map(elem => formData.append(key, elem))
+        else formData.append(key, options.data[key])
+      });
       options.data = formData
     }
-
     /*  options = {
         ...options,
         data: formData,
@@ -267,12 +270,10 @@ function useFetcher(props) {
           counter.current[options.url + JSON.stringify(options.data)] =
             counter.current[options.url + JSON.stringify(options.data)] + 1;
           await new Promise((resolve) => setTimeout(resolve, 500));
-          //console.log(err.config)
           return fetch(err.config);
         } else {
           counter.current[options.url + JSON.stringify(options.data)] = 0;
           /*if (err.message.toString() == "Network Error") {
-
           }*/
           if (options.setLoading != false) setLoading(false);
           if (options.setError != false) setError(err.response);

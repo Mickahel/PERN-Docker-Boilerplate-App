@@ -10,14 +10,20 @@ const useStyles = makeStyles((theme) => ({
   root: {
     color: config.theme.roundLoader.color || config.palette.primaryColor,
   },
-  bgColor: {
-    backgroundColor: theme.palette.type === "light" ? "#fafafa" : "#303030",
-  },
+  bgColor: (props) => ({
+    backgroundColor: localStorage.theme
+      ? localStorage.theme == "light"
+        ? "#fafafa"
+        : "#303030"
+      : theme.palette.type === "light"
+        ? "#fafafa"
+        : "#303030",
+  }),
 }));
 
 function RoundLoader(props) {
   const { size, className } = props;
-  const classes = useStyles();
+  const classes = useStyles({ localStorageTheme: localStorage.theme });
 
   return (
     <div
