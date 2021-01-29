@@ -28,17 +28,7 @@ let WEB_MANIFEST = self.__WB_MANIFEST
 
   revision: '1234567890',
 })
-*/
-
-WEB_MANIFEST.push({
-  url: process.env.PUBLIC_URL + "locales/en_translation.json",
-  revision: '1234567894',
-})
-WEB_MANIFEST.push({
-  url: process.env.PUBLIC_URL + "locales/it_translation.json",
-  revision: '1234567892',
-})
-/*
+*//*
 WEB_MANIFEST.push({
   url: process.env.PUBLIC_URL + "/img/placeholders/NoInternet.svg",
   revision: '123454367892',
@@ -119,9 +109,37 @@ self.addEventListener('message', (event) => {
   }
 });
 
+self.addEventListener('notificationclick', function (event) {
+  //console.log('SW notification click event', event)
+  const url = event.notification?.data?.FCM_MSG?.notification?.data?.click_action || event.notification?.data?.click_action;
+  //console.log(url)
+  event.waitUntil(
+    clients.matchAll({ type: 'window' }).then(windowClients => {
+      // Check if there is already a window/tab open with the target URL
+      for (var i = 0; i < windowClients.length; i++) {
+        var client = windowClients[i];
+        // If so, just focus it.
+        if (client.url === url && 'focus' in client) {
+          return client.focus();
+        } else if (client.url.startsWith() && 'navigate' in client) {
+          return client.navigate(url);
+        }
+      }
+      // If not, then open the target URL in a new window/tab.
+      if (clients.openWindow) {
+        return clients.openWindow(url);
+      }
+    })
+  );
+
+  //let action = event.action; --> AZIONI
+  notification.close();
+
+})
+
 // Any other custom service worker logic can go here.
-importScripts('https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/8.2.1/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.4/firebase-messaging.js');
 
 // ? https://stackoverflow.com/questions/42964547/uncaught-firebaseerror-messaging-this-method-is-available-in-a-window-context
 // ? https://stackoverflow.com/questions/46043818/get-firebase-web-notification-even-close-chrome
@@ -137,14 +155,15 @@ firebase.initializeApp({
 });
 
 
-self.addEventListener('notificationclick', function (event) {
-
-})
-
 
 
 const messaging = firebase.messaging();
 //* https://stackoverflow.com/questions/40277900/how-to-get-push-message-events-like-click-close-show-with-firebase-cloud-messagi
+
+
+
+
+
 /*messaging.onBackgroundMessage(async (payload) => {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
   // Customize notification here

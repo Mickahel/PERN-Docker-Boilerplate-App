@@ -193,9 +193,11 @@ function EnhancedTable(props) {
   };
 
   const handleRequestSort = (event, property) => {
+
     const isAsc = orderBy === property && order === "asc";
+    const isDesc = orderBy === property && order === "desc";
     setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
+    setOrderBy(isDesc ? "" : property);
   };
 
   const handleSelectAllClick = (event) => {
@@ -354,7 +356,7 @@ function EnhancedTable(props) {
 }
 
 EnhancedTable.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   headCells: PropTypes.array.isRequired,
   rows: PropTypes.array.isRequired,
   buttons: PropTypes.array,

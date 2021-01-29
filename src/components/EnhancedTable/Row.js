@@ -194,6 +194,7 @@ function Row(props) {
                   <span className="font-semibold"><Trans>{collapsibleTitle}</Trans></span>
                 </Typography>
                 {collapsibleHeadIconsAndDescription.map(element => {
+                  if (_.isEmpty(row.collapsible[element.id].value) && _.isEmpty(row.collapsible[element.id].component)) return
                   return (
                     <div key={element.id} className="mb-3">
                       <div className="flex mb-1">

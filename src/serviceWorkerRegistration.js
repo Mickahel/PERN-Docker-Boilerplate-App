@@ -89,7 +89,7 @@ export function registerValidSW(swUrl, config) {
           }
         };
       };
-      console.log("REGISTRATION FROM SW FILE", registration)
+      //console.log("REGISTRATION FROM SW FILE", registration)
       return registration
     })
     .catch((error) => {

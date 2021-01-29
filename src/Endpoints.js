@@ -21,7 +21,7 @@ const Endpoints = {
     sendNew: "/v1/app/feedback/create", // ? POST
   },
   pushNotification: {
-    sendToken: "/v1/app/pushNotification/:token" // ? POST
+    sendToken: "/v1/app/pushNotification/registerToken/:token" // ? POST
   }
 };
 
