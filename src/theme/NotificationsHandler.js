@@ -45,11 +45,11 @@ function NotificationsHandler(props) {
 
               registration.waiting.postMessage({ type: 'SKIP_WAITING' })
             },
-            onSuccess: function (registration) {
+            /*onSuccess: function (registration) {
               //console.log("onSuccess")
               let appUpdateEvent = new Event('app-update');
               window.dispatchEvent(appUpdateEvent);
-            }
+            }*/
           });
 
         const messaging = firebase.messaging();
