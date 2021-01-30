@@ -111,29 +111,31 @@ self.addEventListener('message', (event) => {
 
 self.addEventListener('notificationclick', function (event) {
   //console.log('SW notification click event', event)
-  const url = event.notification?.data?.FCM_MSG?.notification?.data?.click_action || event.notification?.data?.click_action;
-  //console.log(url)
-  event.waitUntil(
-    clients.matchAll({ type: 'window' }).then(windowClients => {
-      // Check if there is already a window/tab open with the target URL
-      for (var i = 0; i < windowClients.length; i++) {
-        var client = windowClients[i];
-        // If so, just focus it.
-        if (client.url === url && 'focus' in client) {
-          return client.focus();
-        } else if (client.url.startsWith() && 'navigate' in client) {
-          return client.navigate(url);
-        }
-      }
-      // If not, then open the target URL in a new window/tab.
-      if (clients.openWindow) {
-        return clients.openWindow(url);
-      }
-    })
-  );
+  const url = event?.notification?.data?.FCM_MSG?.notification?.data?.click_action || event?.notification?.data?.click_action;
 
+  if (url && url !== "") {
+    console.log(url)
+    event.waitUntil(
+      clients.matchAll({ type: 'window' }).then(windowClients => {
+        // Check if there is already a window/tab open with the target URL
+        for (var i = 0; i < windowClients.length; i++) {
+          var client = windowClients[i];
+          // If so, just focus it.
+          if (client.url === url && 'focus' in client) {
+            return client.focus();
+          } else if (client.url.startsWith() && 'navigate' in client) {
+            return client.navigate(url);
+          }
+        }
+        // If not, then open the target URL in a new window/tab.
+        if (clients.openWindow) {
+          return clients.openWindow(url);
+        }
+      })
+    );
+  }
   //let action = event.action; --> AZIONI
-  notification.close();
+  event.notification.close();
 
 })
 

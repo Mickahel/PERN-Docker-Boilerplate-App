@@ -12,12 +12,14 @@ import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
+import CustomScrollbar from 'components/CustomScrollbar'
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: (props) => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     minHeight: props.setMinHeight ? "90px !important" : "",
+    justifyContent: "space-between"
   }),
   highlight:
     theme.palette.type === "light"
@@ -32,7 +34,7 @@ const useToolbarStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.primary.dark,
       },
   title: {
-    flex: "1 1 100%",
+    //flex: "1 1 100%",
   },
 }));
 
@@ -69,7 +71,7 @@ const EnhancedTableToolbar = (props) => {
     >
       {numSelected > 0 ? (
         <Typography
-          className={classes.title}
+          //className={classes.title}
           color="inherit"
           variant="subtitle1"
           component="div"
@@ -139,21 +141,25 @@ const EnhancedTableToolbar = (props) => {
           </div>
         )}
 
-      {buttons.map(button => {
-        let icon = <Tooltip key={button.tooltip + "tt"} title={<Trans>{button.tooltip}</Trans>}>
-          <span>
-            <IconButton
-              key={button.tooltip + "ic"}
-              onClick={() => { button.onClick(selected.length > 1 ? selected : selected[0]) }}
-              disabled={button.disabled && selected.length > 0 ? button.disabled(selected.length > 1 ? selected : selected[0]) : false}
-            >
-              {button.icon}
-            </IconButton>
-          </span>
-        </Tooltip>
-        if ((button.activateOnSingleSelection == true && numSelected === 1) || (button.activateOnMultipleSelection == true && numSelected > 1)) return icon
-      })
-      }
+
+      <div className="flex overflow-auto">
+        {buttons.map(button => {
+          let icon = <Tooltip key={button.tooltip + "tt"} title={<Trans>{button.tooltip}</Trans>}>
+            <span>
+              <IconButton
+                key={button.tooltip + "ic"}
+                onClick={() => { button.onClick(selected.length > 1 ? selected : selected[0]) }}
+                disabled={button.disabled && selected.length > 0 ? button.disabled(selected.length > 1 ? selected : selected[0]) : false}
+              >
+                {button.icon}
+              </IconButton>
+            </span>
+          </Tooltip>
+          if ((button.activateOnSingleSelection == true && numSelected === 1) || (button.activateOnMultipleSelection == true && numSelected > 1)) return icon
+        })
+        }
+      </div>
+
     </Toolbar >
   );
 };

@@ -17,7 +17,10 @@ import Row from "./Row";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import "./style.scss";
 import TextField from "@material-ui/core/TextField";
-import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined';
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
 function createRows(rowsToParse) {
   return rowsToParse
 }
@@ -131,7 +134,22 @@ function EnhancedTable(props) {
   const [page, setPage] = useState(0);
   const [headCells, setHeadCells] = useState(createHeadCells(props.headCells));
   const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage);
-  const history = useHistory();
+  const history = useHistory()
+  const validationSchema = Yup.object({
+    page: Yup.number().min(1).max(Math.ceil(rows.length / rowsPerPage)).integer().required(),
+  });
+  const formiktextFieldPage = useFormik({
+    initialValues: {
+      page: page + 1
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      setPage(values.page - 1)
+    }
+  })
+
+
+
 
   const handleCheckboxFilterClick = (event, elementId) => {
     let isAHeadCellVisible = false;
@@ -232,6 +250,7 @@ function EnhancedTable(props) {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    formiktextFieldPage.setFieldValue("page", newPage + 1)
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -326,9 +345,32 @@ function EnhancedTable(props) {
         </Table>
       </TableContainer>
       {!singlePage && (<>
-        {/*<div className="pages"><MenuBookOutlinedIcon fontSize="small"/> 
-        <TextField type="number" size="small" id="filled-basic" label={<Trans>enhancedTable.page</Trans>} variant="filled" /></div>
-        */}<TablePagination
+
+        <div className="mt-2 mr-4 flex justify-end">
+          <form onSubmit={formiktextFieldPage.onSubmit}>
+            <ClickAwayListener onClickAway={() => {
+              if (_.isEmpty(formiktextFieldPage.values.page)) formiktextFieldPage.setFieldValue("page", page + 1)
+            }}>
+              <TextField
+                variant="filled"
+                error={Boolean(formiktextFieldPage.errors.page)}
+                helperText={
+                  <Trans>{formiktextFieldPage.errors.page}</Trans>
+                }
+                value={formiktextFieldPage.values.page}
+                onChange={(event) => {
+                  if (event.target.value > 0 && event.target.value <= Math.ceil(rows.length / rowsPerPage)) {
+                    formiktextFieldPage.setFieldValue("page", parseInt(event.target.value))
+                    formiktextFieldPage.submitForm()
+                  }
+                  else formiktextFieldPage.setFieldValue("page", event.target.value)
+                }}
+                label={i18n.t("enhancedTable.page")}
+                size="small" />
+            </ClickAwayListener>
+          </form>
+        </div>
+        <TablePagination
           backIconButtonText={i18n.t("enhancedTable.previousPage")}
           nextIconButtonText={i18n.t("enhancedTable.nextPage")}
           labelRowsPerPage={i18n.t("enhancedTable.rows")}
