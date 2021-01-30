@@ -1,0 +1,18 @@
+@import "../../configuration/variables.scss";
+
+.circularProgressLoader {
+	position: fixed;
+	z-index: 99;
+	overflow: visible;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+@keyframes test {
+	to {
+		transform: rotate(-360deg);
+	}
+}
