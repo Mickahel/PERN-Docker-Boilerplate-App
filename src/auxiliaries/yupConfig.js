@@ -44,7 +44,7 @@ export default function yupConfig() {
     number: {},
     string: {
       email: ({ email }) => i18n.t("yup.email", { email }),
-      min: (num) => i18n.t("yup.min", { num: num.min }),
+      min: ({ min, path }) => i18n.t("yup.min", { path, num: min })
     },
   });
 }

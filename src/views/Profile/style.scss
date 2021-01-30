@@ -21,7 +21,8 @@
 	.topSide {
 		flex-direction: column;
 	}
-	.profileTab {
+	.profileTab,
+	.accountTab {
 		flex-direction: column !important;
 		.leftBox,
 		.rightBox {
