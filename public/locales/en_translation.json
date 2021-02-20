@@ -91,7 +91,7 @@
 			"activatingText": "We are activating your account"
 		}
 	},
-
+	"page": "Page",
 	"yup": {
 		"invalidField": "Invalid Field",
 		"required": "Required Field",

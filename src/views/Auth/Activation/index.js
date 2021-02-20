@@ -82,7 +82,7 @@ function Activation(props) {
               src={process.env.PUBLIC_URL + "/img/tick.svg"}
               alt="Confirm Image"
             />
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-3">
               <Button
                 variant="contained"
                 color="primary"
@@ -106,7 +106,7 @@ function Activation(props) {
               src={process.env.PUBLIC_URL + "/img/cross.svg"}
               alt="Confirm Image"
             />
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-3">
               <Button
                 variant="contained"
                 color="primary"

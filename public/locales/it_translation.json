@@ -91,7 +91,7 @@
 			"goToApp": "Accedi all'app"
 		}
 	},
-
+	"page": "Pagina",
 	"yup": {
 		"invalidField": "Campo non Valido",
 		"required": "Campo Obbligatorio",

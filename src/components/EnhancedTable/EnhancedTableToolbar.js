@@ -12,7 +12,6 @@ import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
-import CustomScrollbar from 'components/CustomScrollbar'
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: (props) => ({
