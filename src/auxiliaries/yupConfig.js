@@ -41,10 +41,14 @@ export default function yupConfig() {
       required: i18n.t("yup.required"),
     },
     // use functions to generate an error object that includes the value from the schema
-    number: {},
+    number: {
+      min: ({ min, path }) => i18n.t("yup.minNumber", { path: i18n.t(path), num: min }),
+      max: ({ max, path }) => i18n.t("yup.maxNumber", { path: i18n.t(path), num: max })
+
+    },
     string: {
       email: ({ email }) => i18n.t("yup.email", { email }),
-      min: ({ min, path }) => i18n.t("yup.min", { path, num: min })
+      min: ({ min, path }) => i18n.t("yup.minString", { path, num: min })
     },
   });
 }

@@ -353,6 +353,7 @@ function EnhancedTable(props) {
             }}>
               <TextField
                 variant="filled"
+                type="number"
                 error={Boolean(formiktextFieldPage.errors.page)}
                 helperText={
                   <Trans>{formiktextFieldPage.errors.page}</Trans>

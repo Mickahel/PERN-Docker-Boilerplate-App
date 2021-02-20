@@ -2,8 +2,6 @@ import React from "react";
 import { ErrorBoundary as EB } from "react-error-boundary";
 import Button from "@material-ui/core/Button";
 
-// TODO Refine
-
 function ErrorBoundary(props) {
   return (
     <EB
