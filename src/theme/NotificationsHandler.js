@@ -10,7 +10,7 @@ import { ThemeContext } from 'contexts/Providers/ThemeProvider';
 import Alert from '@material-ui/lab/Alert';
 import Collapse from '@material-ui/core/Collapse';
 import * as serviceWorkerRegistration from '../serviceWorkerRegistration';
-
+import config from '../configuration/config'
 function NotificationsHandler(props) {
   let { fetch } = useFetch()
   const themeContext = useContext(ThemeContext)
@@ -79,6 +79,8 @@ function NotificationsHandler(props) {
           console.log('[FIREBASE MESSAGING] Message received', payload);
           //const notificationTitle = event.notification.title;
           const serviceWorker = await navigator.serviceWorker.ready;
+          if (payload.notification.title == undefined) payload.notification.title = config.name.long
+          if (payload.notification.body == undefined) payload.notification.body = ""
           serviceWorker.showNotification(payload.notification.title, payload.notification)
         })
       }
