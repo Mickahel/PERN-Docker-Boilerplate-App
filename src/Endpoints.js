@@ -22,6 +22,9 @@ const Endpoints = {
   },
   pushNotification: {
     sendToken: "/v1/app/pushNotification/registerToken/:token" // ? POST
+  },
+  generalSettings: {
+    getGeneralSetting: "v1/admin/general-settings/:feature"// ? GET
   }
 };
 
