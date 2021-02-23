@@ -13,13 +13,10 @@ function PrivacyPolicy(props) {
   const [t, i18n] = useTranslation();
   const { fetch, data, loading } = useFetch()
   const loadData = async () => {
-    const t = await fetch({
+    await fetch({
       method: "GET",
       name: "privacyPolicy",
-      url: Endpoints.generalSettings.getGeneralSetting,
-      urlParams: {
-        feature: "privacyPolicy"
-      }
+      url: Endpoints.tos.getPrivacyPolicy,
     })
   }
   useEffect(() => { loadData() }, [])
@@ -28,7 +25,7 @@ function PrivacyPolicy(props) {
     <PublicAppBar title="Privacy Policy">
       <Helmet title={`${config.name.short} - Privacy Policy`} />
       <div id="privacyPolicy">
-        <div dangerouslySetInnerHTML={{ __html: data.value }} className='documentation-content' />
+        {data?.value && <div dangerouslySetInnerHTML={{ __html: data?.value }} className='documentation-content' />}
       </div>
     </PublicAppBar>
   );

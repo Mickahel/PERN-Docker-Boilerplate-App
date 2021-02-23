@@ -15,7 +15,7 @@ const ErrorNotAuthorized = lazy(() =>
 );
 const ErrorNotFound = lazy(() => import("views/Placeholders/ErrorNotFound"));
 const PrivacyPolicy = lazy(() => import("views/TOS/PrivacyPolicy"));
-const TermsOfService = lazy(() => import("views/TOS/TermsOfService"));
+const TermsAndConditions = lazy(() => import("views/TOS/TermsAndConditions"));
 
 
 
@@ -53,7 +53,7 @@ function App(props) {
     <span>
       <CookieConsentDrawer />
       <Switch>
-        <Route path="/terms-of-service" component={TermsOfService} />
+        <Route path="/terms-and-conditions" component={TermsAndConditions} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/error/404" component={ErrorNotFound} />
         <Route path="/error/401" component={ErrorNotAuthorized} />

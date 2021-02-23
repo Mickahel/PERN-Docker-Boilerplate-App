@@ -8,30 +8,27 @@ import { Trans, useTranslation } from "react-i18next";
 import useFetch from "hooks/useFetch"
 import Endpoints from "Endpoints"
 import RoundLoader from "components/RoundLoader";
-function TermsOfService(props) {
+function TermsAndConditions(props) {
   const [t, i18n] = useTranslation();
   const { fetch, data, loading } = useFetch()
   const loadData = async () => {
-    const t = await fetch({
+    await fetch({
       method: "GET",
       name: "privacyPolicy",
-      url: Endpoints.generalSettings.getGeneralSetting,
-      urlParams: {
-        feature: "termsOfService"
-      }
+      url: Endpoints.tos.getTermsAndConditions,
     })
   }
   useEffect(() => { loadData() }, [])
   if (loading) return <RoundLoader />
   return (
-    <PublicAppBar title="tos.termsOfService">
-      <Helmet title={`${config.name.short} - ${t("tos.termsOfService")}`} />
-      <div id="termsOfService">
-        <div dangerouslySetInnerHTML={{ __html: data.value }} className='documentation-content' />
+    <PublicAppBar title="tos.termsAndConditions">
+      <Helmet title={`${config.name.short} - ${t("tos.termsAndConditions")}`} />
+      <div id="termsAndConditions">
+        {data?.value && <div dangerouslySetInnerHTML={{ __html: data?.value }} className='documentation-content' />}
 
       </div>
     </PublicAppBar>
   );
 }
 
-export default TermsOfService;
+export default TermsAndConditions;
