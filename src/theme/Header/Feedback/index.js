@@ -77,7 +77,7 @@ function Feedback(props) {
           data: {
             description: values.description,
             type: values.type,
-            path: window.location,
+            path: window.location.href,
             createdBy: userContext.user.id
           },
           file,

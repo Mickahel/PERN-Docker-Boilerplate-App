@@ -142,6 +142,7 @@ function EnhancedTable(props) {
     initialValues: {
       page: page + 1
     },
+    ...rows > 0 &&
     validationSchema,
     onSubmit: (values) => {
       setPage(values.page - 1)
@@ -278,6 +279,7 @@ function EnhancedTable(props) {
         buttons={buttons}
         title={title}
         selected={selected}
+        setSelected={setSelected}
         handleSearch={handleSearch}
         headCells={headCells}
         handleCheckboxFilterClick={handleCheckboxFilterClick}
@@ -347,13 +349,20 @@ function EnhancedTable(props) {
       {!singlePage && (<>
 
         <div className="mt-2 mr-4 flex justify-end">
-          <form onSubmit={formiktextFieldPage.onSubmit}>
+          <form
+            onSubmit={formiktextFieldPage.onSubmit}
+            onKeyDown={(keyEvent) => {
+              if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
+                keyEvent.preventDefault();
+              }
+            }}>
             <ClickAwayListener onClickAway={() => {
               if (_.isEmpty(formiktextFieldPage.values.page)) formiktextFieldPage.setFieldValue("page", page + 1)
             }}>
               <TextField
                 variant="filled"
                 type="number"
+                disabled={page <= 1 ? true : false}
                 error={Boolean(formiktextFieldPage.errors.page)}
                 helperText={
                   <Trans>{formiktextFieldPage.errors.page}</Trans>

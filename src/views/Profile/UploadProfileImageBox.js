@@ -1,7 +1,7 @@
-import React, { useContext, useCallback, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeContext } from "contexts/Providers/ThemeProvider";
 import { UserContext } from "contexts/Providers/UserProvider";
-import { Card, CardContent, CardHeader, Button } from "@material-ui/core";
+import { Card, CardContent, CardHeader, Button, CircularProgress } from "@material-ui/core";
 import PhotoCameraOutlinedIcon from "@material-ui/icons/PhotoCameraOutlined";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UploadProfileImageBox(props) {
+  const [uploaderLoader, setUploaderLoader] = useState(false)
   const userContext = useContext(UserContext);
-  const themeContext = useContext(ThemeContext);
   const classes = useStyles();
   const { fetch } = useFetch();
 
@@ -36,16 +36,19 @@ function UploadProfileImageBox(props) {
       let url = reader.readAsDataURL(file);
 
       reader.onloadend = async function (e) {
+        setUploaderLoader(true)
         let result = await fetch({
           url: Endpoints.user.editProfile,
           method: "PUT",
           file,
           filename: "profileImageUrl",
         });
-
         userContext.setUser(result);
+        setUploaderLoader(false)
+
       }.bind(this);
     }
+
   };
   return (
     <Card id="UploadProfileImageBox">
@@ -79,8 +82,8 @@ function UploadProfileImageBox(props) {
               )}
             </div>
           </div>
-          <div className="mt-4 mb-2 flex justify-center">
-            <Button color="primary" variant="outlined" component="label">
+          <div className="mt-4 mb-2 flex flex-col justify-center">
+            <Button disabled={uploaderLoader} color="primary" variant="outlined" component="label">
               <input
                 accept="image/*"
                 className={classes.input}
@@ -96,6 +99,9 @@ function UploadProfileImageBox(props) {
               />
               <Trans>profile.upload</Trans>
             </Button>
+            <div className="self-center mt-2">
+              {uploaderLoader && <CircularProgress />}
+            </div>
           </div>
           <div className="mt-2 mb-2 flex justify-center">
             <Typography color="textSecondary" variant="body1">
